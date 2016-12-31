@@ -1,0 +1,113 @@
+{
+  "MAIN": {
+    "HEADLINE": "Design, Technologie, Stratégie",
+    "TAGS": {
+      "PRD_DESIGN": "Conception des produits",
+      "FE_DEV": "Développement frontal",
+      "BE_DEV": "Développement arrière"
+    },
+    "PROJECTS": {
+      "PERENGO": {
+        "TITLE": "Perengo",
+        "DESCRIPTION": "Perengo est une plate-forme de recrutement de main-d'œuvre axée sur les cols bleus et le secteur à la demande. Merciba a collaboré étroitement avec le propriétaire du produit, le chef de la direction et une équipe d'entrepreneurs, dirigeant le design UX / UI et les équipes de développement frontal. Nous avons collaboré sur les flux d'utilisateurs et les wireframes, créé les systèmes d'interface utilisateur, développé la fonctionnalité de base et écrasé les bugs."
+      },
+      "SWEET_UNITY": {
+        "TITLE": "Sweet Unity Farms",
+        "DESCRIPTION": "We worked with Sweet Unity Farms Coffee to develop an e-commerce website and online presense. SUF is a farm-sourced coffee company founded by David Robinson, son of Jackie Robinson. Merciba created their visual identity for their digital content and worked closely with stakeholders to visually express their brand values."
+      },
+      "SOFTWARE": {
+				"TITLE": "Open-Source Software",
+				"DESCRIPTION": "[REPLACE] Lorem Khaled Ipsum is a major key to success. They don’t want us to win. Bless up. Eliptical talk. Surround yourself with angels, positive energy, beautiful people, beautiful souls, clean heart, angel. Lion! We don’t see them, we will never see them. They key is to have every key, the key to open every.[/REPLACE]",
+				"LINK_TEXT": "View Project On Github",
+				"CARDS": {
+					"CARD_1": {
+						"TITLE": "Paquet",
+						"DESCRIPTION": "Paquet is a REST API (meta-)framework with a specific mission: To get a server set up as quickly and effortlessly as possible, with a full suite of production-ready features. Paquet was written so that you could use one line and an object structure to spin up a backend server."
+					},
+					"CARD_2": {
+						"TITLE": "K-Nearest",
+						"DESCRIPTION": "A JavaScript implementation of the K-Neaerest-Neighbor machine-learning algorithm."
+					},
+					"CARD_3": {
+						"TITLE": "ASCII-Mirror",
+						"DESCRIPTION": "A Raspberry Pi daemon written in Node.js that uses the Camera Module to output an ASCII representation of the video feed to a connected HDMI display, thus creating a \"mirror\" effect in ASCII text."
+					},
+					"CARD_4": {
+						"TITLE": "Orequire",
+						"DESCRIPTION": "A tiny little Node.js module that converts all exported files within a given directory into an object structure. Handy for app bootstrapping."
+					}
+				}
+			}
+		}
+	},
+	"NAVBAR": {
+		"PROJECTS": "Projects",
+		"ABOUT": "About",
+		"CONTACT": "Contact",
+		"BLOG": "Blog"
+	},
+	"ABOUT": {
+		"PAGE_1": {
+			"TITLE": "At Merciba, we think big while considering the smallest of details.",
+			"DESCRIPTION": "[REPLACE] Lorem Khaled Ipsum is a major key to success. They don’t want us to win. Bless up. Eliptical talk. Surround yourself with angels, positive energy, beautiful people, beautiful souls, clean heart, angel. Lion! We don’t see them, we will never see them. They key is to have every key, the key to open every.[/REPLACE]",
+			"CARDS": {
+				"CARD_1": {
+					"TITLE": "Iterative",
+					"DESCRIPTION": "We make sure to have recurring check-ins with all team members and stake holders. By continuously validating requirements and deliverables and making changes where needed, we help our clients and partners achieve their goals and meet requirements."
+				},
+				"CARD_2": {
+					"TITLE": "Collaborative",
+					"DESCRIPTION": "Highly functional collaboration between management, design and engineering is key to a successful project. We have worked hard to develop internal workflows to improve communication and collaboration using the idustry’s best tools."
+				},
+				"CARD_3": {
+					"TITLE": "Flexible",
+					"DESCRIPTION": "We provide you with options of how to work with us. There are inevitably changes and surprises when it comes to projects; our organizational set up allows for flexibility throughout the project."
+				}
+			}
+		},
+		"PAGE_2": {
+			"LEFT": {
+				"TITLE": "Design",
+				"DESCRIPTION": {
+					"BRANDING_ID": "Branding & Identity Development",
+					"WIREFRAMING": "Wireframing & User Flows (UX)",
+					"UI_DSGN": "UI Design",
+					"PRD_DSGN": "Product Design",
+					"CPGN_CREATIVE": "Campaign Creative",
+					"ART_DIR": "Art Direction",
+					"BRANDED_DIGITAL": "Branded Digital Content"
+				}
+			},
+			"MIDDLE": {
+				"TITLE": "Technology",
+				"DESCRIPTION": {
+					"HTML_CSS": "HTML, CSS",
+					"JS_NODE": "JavaScript",
+					"NATIVE": "Native Cross-Platform Apps",
+					"SERVER_SIDE_ENG": "Server-Side Engineering",
+					"CMS_PLATFORM": "CMS & Platform Builds",
+					"SEO": "SEO",
+					"TRNG_CONSULT": "Software Training & Consultation"
+				}
+			},
+			"RIGHT": {
+				"TITLE": "Strategy",
+				"DESCRIPTION": {
+					"MKTG_STRATEGY": "Marketing Strategy",
+					"SM_STRATEGY": "Social Media Strategy",
+					"PM": "Project Management (Waterfall, Agile)",
+					"USR_ANALYTICS": "User Research & Analytics (UX)",
+					"USR_PERSONA": "User Persona Development (UX)",
+					"BRAND_STRATEGY": "Brand Strategy",
+					"CONTENT_STRATEGY": "Content Strategy",
+					"IN_HOUSE_TRNG": "In-House Training & Team Development"
+				}
+			}
+		},
+		"PAGE_3": {
+			"TITLE": "About Us",
+			"DESCRIPTION": "[REPLACE] Lorem Khaled Ipsum is a major key to success. They don’t want us to win. Bless up. Eliptical talk. Surround yourself with angels, positive energy, beautiful people, beautiful souls, clean heart, angel. Lion! We don’t see them, we will never see them. They key is to have every key, the key to open every.[/REPLACE]"
+		}
+	},
+	"NAVBAR.PROJECTS": "NAVBAR.PROJECTS"
+}

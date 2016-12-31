@@ -1,0 +1,168 @@
+html {
+  height:100%;
+  min-height:100%;
+  width:100%;
+  min-width:100%;
+}
+
+body {
+  font-family: 'Karla', sans-serif;
+  min-height: 100%;
+  min-width: 100%;
+}
+
+a {
+  text-decoration: none;
+}
+
+#main-logo {
+  background: url('https://s3.amazonaws.com/merciba.com/assets/merciba-logo.png');
+  background-size: auto 100%;
+  background-repeat: no-repeat;
+  width: 40%;
+  height: 585px;
+  float: none;
+  margin: 300px auto;
+}
+
+.logo-bw {
+  background: url('https://s3.amazonaws.com/merciba.com/assets/mercibalogo-sm-bw.svg');
+  background-size: cover;
+}
+
+.logo-color {
+  background: url('https://s3.amazonaws.com/merciba.com/assets/mercibalogo-sm.svg');
+  background-size: cover;
+}
+
+article section {
+  padding-top: 140px;
+}
+
+.left {
+  margin: 160px 50% 323px 15%;
+}
+
+.right {
+  margin: 160px 10% 323px 55%;
+}
+
+.section-scroll {
+  margin-top: 350px;
+}
+
+.section-scroll.left {
+  width: 35%;
+  float: left;
+}
+
+.section-scroll.right {
+  width: 35%;
+  float: right;
+}
+
+.section-scroll img {
+  width: 100%;
+  margin: 25px auto;
+  display: block;
+  box-shadow: 0 6px 12px 0 rgba(0,0,0,0.16), 0 4px 12px 0 rgba(0,0,0,0.22);
+}
+
+.section-fixed {
+  position: fixed;
+  width: 35%;
+  top: 0;
+  opacity: 0;
+  transition: opacity 0.25s;
+}
+
+.section-fixed.left {
+  left: 10px;
+}
+
+.section-fixed.right {
+  right: -10px;
+}
+
+.section-title {
+  font-size: 35px;
+  font-weight: bold;
+  line-height: 41px;
+  color: #3A4045;
+  margin: 12px 0;
+}
+
+.section-description {
+  font-size: 16px;
+  line-height: 24px;
+  color: #3A4045;
+  margin-top: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #9B9EA2;
+}
+
+.section-tags {
+  font-size: 13px;
+  font-weight: bold;
+  line-height: 20px;
+  color: #9B9EA2;
+  margin: 12px 0;
+  text-transform: uppercase;
+}
+
+.spinner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  background: white url('http://sites.jamanetwork.com/help/images/spinner-transparent.gif') no-repeat;
+  background-size: 50px 50px;
+  background-position: 50%;
+  width: 100%;
+  height: 100%;
+}
+
+.card {
+  position: relative;
+}
+
+.card img {
+  height: 233px;
+}
+
+.card div {
+  position: absolute;
+  font-weight: bold;
+  text-align: center;
+  color: #FFFFFF;
+}
+
+.card .card-title {
+  text-transform: uppercase;
+  top: 0;
+  width: 100%;
+  margin: 24px 0;
+  font-size: 22px;
+  line-height: 26px;
+}
+
+.card .card-description {
+  position: absolute;
+  top: 68px;
+  width: 90%;
+  padding: 0 30px;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.card .card-link {
+  text-transform: uppercase;
+  z-index: 1;
+  bottom: 0;
+  width: 100%;
+  margin: 24px 0;
+}
+
+.software-logo {
+  margin: 10px;
+}
