@@ -11,6 +11,18 @@ class Project extends React.Component {
     if (typeof window !== 'undefined') {
       window.addEventListener('scroll', this.handleScroll.bind(this));
       this.handleScroll()
+      if (this.props.route === "/") {
+        if ($(window).scrollTop() === 0) $('a').hide();
+        else $('a').show();
+      }
+      else {
+        let routePaths = this.props.route.split('/')
+        $('.projects-container > section:first-child').css({
+          marginTop: "26px",
+          paddingTop: "0"
+        })
+        $('.projects-container > section:first-child div.section-scroll').css("margin", 0)
+      }
     }
   }
 
@@ -20,10 +32,13 @@ class Project extends React.Component {
 
   handleScroll() {
     if (typeof window !== 'undefined') {
-      let top = $(window).height()
+      let top = $(window).height(),
+          style = this.calculateStyle({ pos: $(window).scrollTop(), viewportHeight: $(window).height() })
+
       this.setState({
-        style: this.calculateStyle({ pos: $(window).scrollTop(), viewportHeight: $(window).height() })
+        style
       })
+      this.checkFooter();
     }
   }
 
@@ -36,14 +51,17 @@ class Project extends React.Component {
       breakpoints.begin = offset.top - 250
       breakpoints.end = (offset.top + scrollSide.height()) - (opts.viewportHeight / 2)
       if (opts.pos > breakpoints.begin) {
-        if ((opts.pos >= (breakpoints.end - (opts.viewportHeight / 5))) && this.props.last) $('.footer').show()
-        else $('.footer').hide()
         if ((opts.pos > breakpoints.begin) && (opts.pos < breakpoints.end)) return { opacity: 1, top }
         else return { opacity: 0, top }
       }
       else return { opacity: 0, top }
     }
     else return { opacity: 0, top }
+  }
+
+  checkFooter() {
+    if ($(window).scrollTop() + $(window).height() == $(document).height()) $('.footer').show()
+    else $('.footer').hide()
   }
 
   imageLoaded() {
@@ -67,6 +85,7 @@ class Project extends React.Component {
       if (this.props.images && this.props.images.length) {
         return this.props.images.map((url, index) => {
           return <img
+            style={this.props.imageStyle ? this.props.imageStyle : {}}
             key={`${this.props.name}-${index}`}
             src={url}
             onLoad={this.imageLoaded.bind(this)}/>
@@ -78,7 +97,7 @@ class Project extends React.Component {
   render() {
     if (!this.state) return null;
     return (
-      <section id={this.props.name}>
+      <section id={this.props.name} >
         <div className={this.props.scrollSide} ref="gallery">
           {this.getScrollSide()}
         </div>
@@ -88,7 +107,7 @@ class Project extends React.Component {
           <div className="section-tags">
             {this.props.tags.map((tag) => <Text tag="div" locale={this.props.locale} key={tag} translate={tag}/>)}
           </div>
-          {this.props.icons ? this.props.icons.map((icon, index) => <a href={icon.href} target="_blank" key={`link-${index}`}><img className="software-logo" height="50" key={`icon-${index}`} src={icon.img} onLoad={this.imageLoaded.bind(this)}/></a>) : <span></span>}
+          {this.props.icons ? this.props.icons.map((icon, index) => <a href={icon.href} target="_blank" style={this.state.links} key={`link-${index}`}><img className="software-logo" height="50" key={`icon-${index}`} src={icon.img} onLoad={this.imageLoaded.bind(this)}/></a>) : <span></span>}
         </div>
       </section>
     )

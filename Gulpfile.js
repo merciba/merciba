@@ -10,7 +10,7 @@ const webpack = require('webpack')
 const webpackConfig = require('./webpack.config')
 const spawn = require('child_process').spawn
 
-let node;
+let node, regex = new RegExp("listening at port");
 
 stats(gulp);
 
@@ -23,14 +23,18 @@ gulp.task('browser-sync', function() {
 gulp.task('watch', function () {
 	gulp.watch(['components/src/**/*.jsx', 'views/**/*.jade'], function () {
 		runSequence('build', 'server');
-	}).on('change', browserSync.reload);
-	gulp.watch(['server.js', 'routes/**/*.js'], ['server']).on('change', browserSync.reload);
-	gulp.watch(['client.js'], ['webpack']).on('change', browserSync.reload);;
+	})
+	gulp.watch(['server.js', 'routes/**/*.js'], ['server'])
+	gulp.watch(['client.js'], ['webpack'])
 });
 
 gulp.task('server', function() {
   if (node) node.kill()
-  node = spawn('node', ['server.js'], {stdio: 'inherit'})
+  node = spawn('node', ['server.js'])
+  node.stdout.on('data', (data) => {
+    console.log(data.toString())
+    if (regex.test(data.toString())) browserSync.reload()
+  })
   node.on('close', function (code) {
     if (code === 8) {
       gulp.log('Error detected, waiting for changes...');
@@ -57,7 +61,7 @@ gulp.task('build', function (done) {
 });
 
 gulp.task('dev', function () {
-	runSequence('build', 'watch', 'browser-sync', 'server');
+	runSequence('build', 'watch', 'server', 'browser-sync');
 });
 
 gulp.task('default', ['dev']);

@@ -11,18 +11,16 @@ body {
   min-width: 100%;
 }
 
-a {
-  text-decoration: none;
+a, a:visited {
+  text-decoration: none !important;
 }
 
 #main-logo {
-  background: url('https://s3.amazonaws.com/merciba.com/assets/merciba-logo.png');
-  background-size: auto 100%;
-  background-repeat: no-repeat;
-  width: 40%;
+  width: 610px;
   height: 585px;
   float: none;
-  margin: 300px auto;
+  margin: 300px 30%;
+  cursor: default;
 }
 
 .logo-bw {
@@ -33,6 +31,14 @@ a {
 .logo-color {
   background: url('https://s3.amazonaws.com/merciba.com/assets/mercibalogo-sm.svg');
   background-size: cover;
+}
+
+.logo-container {
+  cursor: default;
+}
+
+.projects-container {
+  z-index: -1;
 }
 
 article section {
@@ -61,8 +67,7 @@ article section {
   float: right;
 }
 
-.section-scroll img {
-  width: 100%;
+.section-scroll > img {
   margin: 25px auto;
   display: block;
   box-shadow: 0 6px 12px 0 rgba(0,0,0,0.16), 0 4px 12px 0 rgba(0,0,0,0.22);
@@ -127,7 +132,11 @@ article section {
 }
 
 .card img {
-  height: 233px;
+  width: 100%;
+  max-height: 250px;
+  margin: 25px auto;
+  display: block;
+  box-shadow: 0 6px 12px 0 rgba(0,0,0,0.16), 0 4px 12px 0 rgba(0,0,0,0.22);
 }
 
 .card div {
@@ -150,7 +159,7 @@ article section {
   position: absolute;
   top: 68px;
   width: 90%;
-  padding: 0 30px;
+  margin: 0 30px;
   font-size: 16px;
   line-height: 24px;
 }

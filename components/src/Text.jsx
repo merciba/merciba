@@ -28,7 +28,7 @@ class Text extends React.Component {
     else if (this.props.tag === 'h1') return (<h1 className={this.props.sel ? this.props.sel : "translated"}>{this.state.translation}</h1>)
     else if (this.props.tag === 'h2') return (<h2 className={this.props.sel ? this.props.sel : "translated"}>{this.state.translation}</h2>)
     else if (this.props.tag === 'h3') return (<h3 className={this.props.sel ? this.props.sel : "translated"}>{this.state.translation}</h3>)
-    else return (<p>{this.state.translation}</p>)
+    else return (<p className={this.props.sel ? this.props.sel : "translated"}>{this.state.translation}</p>)
   }
 
 }

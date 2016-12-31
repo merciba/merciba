@@ -25,7 +25,7 @@
 				"CARDS": {
 					"CARD_1": {
 						"TITLE": "Paquet",
-						"DESCRIPTION": "Paquet is a REST API (meta-)framework with a specific mission: To get a server set up as quickly and effortlessly as possible, with a full suite of production-ready features. Paquet was written so that you could use one line and an object structure to spin up a backend server."
+						"DESCRIPTION": "Paquet is a REST API (meta-)framework with a specific mission: To get a server set up as quickly and effortlessly as possible, with a full suite of production-ready features."
 					},
 					"CARD_2": {
 						"TITLE": "K-Nearest",
@@ -33,7 +33,7 @@
 					},
 					"CARD_3": {
 						"TITLE": "ASCII-Mirror",
-						"DESCRIPTION": "A Raspberry Pi daemon written in Node.js that uses the Camera Module to output an ASCII representation of the video feed to a connected HDMI display, thus creating a \"mirror\" effect in ASCII text."
+						"DESCRIPTION": "A Raspberry Pi daemon written in Node.js that generates an ASCII representation of a camera's video feed, thus creating a \"mirror\" effect in ASCII text."
 					},
 					"CARD_4": {
 						"TITLE": "Orequire",

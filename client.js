@@ -14,4 +14,4 @@ if (typeof window !== 'undefined') {
 
 import App from './components/src/App.jsx'
 
-ReactDOM.render(<App />, document.getElementById('app'))
+ReactDOM.render(<App route={$('body').data('route')}/>, document.getElementById('app'))

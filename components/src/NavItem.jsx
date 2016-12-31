@@ -17,8 +17,10 @@ class NavItem extends React.Component {
     if (!this.state) return null;
     return (
       <li>
-        <object id={this.state.icon_id} className="menu-icon" data={this.state.icon_url} type="image/svg+xml" ></object>
-        <Text tag="p" locale={this.props.locale} translate={this.props.translate} />
+        <a href={this.props.url} >
+          <object id={this.state.icon_id} className="menu-icon" data={this.state.icon_url} type="image/svg+xml" ></object>
+          <Text tag="p" locale={this.props.locale} translate={this.props.translate} />
+        </a>
       </li>
     )
   }

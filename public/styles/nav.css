@@ -23,8 +23,11 @@ nav ul li {
   font-size: 18px;
   font-weight: bold;
   line-height: 33px;
-  color: #3A4045;
   text-transform: uppercase;
+}
+
+nav ul li a {
+  color: #3A4045;
 }
 
 nav ul li p {
