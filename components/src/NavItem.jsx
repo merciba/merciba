@@ -18,8 +18,10 @@ class NavItem extends React.Component {
     return (
       <li>
         <a href={this.props.url} >
-          <object id={this.state.icon_id} className="menu-icon" data={this.state.icon_url} type="image/svg+xml" ></object>
-          <Text tag="p" locale={this.props.locale} translate={this.props.translate} />
+          { this.props.position === "top" ?
+            <object id={this.state.icon_id} className="menu-icon" data={this.state.icon_url} type="image/svg+xml" ></object> :
+            <i className={`menu-icon ${this.props.icon}`} aria-hidden="true"></i> }
+          { this.props.translate ? <Text tag="p" locale={this.props.locale} translate={this.props.translate} /> : <span></span> }
         </a>
       </li>
     )

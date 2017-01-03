@@ -64,7 +64,7 @@
 				},
 				"CARD_3": {
 					"TITLE": "Flexible",
-					"DESCRIPTION": "We provide you with options of how to work with us. There are inevitably changes and surprises when it comes to projects; our organizational set up allows for flexibility throughout the project."
+					"DESCRIPTION": "We provide you with options in how to work with us. There are inevitably changes and surprises when it comes to projects; our organizational set up allows for flexibility throughout the project."
 				}
 			}
 		},
@@ -98,12 +98,11 @@
 				"DESCRIPTION": {
 					"MKTG_STRATEGY": "Marketing Strategy",
 					"SM_STRATEGY": "Social Media Strategy",
-					"PM": "Project Management (Waterfall, Agile)",
+					"PM": "Project Management (Agile)",
 					"USR_ANALYTICS": "User Research & Analytics (UX)",
 					"USR_PERSONA": "User Persona Development (UX)",
-					"BRAND_STRATEGY": "Brand Strategy",
-					"CONTENT_STRATEGY": "Content Strategy",
-					"IN_HOUSE_TRNG": "In-House Training & Team Development"
+					"BRAND_STRATEGY": "Brand/Content Strategy",
+					"IN_HOUSE_TRNG": "In-House Training"
 				}
 			}
 		},

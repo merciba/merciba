@@ -37,6 +37,7 @@
   top: 30%;
   margin: 0 10% 323px 55%;
   color: #3A4045;
+  transition: opacity 0.5s;
 }
 
 .about-title {
@@ -49,4 +50,36 @@
   font-size: 16px;
   line-height: 24px;
   margin-top: 24px;
+}
+
+.about-vertical-col {
+  width: 22%;
+  height: 600px;
+  margin: 160px 67px;
+  display: inline-block;
+}
+
+.about-vertical-img {
+  width: 257.82px;
+  height: 256.53px;
+}
+
+.about-vertical-title {
+  font-size: 35px;
+  font-weight: bold;
+  line-height: 41px;
+}
+
+.about-page-2 {
+  margin-left: 10%;
+}
+
+.about-page-3 {
+  min-height: 1000px;
+}
+
+.about-page-3 img {
+  width: 555px;
+  height: 555px;
+  transition: opacity 1.5s;
 }

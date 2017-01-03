@@ -18,8 +18,8 @@ class Project extends React.Component {
       else {
         let routePaths = this.props.route.split('/')
         $('.projects-container > section:first-child').css({
-          marginTop: "26px",
-          paddingTop: "0"
+          marginTop: 26,
+          paddingTop: 0
         })
         $('.projects-container > section:first-child div.section-scroll').css("margin", 0)
       }
@@ -38,7 +38,6 @@ class Project extends React.Component {
       this.setState({
         style
       })
-      this.checkFooter();
     }
   }
 
@@ -51,17 +50,12 @@ class Project extends React.Component {
       breakpoints.begin = offset.top - 250
       breakpoints.end = (offset.top + scrollSide.height()) - (opts.viewportHeight / 2)
       if (opts.pos > breakpoints.begin) {
-        if ((opts.pos > breakpoints.begin) && (opts.pos < breakpoints.end)) return { opacity: 1, top }
-        else return { opacity: 0, top }
+        if ((opts.pos > breakpoints.begin) && (opts.pos < breakpoints.end)) return { visibility: 'visible', opacity: 1, top }
+        else return { visibility: 'hidden', opacity: 0, top }
       }
-      else return { opacity: 0, top }
+      else return { visibility: 'hidden', opacity: 0, top }
     }
-    else return { opacity: 0, top }
-  }
-
-  checkFooter() {
-    if ($(window).scrollTop() + $(window).height() == $(document).height()) $('.footer').show()
-    else $('.footer').hide()
+    else return { visibility: 'hidden', opacity: 0, top }
   }
 
   imageLoaded() {
@@ -101,7 +95,7 @@ class Project extends React.Component {
         <div className={this.props.scrollSide} ref="gallery">
           {this.getScrollSide()}
         </div>
-        <div className={this.props.fixedSide} style={this.state.style}>
+        <div className={this.props.fixedSide} style={this.state.style} ref="fixed">
           <a href={this.props.url} target="_blank"><Text tag="div" locale={this.props.locale} sel="section-title" translate={this.props.title}/></a>
           <Text tag="p" locale={this.props.locale} sel="section-description" translate={this.props.description}/>
           <div className="section-tags">

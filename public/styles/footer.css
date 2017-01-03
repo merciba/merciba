@@ -15,6 +15,12 @@ footer {
   transition: display 0.5s
 }
 
-.footer div {
+.footer-right {
   margin-right: 100px;
+}
+
+.footer-left {
+  z-index: 3;
+  position: absolute;
+  left: 10px;
 }

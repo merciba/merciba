@@ -68,6 +68,12 @@
 	  window.$ = _jquery2.default;
 	  window.React = _react2.default;
 	  window.ReactDOM = _reactDom2.default;
+	  window.isMobile = function () {
+	    if ((0, _jquery2.default)(window).width() > 1330) return false;else return true;
+	  };
+	  window.clone = function (obj) {
+	    return JSON.parse(JSON.stringify(obj));
+	  };
 	} // This is the front-end entrypoint.
 	// It is packaged, along with any referenced components into public/client.js
 	// This allows using ES6 import for including front-end libraries.
@@ -31805,6 +31811,7 @@
 	    key: 'handleScroll',
 	    value: function handleScroll() {
 	      // Scroll handler. Fired on each scroll
+	      this.checkFooter();
 	    }
 	  }, {
 	    key: 'imageLoaded',
@@ -31821,6 +31828,11 @@
 	      setTimeout(function () {
 	        return window.scroll(0, 0);
 	      });
+	    }
+	  }, {
+	    key: 'checkFooter',
+	    value: function checkFooter() {
+	      if ((0, _jquery2.default)(window).scrollTop() + (0, _jquery2.default)(window).height() == (0, _jquery2.default)(document).height()) (0, _jquery2.default)('.footer').show();else (0, _jquery2.default)('.footer').hide();
 	    }
 	  }, {
 	    key: 'styleProject',
@@ -31880,7 +31892,12 @@
 	        'main',
 	        { role: 'main' },
 	        _react2.default.createElement('div', { className: 'spinner', style: this.state.loading ? { display: 'block', position: 'fixed' } : { display: 'none' } }),
-	        _react2.default.createElement(_Navbar2.default, { route: this.props.route, locale: this.state.locale, ref: 'navbar' }),
+	        _react2.default.createElement(_Navbar2.default, {
+	          route: this.props.route,
+	          locale: this.state.locale,
+	          links: [{ url: "/projects", icon: "circle", text: "NAVBAR.PROJECTS" }, { url: "/about", icon: "square", text: "NAVBAR.ABOUT" }, { url: "/contact", icon: "triangle", text: "NAVBAR.CONTACT" }],
+	          bottomLinks: [{ url: "https://instagram.com/mercibaco", icon: "fa fa-instagram" }, { url: "https://twitter.com/mercibaco", icon: "fa fa-twitter" }],
+	          ref: 'navbar' }),
 	        _react2.default.createElement(
 	          'article',
 	          { className: 'container logo-container', ref: 'logo' },
@@ -31939,7 +31956,28 @@
 	            cards: [{ title: "ABOUT.PAGE_1.CARDS.CARD_1.TITLE", description: "ABOUT.PAGE_1.CARDS.CARD_1.DESCRIPTION" }, { title: "ABOUT.PAGE_1.CARDS.CARD_2.TITLE", description: "ABOUT.PAGE_1.CARDS.CARD_2.DESCRIPTION" }, { title: "ABOUT.PAGE_1.CARDS.CARD_3.TITLE", description: "ABOUT.PAGE_1.CARDS.CARD_3.DESCRIPTION" }],
 	            title: 'ABOUT.PAGE_1.TITLE',
 	            description: 'ABOUT.PAGE_1.DESCRIPTION',
-	            locale: this.state.locale })
+	            cols: [{
+	              img: "http://static.101smart.com/01/Images/image-placeholder-alt.jpg",
+	              title: "ABOUT.PAGE_2.LEFT.TITLE",
+	              items: ["ABOUT.PAGE_2.LEFT.DESCRIPTION.BRANDING_ID", "ABOUT.PAGE_2.LEFT.DESCRIPTION.WIREFRAMING", "ABOUT.PAGE_2.LEFT.DESCRIPTION.UI_DSGN", "ABOUT.PAGE_2.LEFT.DESCRIPTION.PRD_DSGN", "ABOUT.PAGE_2.LEFT.DESCRIPTION.CPGN_CREATIVE", "ABOUT.PAGE_2.LEFT.DESCRIPTION.ART_DIR", "ABOUT.PAGE_2.LEFT.DESCRIPTION.BRANDED_DIGITAL"]
+	            }, {
+	              img: "http://static.101smart.com/01/Images/image-placeholder-alt.jpg",
+	              title: "ABOUT.PAGE_2.MIDDLE.TITLE",
+	              items: ["ABOUT.PAGE_2.MIDDLE.DESCRIPTION.HTML_CSS", "ABOUT.PAGE_2.MIDDLE.DESCRIPTION.JS_NODE", "ABOUT.PAGE_2.MIDDLE.DESCRIPTION.NATIVE", "ABOUT.PAGE_2.MIDDLE.DESCRIPTION.SERVER_SIDE_ENG", "ABOUT.PAGE_2.MIDDLE.DESCRIPTION.CMS_PLATFORM", "ABOUT.PAGE_2.MIDDLE.DESCRIPTION.SEO", "ABOUT.PAGE_2.MIDDLE.DESCRIPTION.TRNG_CONSULT"]
+	            }, {
+	              img: "http://static.101smart.com/01/Images/image-placeholder-alt.jpg",
+	              title: "ABOUT.PAGE_2.RIGHT.TITLE",
+	              items: ["ABOUT.PAGE_2.RIGHT.DESCRIPTION.MKTG_STRATEGY", "ABOUT.PAGE_2.RIGHT.DESCRIPTION.SM_STRATEGY", "ABOUT.PAGE_2.RIGHT.DESCRIPTION.PM", "ABOUT.PAGE_2.RIGHT.DESCRIPTION.USR_ANALYTICS", "ABOUT.PAGE_2.RIGHT.DESCRIPTION.USR_PERSONA", "ABOUT.PAGE_2.RIGHT.DESCRIPTION.BRAND_STRATEGY", "ABOUT.PAGE_2.RIGHT.DESCRIPTION.IN_HOUSE_TRNG"]
+	            }],
+	            page3: {
+	              title: "ABOUT.PAGE_3.TITLE",
+	              description: "ABOUT.PAGE_3.DESCRIPTION",
+	              img1: "https://s3.amazonaws.com/merciba.com/assets/about/about-image-1.png",
+	              img2: "https://s3.amazonaws.com/merciba.com/assets/about/about-image-2.png",
+	              style: { top: '20%', opacity: 0 }
+	            },
+	            locale: this.state.locale,
+	            onImageLoaded: this.imageLoaded.bind(this) })
 	        ),
 	        _react2.default.createElement(
 	          'article',
@@ -31954,7 +31992,12 @@
 	            { className: 'footer', ref: 'footer' },
 	            _react2.default.createElement(
 	              'div',
-	              null,
+	              { className: 'footer-left' },
+	              'Made with \uD83D\uDCBB\xA0 in Brooklyn, New York \uD83C\uDF07 '
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'footer-right' },
 	              '\xA9 2017 Merciba LLC'
 	            )
 	          )
@@ -37953,42 +37996,48 @@
 	    key: 'handleScroll',
 	    value: function handleScroll() {
 	      if (typeof window !== 'undefined') {
-	        var scrolledFromTop = (0, _jquery2.default)(window).scrollTop();
-	        var windowHeight = (0, _jquery2.default)(window).height() - 200;
-	        var documentHeight = Math.max(document.body.scrollHeight, document.body.offsetHeight, document.documentElement.clientHeight, document.documentElement.scrollHeight, document.documentElement.offsetHeight) / 2;
-	        var factor = 120 / windowHeight;
-	        var converted = scrolledFromTop * factor;
-	        var logoDescended = -120 + converted < 0 ? -120 + converted : 0;
-	        var ulDescended = converted + 50 < 200 ? converted + 50 : 200;
-	        if (this.props.route === "/") this.setState({
-	          logo_style: {
-	            top: logoDescended + 'px',
-	            cursor: 'pointer'
-	          },
-	          ul_style: {
-	            marginTop: ulDescended + 'px'
-	          },
-	          style: {
-	            left: this.state ? this.state.style.left : 0,
-	            boxShadow: scrolledFromTop < documentHeight - 80 && scrolledFromTop > windowHeight * 2 && this.state.class === 'open' ? '0 6px 12px 0 rgba(0,0,0,0.16), 0 4px 12px 0 rgba(0,0,0,0.22)' : 'none',
-	            background: scrolledFromTop < documentHeight - 80 && scrolledFromTop > windowHeight * 2 && this.state.class === 'open' ? 'white' : 'transparent'
-	          }
-	        });else this.setState({
-	          logo_style: {
-	            top: 0,
-	            cursor: 'pointer'
-	          },
-	          ul_style: {
-	            marginTop: 200
-	          },
-	          style: {
-	            left: 0,
-	            boxShadow: scrolledFromTop < documentHeight - 80 && scrolledFromTop > windowHeight * 2 && this.state.class === 'open' ? '0 6px 12px 0 rgba(0,0,0,0.16), 0 4px 12px 0 rgba(0,0,0,0.22)' : 'none',
-	            background: scrolledFromTop < documentHeight - 80 && scrolledFromTop > windowHeight * 2 && this.state.class === 'open' ? 'white' : 'transparent'
-	          }
-	        });
-	        if (scrolledFromTop > windowHeight - 200) this.close();else this.open();
+	        if (window.isMobile()) {
+	          console.log('Mobile device detected');
+	        } else {
+	          this.styleDesktop();
+	        }
 	      }
+	    }
+	  }, {
+	    key: 'styleDesktop',
+	    value: function styleDesktop() {
+	      var scrolledFromTop = (0, _jquery2.default)(window).scrollTop();
+	      var windowHeight = (0, _jquery2.default)(window).height() - 200;
+	      var documentHeight = Math.max(document.body.scrollHeight, document.body.offsetHeight, document.documentElement.clientHeight, document.documentElement.scrollHeight, document.documentElement.offsetHeight) / 2;
+	      var factor = 120 / windowHeight;
+	      var converted = scrolledFromTop * factor;
+	      var logoDescended = -120 + converted < 0 ? -120 + converted : 0;
+	      var ulTopDescended = converted + 50 < 200 ? converted + 50 : 200;
+	      var ulBottomAscended = converted + 50 < 200 ? 164 - converted : 64;
+	
+	      var logo_style = {
+	        top: this.props.route === "/" ? logoDescended + 'px' : 0,
+	        cursor: 'pointer'
+	      };
+	      var top_style = {
+	        marginTop: this.props.route === "/" ? ulTopDescended + 'px' : 200
+	      };
+	      var bottom_style = {
+	        bottom: this.props.route === "/" ? ulBottomAscended + 'px' : 64
+	      };
+	      var style = {
+	        left: this.state && this.state.style.left ? this.state.style.left : -200,
+	        boxShadow: scrolledFromTop < (0, _jquery2.default)(document).height() - (0, _jquery2.default)(window).height() - 80 && scrolledFromTop > windowHeight * 2 && this.state.class === 'open' ? '0 6px 12px 0 rgba(0,0,0,0.16), 0 4px 12px 0 rgba(0,0,0,0.22)' : 'none',
+	        background: scrolledFromTop < (0, _jquery2.default)(document).height() - (0, _jquery2.default)(window).height() - 80 && scrolledFromTop > windowHeight * 2 && this.state.class === 'open' ? 'white' : 'transparent'
+	      };
+	
+	      this.setState({
+	        logo_style: logo_style,
+	        top_style: top_style,
+	        bottom_style: bottom_style,
+	        style: style
+	      });
+	      if (scrolledFromTop > windowHeight - 200) this.close();else this.open();
 	    }
 	  }, {
 	    key: 'scrollToTop',
@@ -38023,15 +38072,33 @@
 	        style: {
 	          left: '-200px',
 	          boxShadow: 'none',
-	          background: scrolledFromTop > windowHeight * 2 ? 'white' : 'transparent'
+	          background: 'transparent'
 	        }
+	      });
+	    }
+	  }, {
+	    key: 'getTopLinks',
+	    value: function getTopLinks() {
+	      var _this2 = this;
+	
+	      return this.props.links.map(function (link, index) {
+	        return _react2.default.createElement(_NavItem2.default, { key: 'nav-item-' + index, url: link.url, icon: link.icon, color: 'blk', locale: _this2.props.locale, translate: link.text, position: 'top' });
+	      });
+	    }
+	  }, {
+	    key: 'getBottomLinks',
+	    value: function getBottomLinks() {
+	      var _this3 = this;
+	
+	      return this.props.bottomLinks.map(function (link, index) {
+	        return _react2.default.createElement(_NavItem2.default, { key: 'nav-link-' + index, url: link.url, icon: link.icon, color: 'blk', locale: _this3.props.locale, position: 'bottom' });
 	      });
 	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
 	      if (!this.state) return null;
-	      return _react2.default.createElement('nav', { className: this.state.class, style: this.state.style, onMouseEnter: this.open.bind(this), onMouseLeave: this.close.bind(this), onMouseMove: this.open.bind(this) }, _react2.default.createElement('div', { className: this.state.logo_class, style: this.state.logo_style, onClick: this.scrollToTop.bind(this) }), _react2.default.createElement('ul', { id: 'nav-items', style: this.state.ul_style }, _react2.default.createElement(_NavItem2.default, { url: '/projects', icon: 'circle', color: 'blk', locale: this.props.locale, translate: 'NAVBAR.PROJECTS' }), _react2.default.createElement(_NavItem2.default, { url: '/about', icon: 'square', color: 'blk', locale: this.props.locale, translate: 'NAVBAR.ABOUT' }), _react2.default.createElement(_NavItem2.default, { url: '/contact', icon: 'triangle', color: 'blk', locale: this.props.locale, translate: 'NAVBAR.CONTACT' })));
+	      return _react2.default.createElement('nav', { className: this.state.class, style: this.state.style, onMouseEnter: this.open.bind(this), onMouseLeave: this.close.bind(this), onMouseMove: this.open.bind(this) }, _react2.default.createElement('div', { className: this.state.logo_class, style: this.state.logo_style, onClick: this.scrollToTop.bind(this) }), _react2.default.createElement('ul', { id: 'nav-items', style: this.state.top_style }, this.getTopLinks()), _react2.default.createElement('ul', { id: 'nav-links', style: this.state.bottom_style }, this.getBottomLinks()));
 	    }
 	  }]);
 	
@@ -38113,7 +38180,7 @@
 	    key: 'render',
 	    value: function render() {
 	      if (!this.state) return null;
-	      return _react2.default.createElement('li', null, _react2.default.createElement('a', { href: this.props.url }, _react2.default.createElement('object', { id: this.state.icon_id, className: 'menu-icon', data: this.state.icon_url, type: 'image/svg+xml' }), _react2.default.createElement(_Text2.default, { tag: 'p', locale: this.props.locale, translate: this.props.translate })));
+	      return _react2.default.createElement('li', null, _react2.default.createElement('a', { href: this.props.url }, this.props.position === "top" ? _react2.default.createElement('object', { id: this.state.icon_id, className: 'menu-icon', data: this.state.icon_url, type: 'image/svg+xml' }) : _react2.default.createElement('i', { className: 'menu-icon ' + this.props.icon, 'aria-hidden': 'true' }), this.props.translate ? _react2.default.createElement(_Text2.default, { tag: 'p', locale: this.props.locale, translate: this.props.translate }) : _react2.default.createElement('span', null)));
 	    }
 	  }]);
 	
@@ -38286,8 +38353,8 @@
 	        } else {
 	          var routePaths = this.props.route.split('/');
 	          (0, _jquery2.default)('.projects-container > section:first-child').css({
-	            marginTop: "26px",
-	            paddingTop: "0"
+	            marginTop: 26,
+	            paddingTop: 0
 	          });
 	          (0, _jquery2.default)('.projects-container > section:first-child div.section-scroll').css("margin", 0);
 	        }
@@ -38308,7 +38375,6 @@
 	        this.setState({
 	          style: style
 	        });
-	        this.checkFooter();
 	      }
 	    }
 	  }, {
@@ -38322,14 +38388,9 @@
 	        breakpoints.begin = offset.top - 250;
 	        breakpoints.end = offset.top + scrollSide.height() - opts.viewportHeight / 2;
 	        if (opts.pos > breakpoints.begin) {
-	          if (opts.pos > breakpoints.begin && opts.pos < breakpoints.end) return { opacity: 1, top: top };else return { opacity: 0, top: top };
-	        } else return { opacity: 0, top: top };
-	      } else return { opacity: 0, top: top };
-	    }
-	  }, {
-	    key: 'checkFooter',
-	    value: function checkFooter() {
-	      if ((0, _jquery2.default)(window).scrollTop() + (0, _jquery2.default)(window).height() == (0, _jquery2.default)(document).height()) (0, _jquery2.default)('.footer').show();else (0, _jquery2.default)('.footer').hide();
+	          if (opts.pos > breakpoints.begin && opts.pos < breakpoints.end) return { visibility: 'visible', opacity: 1, top: top };else return { visibility: 'hidden', opacity: 0, top: top };
+	        } else return { visibility: 'hidden', opacity: 0, top: top };
+	      } else return { visibility: 'hidden', opacity: 0, top: top };
 	    }
 	  }, {
 	    key: 'imageLoaded',
@@ -38364,7 +38425,7 @@
 	      var _this3 = this;
 	
 	      if (!this.state) return null;
-	      return _react2.default.createElement('section', { id: this.props.name }, _react2.default.createElement('div', { className: this.props.scrollSide, ref: 'gallery' }, this.getScrollSide()), _react2.default.createElement('div', { className: this.props.fixedSide, style: this.state.style }, _react2.default.createElement('a', { href: this.props.url, target: '_blank' }, _react2.default.createElement(_Text2.default, { tag: 'div', locale: this.props.locale, sel: 'section-title', translate: this.props.title })), _react2.default.createElement(_Text2.default, { tag: 'p', locale: this.props.locale, sel: 'section-description', translate: this.props.description }), _react2.default.createElement('div', { className: 'section-tags' }, this.props.tags.map(function (tag) {
+	      return _react2.default.createElement('section', { id: this.props.name }, _react2.default.createElement('div', { className: this.props.scrollSide, ref: 'gallery' }, this.getScrollSide()), _react2.default.createElement('div', { className: this.props.fixedSide, style: this.state.style, ref: 'fixed' }, _react2.default.createElement('a', { href: this.props.url, target: '_blank' }, _react2.default.createElement(_Text2.default, { tag: 'div', locale: this.props.locale, sel: 'section-title', translate: this.props.title })), _react2.default.createElement(_Text2.default, { tag: 'p', locale: this.props.locale, sel: 'section-description', translate: this.props.description }), _react2.default.createElement('div', { className: 'section-tags' }, this.props.tags.map(function (tag) {
 	        return _react2.default.createElement(_Text2.default, { tag: 'div', locale: _this3.props.locale, key: tag, translate: tag });
 	      })), this.props.icons ? this.props.icons.map(function (icon, index) {
 	        return _react2.default.createElement('a', { href: icon.href, target: '_blank', style: _this3.state.links, key: 'link-' + index }, _react2.default.createElement('img', { className: 'software-logo', height: '50', key: 'icon-' + index, src: icon.img, onLoad: _this3.imageLoaded.bind(_this3) }));
@@ -38450,8 +38511,62 @@
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
 	      if (typeof window !== 'undefined') {
-	        console.log('About page ready.');
+	        window.addEventListener('scroll', this.handleScroll.bind(this));
+	        this.handleScroll();
 	      }
+	    }
+	  }, {
+	    key: 'componentWillUnmount',
+	    value: function componentWillUnmount() {
+	      if (typeof window !== 'undefined') window.removeEventListener('scroll', this.handleScroll.bind(this));
+	    }
+	  }, {
+	    key: 'handleScroll',
+	    value: function handleScroll() {
+	      if (typeof window !== 'undefined') {
+	        var pos = (0, _jquery2.default)(window).scrollTop();
+	        var page1 = this.renderPage1({ pos: pos, breakpoint: (0, _jquery2.default)(window).height() / 4 });
+	        var page3 = this.renderPage3({ pos: pos, start: (0, _jquery2.default)(document).height() - (0, _jquery2.default)(window).height() * 1.5 });
+	        this.setState({
+	          page1: page1,
+	          page3: page3
+	        });
+	      }
+	    }
+	  }, {
+	    key: 'renderPage1',
+	    value: function renderPage1(_ref) {
+	      var pos = _ref.pos,
+	          breakpoint = _ref.breakpoint;
+	
+	      if (pos > breakpoint) return { opacity: 0 };else return { opacity: 1 };
+	    }
+	  }, {
+	    key: 'renderPage3',
+	    value: function renderPage3(_ref2) {
+	      var pos = _ref2.pos,
+	          start = _ref2.start;
+	
+	      if (pos === 0 || pos < start) {
+	        return {
+	          style: { top: '20%', opacity: 0 },
+	          img1: this.props.page3.img1,
+	          img2: this.props.page3.img2,
+	          img2Style: { position: 'absolute', top: 48, opacity: 0 }
+	        };
+	      } else {
+	        return {
+	          style: { top: '20%', opacity: 1 },
+	          img1: this.props.page3.img1,
+	          img2: this.props.page3.img2,
+	          img2Style: { position: 'absolute', top: 48, opacity: 1 }
+	        };
+	      }
+	    }
+	  }, {
+	    key: 'renderScrollContainer',
+	    value: function renderScrollContainer() {
+	      if (typeof window !== 'undefined') return { position: 'absolute', height: (0, _jquery2.default)(window).height() / 1.5 };else return {};
 	    }
 	  }, {
 	    key: 'renderCards',
@@ -38465,9 +38580,34 @@
 	      }
 	    }
 	  }, {
+	    key: 'renderVerticalColumns',
+	    value: function renderVerticalColumns() {
+	      var _this3 = this;
+	
+	      if (typeof window !== 'undefined') {
+	        return this.props.cols.map(function (col, index) {
+	          return _react2.default.createElement('div', { key: 'vertical-col-' + index, className: 'about-vertical-col' }, _react2.default.createElement('img', { className: 'about-vertical-img', src: col.img }), _react2.default.createElement(_Text2.default, { locale: _this3.props.locale, sel: 'about-vertical-title', translate: col.title }), col.items.map(function (item, index) {
+	            return _react2.default.createElement(_Text2.default, { key: index, locale: _this3.props.locale, sel: 'about-vertical-text', translate: item });
+	          }));
+	        });
+	      }
+	    }
+	  }, {
+	    key: 'imageLoaded',
+	    value: function imageLoaded() {
+	      this.props.onImageLoaded(this.refs.gallery);
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
-	      return _react2.default.createElement('div', { id: 'about' }, _react2.default.createElement('div', { className: 'about-page-1' }, _react2.default.createElement('div', { className: 'about-cards' }, this.renderCards()), _react2.default.createElement('div', { className: 'about-summary' }, _react2.default.createElement(_Text2.default, { locale: this.props.locale, tag: 'div', sel: 'about-title', translate: this.props.title }), _react2.default.createElement(_Text2.default, { locale: this.props.locale, tag: 'div', sel: 'about-description', translate: this.props.description }))));
+	      if (!this.state) return null;
+	      return _react2.default.createElement('div', { id: 'about', ref: 'gallery' }, _react2.default.createElement('div', { className: 'about-page-1', ref: 'page1' }, _react2.default.createElement('div', { className: 'about-cards' }, this.renderCards()), _react2.default.createElement('div', { className: 'about-summary', style: this.state ? this.state.page1 : { opacity: 1 } }, _react2.default.createElement(_Text2.default, { locale: this.props.locale, tag: 'div', sel: 'about-title', translate: this.props.title }), _react2.default.createElement(_Text2.default, { locale: this.props.locale, tag: 'div', sel: 'about-description', translate: this.props.description }))), _react2.default.createElement('div', { className: 'about-page-2', ref: 'page2' }, this.renderVerticalColumns()), _react2.default.createElement('div', { className: 'about-page-3', ref: 'page3' }, _react2.default.createElement('div', { className: 'section-scroll right', style: this.renderScrollContainer() }, _react2.default.createElement('img', {
+	        style: { position: 'absolute', top: 48 },
+	        src: this.props.page3.img1,
+	        onLoad: this.imageLoaded.bind(this) }), _react2.default.createElement('img', {
+	        style: this.state ? this.state.page3.img2Style : { position: 'absolute', top: 48, opacity: 0 },
+	        src: this.props.page3.img2,
+	        onLoad: this.imageLoaded.bind(this) })), _react2.default.createElement('div', { className: 'section-fixed left', style: this.state ? this.state.page3.style : this.props.page3.style, ref: 'fixed' }, _react2.default.createElement(_Text2.default, { tag: 'div', locale: this.props.locale, sel: 'section-title', translate: this.props.page3.title }), _react2.default.createElement(_Text2.default, { tag: 'p', locale: this.props.locale, sel: 'section-description', translate: this.props.page3.description }))));
 	    }
 	  }]);
 	
@@ -49777,8 +49917,62 @@
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
 	      if (typeof window !== 'undefined') {
-	        console.log('About page ready.');
+	        window.addEventListener('scroll', this.handleScroll.bind(this));
+	        this.handleScroll();
 	      }
+	    }
+	  }, {
+	    key: 'componentWillUnmount',
+	    value: function componentWillUnmount() {
+	      if (typeof window !== 'undefined') window.removeEventListener('scroll', this.handleScroll.bind(this));
+	    }
+	  }, {
+	    key: 'handleScroll',
+	    value: function handleScroll() {
+	      if (typeof window !== 'undefined') {
+	        var pos = (0, _jquery2.default)(window).scrollTop();
+	        var page1 = this.renderPage1({ pos: pos, breakpoint: (0, _jquery2.default)(window).height() / 4 });
+	        var page3 = this.renderPage3({ pos: pos, start: (0, _jquery2.default)(document).height() - (0, _jquery2.default)(window).height() * 1.5 });
+	        this.setState({
+	          page1: page1,
+	          page3: page3
+	        });
+	      }
+	    }
+	  }, {
+	    key: 'renderPage1',
+	    value: function renderPage1(_ref) {
+	      var pos = _ref.pos,
+	          breakpoint = _ref.breakpoint;
+	
+	      if (pos > breakpoint) return { opacity: 0 };else return { opacity: 1 };
+	    }
+	  }, {
+	    key: 'renderPage3',
+	    value: function renderPage3(_ref2) {
+	      var pos = _ref2.pos,
+	          start = _ref2.start;
+	
+	      if (pos === 0 || pos < start) {
+	        return {
+	          style: { top: '20%', opacity: 0 },
+	          img1: this.props.page3.img1,
+	          img2: this.props.page3.img2,
+	          img2Style: { position: 'absolute', top: 48, opacity: 0 }
+	        };
+	      } else {
+	        return {
+	          style: { top: '20%', opacity: 1 },
+	          img1: this.props.page3.img1,
+	          img2: this.props.page3.img2,
+	          img2Style: { position: 'absolute', top: 48, opacity: 1 }
+	        };
+	      }
+	    }
+	  }, {
+	    key: 'renderScrollContainer',
+	    value: function renderScrollContainer() {
+	      if (typeof window !== 'undefined') return { position: 'absolute', height: (0, _jquery2.default)(window).height() / 1.5 };else return {};
 	    }
 	  }, {
 	    key: 'renderCards',
@@ -49797,14 +49991,39 @@
 	      }
 	    }
 	  }, {
+	    key: 'renderVerticalColumns',
+	    value: function renderVerticalColumns() {
+	      var _this3 = this;
+	
+	      if (typeof window !== 'undefined') {
+	        return this.props.cols.map(function (col, index) {
+	          return _react2.default.createElement(
+	            'div',
+	            { key: 'vertical-col-' + index, className: 'about-vertical-col' },
+	            _react2.default.createElement('img', { className: 'about-vertical-img', src: col.img }),
+	            _react2.default.createElement(_Text2.default, { locale: _this3.props.locale, sel: 'about-vertical-title', translate: col.title }),
+	            col.items.map(function (item, index) {
+	              return _react2.default.createElement(_Text2.default, { key: index, locale: _this3.props.locale, sel: 'about-vertical-text', translate: item });
+	            })
+	          );
+	        });
+	      }
+	    }
+	  }, {
+	    key: 'imageLoaded',
+	    value: function imageLoaded() {
+	      this.props.onImageLoaded(this.refs.gallery);
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
+	      if (!this.state) return null;
 	      return _react2.default.createElement(
 	        'div',
-	        { id: 'about' },
+	        { id: 'about', ref: 'gallery' },
 	        _react2.default.createElement(
 	          'div',
-	          { className: 'about-page-1' },
+	          { className: 'about-page-1', ref: 'page1' },
 	          _react2.default.createElement(
 	            'div',
 	            { className: 'about-cards' },
@@ -49812,9 +50031,36 @@
 	          ),
 	          _react2.default.createElement(
 	            'div',
-	            { className: 'about-summary' },
+	            { className: 'about-summary', style: this.state ? this.state.page1 : { opacity: 1 } },
 	            _react2.default.createElement(_Text2.default, { locale: this.props.locale, tag: 'div', sel: 'about-title', translate: this.props.title }),
 	            _react2.default.createElement(_Text2.default, { locale: this.props.locale, tag: 'div', sel: 'about-description', translate: this.props.description })
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'about-page-2', ref: 'page2' },
+	          this.renderVerticalColumns()
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'about-page-3', ref: 'page3' },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'section-scroll right', style: this.renderScrollContainer() },
+	            _react2.default.createElement('img', {
+	              style: { position: 'absolute', top: 48 },
+	              src: this.props.page3.img1,
+	              onLoad: this.imageLoaded.bind(this) }),
+	            _react2.default.createElement('img', {
+	              style: this.state ? this.state.page3.img2Style : { position: 'absolute', top: 48, opacity: 0 },
+	              src: this.props.page3.img2,
+	              onLoad: this.imageLoaded.bind(this) })
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'section-fixed left', style: this.state ? this.state.page3.style : this.props.page3.style, ref: 'fixed' },
+	            _react2.default.createElement(_Text2.default, { tag: 'div', locale: this.props.locale, sel: 'section-title', translate: this.props.page3.title }),
+	            _react2.default.createElement(_Text2.default, { tag: 'p', locale: this.props.locale, sel: 'section-description', translate: this.props.page3.description })
 	          )
 	        )
 	      );
@@ -49945,8 +50191,8 @@
 	        _react2.default.createElement(
 	          'a',
 	          { href: this.props.url },
-	          _react2.default.createElement('object', { id: this.state.icon_id, className: 'menu-icon', data: this.state.icon_url, type: 'image/svg+xml' }),
-	          _react2.default.createElement(_Text2.default, { tag: 'p', locale: this.props.locale, translate: this.props.translate })
+	          this.props.position === "top" ? _react2.default.createElement('object', { id: this.state.icon_id, className: 'menu-icon', data: this.state.icon_url, type: 'image/svg+xml' }) : _react2.default.createElement('i', { className: 'menu-icon ' + this.props.icon, 'aria-hidden': 'true' }),
+	          this.props.translate ? _react2.default.createElement(_Text2.default, { tag: 'p', locale: this.props.locale, translate: this.props.translate }) : _react2.default.createElement('span', null)
 	        )
 	      );
 	    }
@@ -50016,42 +50262,48 @@
 	    key: 'handleScroll',
 	    value: function handleScroll() {
 	      if (typeof window !== 'undefined') {
-	        var scrolledFromTop = (0, _jquery2.default)(window).scrollTop();
-	        var windowHeight = (0, _jquery2.default)(window).height() - 200;
-	        var documentHeight = Math.max(document.body.scrollHeight, document.body.offsetHeight, document.documentElement.clientHeight, document.documentElement.scrollHeight, document.documentElement.offsetHeight) / 2;
-	        var factor = 120 / windowHeight;
-	        var converted = scrolledFromTop * factor;
-	        var logoDescended = -120 + converted < 0 ? -120 + converted : 0;
-	        var ulDescended = converted + 50 < 200 ? converted + 50 : 200;
-	        if (this.props.route === "/") this.setState({
-	          logo_style: {
-	            top: logoDescended + 'px',
-	            cursor: 'pointer'
-	          },
-	          ul_style: {
-	            marginTop: ulDescended + 'px'
-	          },
-	          style: {
-	            left: this.state ? this.state.style.left : 0,
-	            boxShadow: scrolledFromTop < documentHeight - 80 && scrolledFromTop > windowHeight * 2 && this.state.class === 'open' ? '0 6px 12px 0 rgba(0,0,0,0.16), 0 4px 12px 0 rgba(0,0,0,0.22)' : 'none',
-	            background: scrolledFromTop < documentHeight - 80 && scrolledFromTop > windowHeight * 2 && this.state.class === 'open' ? 'white' : 'transparent'
-	          }
-	        });else this.setState({
-	          logo_style: {
-	            top: 0,
-	            cursor: 'pointer'
-	          },
-	          ul_style: {
-	            marginTop: 200
-	          },
-	          style: {
-	            left: 0,
-	            boxShadow: scrolledFromTop < documentHeight - 80 && scrolledFromTop > windowHeight * 2 && this.state.class === 'open' ? '0 6px 12px 0 rgba(0,0,0,0.16), 0 4px 12px 0 rgba(0,0,0,0.22)' : 'none',
-	            background: scrolledFromTop < documentHeight - 80 && scrolledFromTop > windowHeight * 2 && this.state.class === 'open' ? 'white' : 'transparent'
-	          }
-	        });
-	        if (scrolledFromTop > windowHeight - 200) this.close();else this.open();
+	        if (window.isMobile()) {
+	          console.log('Mobile device detected');
+	        } else {
+	          this.styleDesktop();
+	        }
 	      }
+	    }
+	  }, {
+	    key: 'styleDesktop',
+	    value: function styleDesktop() {
+	      var scrolledFromTop = (0, _jquery2.default)(window).scrollTop();
+	      var windowHeight = (0, _jquery2.default)(window).height() - 200;
+	      var documentHeight = Math.max(document.body.scrollHeight, document.body.offsetHeight, document.documentElement.clientHeight, document.documentElement.scrollHeight, document.documentElement.offsetHeight) / 2;
+	      var factor = 120 / windowHeight;
+	      var converted = scrolledFromTop * factor;
+	      var logoDescended = -120 + converted < 0 ? -120 + converted : 0;
+	      var ulTopDescended = converted + 50 < 200 ? converted + 50 : 200;
+	      var ulBottomAscended = converted + 50 < 200 ? 164 - converted : 64;
+	
+	      var logo_style = {
+	        top: this.props.route === "/" ? logoDescended + 'px' : 0,
+	        cursor: 'pointer'
+	      };
+	      var top_style = {
+	        marginTop: this.props.route === "/" ? ulTopDescended + 'px' : 200
+	      };
+	      var bottom_style = {
+	        bottom: this.props.route === "/" ? ulBottomAscended + 'px' : 64
+	      };
+	      var style = {
+	        left: this.state && this.state.style.left ? this.state.style.left : -200,
+	        boxShadow: scrolledFromTop < (0, _jquery2.default)(document).height() - (0, _jquery2.default)(window).height() - 80 && scrolledFromTop > windowHeight * 2 && this.state.class === 'open' ? '0 6px 12px 0 rgba(0,0,0,0.16), 0 4px 12px 0 rgba(0,0,0,0.22)' : 'none',
+	        background: scrolledFromTop < (0, _jquery2.default)(document).height() - (0, _jquery2.default)(window).height() - 80 && scrolledFromTop > windowHeight * 2 && this.state.class === 'open' ? 'white' : 'transparent'
+	      };
+	
+	      this.setState({
+	        logo_style: logo_style,
+	        top_style: top_style,
+	        bottom_style: bottom_style,
+	        style: style
+	      });
+	      if (scrolledFromTop > windowHeight - 200) this.close();else this.open();
 	    }
 	  }, {
 	    key: 'scrollToTop',
@@ -50086,8 +50338,26 @@
 	        style: {
 	          left: '-200px',
 	          boxShadow: 'none',
-	          background: scrolledFromTop > windowHeight * 2 ? 'white' : 'transparent'
+	          background: 'transparent'
 	        }
+	      });
+	    }
+	  }, {
+	    key: 'getTopLinks',
+	    value: function getTopLinks() {
+	      var _this2 = this;
+	
+	      return this.props.links.map(function (link, index) {
+	        return _react2.default.createElement(_NavItem2.default, { key: 'nav-item-' + index, url: link.url, icon: link.icon, color: 'blk', locale: _this2.props.locale, translate: link.text, position: 'top' });
+	      });
+	    }
+	  }, {
+	    key: 'getBottomLinks',
+	    value: function getBottomLinks() {
+	      var _this3 = this;
+	
+	      return this.props.bottomLinks.map(function (link, index) {
+	        return _react2.default.createElement(_NavItem2.default, { key: 'nav-link-' + index, url: link.url, icon: link.icon, color: 'blk', locale: _this3.props.locale, position: 'bottom' });
 	      });
 	    }
 	  }, {
@@ -50100,10 +50370,13 @@
 	        _react2.default.createElement('div', { className: this.state.logo_class, style: this.state.logo_style, onClick: this.scrollToTop.bind(this) }),
 	        _react2.default.createElement(
 	          'ul',
-	          { id: 'nav-items', style: this.state.ul_style },
-	          _react2.default.createElement(_NavItem2.default, { url: '/projects', icon: 'circle', color: 'blk', locale: this.props.locale, translate: 'NAVBAR.PROJECTS' }),
-	          _react2.default.createElement(_NavItem2.default, { url: '/about', icon: 'square', color: 'blk', locale: this.props.locale, translate: 'NAVBAR.ABOUT' }),
-	          _react2.default.createElement(_NavItem2.default, { url: '/contact', icon: 'triangle', color: 'blk', locale: this.props.locale, translate: 'NAVBAR.CONTACT' })
+	          { id: 'nav-items', style: this.state.top_style },
+	          this.getTopLinks()
+	        ),
+	        _react2.default.createElement(
+	          'ul',
+	          { id: 'nav-links', style: this.state.bottom_style },
+	          this.getBottomLinks()
 	        )
 	      );
 	    }
@@ -50166,8 +50439,8 @@
 	        } else {
 	          var routePaths = this.props.route.split('/');
 	          (0, _jquery2.default)('.projects-container > section:first-child').css({
-	            marginTop: "26px",
-	            paddingTop: "0"
+	            marginTop: 26,
+	            paddingTop: 0
 	          });
 	          (0, _jquery2.default)('.projects-container > section:first-child div.section-scroll').css("margin", 0);
 	        }
@@ -50188,7 +50461,6 @@
 	        this.setState({
 	          style: style
 	        });
-	        this.checkFooter();
 	      }
 	    }
 	  }, {
@@ -50202,14 +50474,9 @@
 	        breakpoints.begin = offset.top - 250;
 	        breakpoints.end = offset.top + scrollSide.height() - opts.viewportHeight / 2;
 	        if (opts.pos > breakpoints.begin) {
-	          if (opts.pos > breakpoints.begin && opts.pos < breakpoints.end) return { opacity: 1, top: top };else return { opacity: 0, top: top };
-	        } else return { opacity: 0, top: top };
-	      } else return { opacity: 0, top: top };
-	    }
-	  }, {
-	    key: 'checkFooter',
-	    value: function checkFooter() {
-	      if ((0, _jquery2.default)(window).scrollTop() + (0, _jquery2.default)(window).height() == (0, _jquery2.default)(document).height()) (0, _jquery2.default)('.footer').show();else (0, _jquery2.default)('.footer').hide();
+	          if (opts.pos > breakpoints.begin && opts.pos < breakpoints.end) return { visibility: 'visible', opacity: 1, top: top };else return { visibility: 'hidden', opacity: 0, top: top };
+	        } else return { visibility: 'hidden', opacity: 0, top: top };
+	      } else return { visibility: 'hidden', opacity: 0, top: top };
 	    }
 	  }, {
 	    key: 'imageLoaded',
@@ -50265,7 +50532,7 @@
 	        ),
 	        _react2.default.createElement(
 	          'div',
-	          { className: this.props.fixedSide, style: this.state.style },
+	          { className: this.props.fixedSide, style: this.state.style, ref: 'fixed' },
 	          _react2.default.createElement(
 	            'a',
 	            { href: this.props.url, target: '_blank' },

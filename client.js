@@ -10,6 +10,11 @@ if (typeof window !== 'undefined') {
   window.$ = $;
   window.React = React;
   window.ReactDOM = ReactDOM;
+  window.isMobile = function () {
+    if ($(window).width() > 1330) return false
+    else return true
+  }
+  window.clone = (obj) => JSON.parse(JSON.stringify(obj)) 
 }
 
 import App from './components/src/App.jsx'

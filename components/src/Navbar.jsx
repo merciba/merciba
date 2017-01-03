@@ -21,44 +21,49 @@ class Navbar extends React.Component {
 
   handleScroll() {
     if (typeof window !== 'undefined') {
-      let scrolledFromTop = $(window).scrollTop()
-      let windowHeight = $(window).height() - 200
-      let documentHeight = Math.max( document.body.scrollHeight, document.body.offsetHeight, document.documentElement.clientHeight, document.documentElement.scrollHeight, document.documentElement.offsetHeight ) / 2;
-      let factor = 120 / windowHeight
-      let converted = scrolledFromTop * factor
-      let logoDescended = (-120 + converted) < 0 ? (-120 + converted) : 0
-      let ulDescended = (converted + 50) < 200 ? (converted + 50) : 200
-      if (this.props.route === "/") this.setState({
-        logo_style: {
-          top: `${logoDescended}px`,
-          cursor: 'pointer'
-        },
-        ul_style: {
-          marginTop: `${ulDescended}px`
-        },
-        style: {
-          left: this.state ? this.state.style.left : 0,
-          boxShadow: (scrolledFromTop < (documentHeight - 80)) && (scrolledFromTop > (windowHeight * 2)) && (this.state.class === 'open') ? '0 6px 12px 0 rgba(0,0,0,0.16), 0 4px 12px 0 rgba(0,0,0,0.22)' : 'none',
-          background: (scrolledFromTop < (documentHeight - 80)) && (scrolledFromTop > (windowHeight * 2)) && (this.state.class === 'open') ? 'white' : 'transparent'
-        }
-      })
-      else this.setState({
-        logo_style: {
-          top: 0,
-          cursor: 'pointer'
-        },
-        ul_style: {
-          marginTop: 200
-        },
-        style: {
-          left: 0,
-          boxShadow: (scrolledFromTop < (documentHeight - 80)) && (scrolledFromTop > (windowHeight * 2)) && (this.state.class === 'open') ? '0 6px 12px 0 rgba(0,0,0,0.16), 0 4px 12px 0 rgba(0,0,0,0.22)' : 'none',
-          background: (scrolledFromTop < (documentHeight - 80)) && (scrolledFromTop > (windowHeight * 2)) && (this.state.class === 'open') ? 'white' : 'transparent'
-        }
-      })
-      if (scrolledFromTop > (windowHeight - 200)) this.close()
-      else this.open()
+      if (window.isMobile()) {
+        console.log('Mobile device detected')
+      }
+      else {
+        this.styleDesktop()
+      }
     }
+  }
+
+  styleDesktop() {
+    let scrolledFromTop = $(window).scrollTop()
+    let windowHeight = $(window).height() - 200
+    let documentHeight = Math.max( document.body.scrollHeight, document.body.offsetHeight, document.documentElement.clientHeight, document.documentElement.scrollHeight, document.documentElement.offsetHeight ) / 2;
+    let factor = 120 / windowHeight
+    let converted = scrolledFromTop * factor
+    let logoDescended = (-120 + converted) < 0 ? (-120 + converted) : 0
+    let ulTopDescended = (converted + 50) < 200 ? (converted + 50) : 200
+    let ulBottomAscended = (converted + 50) < 200 ? (164 - converted) : 64
+
+    let logo_style= {
+      top: this.props.route === "/" ? `${logoDescended}px` : 0,
+      cursor: 'pointer'
+    }
+    let top_style = {
+      marginTop: this.props.route === "/" ? `${ulTopDescended}px` : 200
+    }
+    let bottom_style = {
+      bottom: this.props.route === "/" ? `${ulBottomAscended}px` : 64
+    }
+    let style = {
+      left: (this.state && this.state.style.left ? this.state.style.left : -200),
+      boxShadow: (scrolledFromTop < ($(document).height() - $(window).height() - 80)) && (scrolledFromTop > (windowHeight * 2)) && (this.state.class === 'open') ? '0 6px 12px 0 rgba(0,0,0,0.16), 0 4px 12px 0 rgba(0,0,0,0.22)' : 'none',
+      background: (scrolledFromTop < ($(document).height() - $(window).height() - 80)) && (scrolledFromTop > (windowHeight * 2)) && (this.state.class === 'open') ? 'white' : 'transparent'
+    }
+
+    this.setState({
+      logo_style,
+      top_style,
+      bottom_style,
+      style
+    })
+    if (scrolledFromTop > (windowHeight - 200)) this.close()
+    else this.open()
   }
 
   scrollToTop() {
@@ -91,9 +96,21 @@ class Navbar extends React.Component {
       style: {
         left: '-200px',
         boxShadow: 'none',
-        background: (scrolledFromTop > (windowHeight * 2)) ? 'white' : 'transparent'
+        background: 'transparent'
       }
     });
+  }
+
+  getTopLinks() {
+    return this.props.links.map((link, index)=> {
+      return <NavItem key={`nav-item-${index}`} url={link.url} icon={link.icon} color="blk" locale={this.props.locale} translate={link.text} position="top"/>
+    })
+  }
+
+  getBottomLinks() {
+    return this.props.bottomLinks.map((link, index)=> {
+      return <NavItem key={`nav-link-${index}`} url={link.url} icon={link.icon} color="blk" locale={this.props.locale} position="bottom"/>
+    })
   }
 
   render() {
@@ -101,10 +118,11 @@ class Navbar extends React.Component {
     return (
       <nav className={this.state.class} style={this.state.style} onMouseEnter={this.open.bind(this)} onMouseLeave={this.close.bind(this)} onMouseMove={this.open.bind(this)}>
         <div className={this.state.logo_class} style={this.state.logo_style} onClick={this.scrollToTop.bind(this)}></div>
-        <ul id="nav-items" style={this.state.ul_style}>
-          <NavItem url="/projects" icon="circle" color="blk" locale={this.props.locale} translate="NAVBAR.PROJECTS"/>
-          <NavItem url="/about" icon="square" color="blk" locale={this.props.locale} translate="NAVBAR.ABOUT"/>
-          <NavItem url="/contact" icon="triangle" color="blk" locale={this.props.locale} translate="NAVBAR.CONTACT"/>
+        <ul id="nav-items" style={this.state.top_style}>
+          {this.getTopLinks()}
+        </ul>
+        <ul id="nav-links" style={this.state.bottom_style}>
+          {this.getBottomLinks()}
         </ul>
       </nav>
     )

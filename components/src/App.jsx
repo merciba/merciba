@@ -39,6 +39,7 @@ class App extends React.Component {
 
     handleScroll() {
       // Scroll handler. Fired on each scroll
+      this.checkFooter();
     }
 
     imageLoaded() {
@@ -51,6 +52,11 @@ class App extends React.Component {
 
     loaded() {
       setTimeout(() => window.scroll(0, 0))
+    }
+
+    checkFooter() {
+      if ($(window).scrollTop() + $(window).height() == $(document).height()) $('.footer').show()
+      else $('.footer').hide()
     }
 
     styleProject(project) {
@@ -111,7 +117,19 @@ class App extends React.Component {
       return (
         <main role="main">
           <div className="spinner" style={this.state.loading ? { display: 'block', position: 'fixed' } : { display: 'none' }}></div>
-          <Navbar route={this.props.route} locale={this.state.locale} ref="navbar"/>
+          <Navbar
+            route={this.props.route}
+            locale={this.state.locale}
+            links={[
+              { url: "/projects", icon: "circle", text: "NAVBAR.PROJECTS" },
+              { url: "/about", icon: "square", text: "NAVBAR.ABOUT" },
+              { url: "/contact", icon: "triangle", text: "NAVBAR.CONTACT"}
+            ]}
+            bottomLinks={[
+              { url: "https://instagram.com/mercibaco", icon: "fa fa-instagram"},
+              { url: "https://twitter.com/mercibaco", icon: "fa fa-twitter"}
+            ]}
+            ref="navbar"/>
           <article className="container logo-container" ref="logo">
             <img id="main-logo" src="https://s3.amazonaws.com/merciba.com/assets/merciba-logo.png" style={this.state.logo} onLoad={this.imageLoaded.bind(this)} />
           </article>
@@ -195,14 +213,64 @@ class App extends React.Component {
               ]}
               title="ABOUT.PAGE_1.TITLE"
               description="ABOUT.PAGE_1.DESCRIPTION"
-              locale={this.state.locale} />
+              cols={[
+                {
+                  img: "http://static.101smart.com/01/Images/image-placeholder-alt.jpg",
+                  title: "ABOUT.PAGE_2.LEFT.TITLE",
+                  items: [
+                    "ABOUT.PAGE_2.LEFT.DESCRIPTION.BRANDING_ID",
+                    "ABOUT.PAGE_2.LEFT.DESCRIPTION.WIREFRAMING",
+                    "ABOUT.PAGE_2.LEFT.DESCRIPTION.UI_DSGN",
+                    "ABOUT.PAGE_2.LEFT.DESCRIPTION.PRD_DSGN",
+                    "ABOUT.PAGE_2.LEFT.DESCRIPTION.CPGN_CREATIVE",
+                    "ABOUT.PAGE_2.LEFT.DESCRIPTION.ART_DIR",
+                    "ABOUT.PAGE_2.LEFT.DESCRIPTION.BRANDED_DIGITAL"
+                  ]
+                },
+                {
+                  img: "http://static.101smart.com/01/Images/image-placeholder-alt.jpg",
+                  title: "ABOUT.PAGE_2.MIDDLE.TITLE",
+                  items: [
+                    "ABOUT.PAGE_2.MIDDLE.DESCRIPTION.HTML_CSS",
+                    "ABOUT.PAGE_2.MIDDLE.DESCRIPTION.JS_NODE",
+                    "ABOUT.PAGE_2.MIDDLE.DESCRIPTION.NATIVE",
+                    "ABOUT.PAGE_2.MIDDLE.DESCRIPTION.SERVER_SIDE_ENG",
+                    "ABOUT.PAGE_2.MIDDLE.DESCRIPTION.CMS_PLATFORM",
+                    "ABOUT.PAGE_2.MIDDLE.DESCRIPTION.SEO",
+                    "ABOUT.PAGE_2.MIDDLE.DESCRIPTION.TRNG_CONSULT"
+                  ]
+                },
+                {
+                  img: "http://static.101smart.com/01/Images/image-placeholder-alt.jpg",
+                  title: "ABOUT.PAGE_2.RIGHT.TITLE",
+                  items: [
+                    "ABOUT.PAGE_2.RIGHT.DESCRIPTION.MKTG_STRATEGY",
+                    "ABOUT.PAGE_2.RIGHT.DESCRIPTION.SM_STRATEGY",
+                    "ABOUT.PAGE_2.RIGHT.DESCRIPTION.PM",
+                    "ABOUT.PAGE_2.RIGHT.DESCRIPTION.USR_ANALYTICS",
+                    "ABOUT.PAGE_2.RIGHT.DESCRIPTION.USR_PERSONA",
+                    "ABOUT.PAGE_2.RIGHT.DESCRIPTION.BRAND_STRATEGY",
+                    "ABOUT.PAGE_2.RIGHT.DESCRIPTION.IN_HOUSE_TRNG"
+                  ]
+                }
+              ]}
+              page3={{
+                title: "ABOUT.PAGE_3.TITLE",
+                description: "ABOUT.PAGE_3.DESCRIPTION",
+                img1: "https://s3.amazonaws.com/merciba.com/assets/about/about-image-1.png",
+                img2: "https://s3.amazonaws.com/merciba.com/assets/about/about-image-2.png",
+                style: { top: '20%', opacity: 0 }
+              }}
+              locale={this.state.locale}
+              onImageLoaded={this.imageLoaded.bind(this)} />
           </article>
           <article className="contact" ref="contact">
             <Contact />
           </article>
           <footer>
             <div className="footer" ref="footer">
-              <div>&copy; 2017 Merciba LLC</div>
+              <div className="footer-left">Made with 💻&nbsp; in Brooklyn, New York 🌇 </div>
+              <div className="footer-right">&copy; 2017 Merciba LLC</div>
             </div>
           </footer>
         </main>
