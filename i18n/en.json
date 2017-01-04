@@ -111,5 +111,14 @@
 			"DESCRIPTION": "[REPLACE] Lorem Khaled Ipsum is a major key to success. They don’t want us to win. Bless up. Eliptical talk. Surround yourself with angels, positive energy, beautiful people, beautiful souls, clean heart, angel. Lion! We don’t see them, we will never see them. They key is to have every key, the key to open every.[/REPLACE]"
 		}
 	},
-	"NAVBAR.PROJECTS": "NAVBAR.PROJECTS"
+	"CONTACT": {
+		"TITLE": "Reach Out",
+		"DESCRIPTION": "We are currently open to consultation work and are always interested in connecting with like-minded creatives, designers, developers, managers, and influencers. Send us a message if you’d like to discuss a project or connect with us.",
+		"FORM": {
+			"NAME": "Your Name",
+			"EMAIL": "Your Email",
+			"MESSAGE": "Message",
+			"SEND": "Send"
+		}
+	}
 }

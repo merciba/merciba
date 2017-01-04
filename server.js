@@ -8,7 +8,6 @@ app.start({
     port: 5000,
     name: 'merciba',
     public: __dirname + '/public',
-    views: __dirname +'/views',
     middleware: {
       '/*': function * (next) {
         // middleware placeholder

@@ -21,7 +21,7 @@ gulp.task('browser-sync', function() {
 });
 
 gulp.task('watch', function () {
-	gulp.watch(['components/src/**/*.jsx', 'views/**/*.jade'], function () {
+	gulp.watch(['components/src/**/*.jsx', 'views/**/*.pug'], function () {
 		runSequence('build', 'server');
 	})
 	gulp.watch(['server.js', 'routes/**/*.js'], ['server'])

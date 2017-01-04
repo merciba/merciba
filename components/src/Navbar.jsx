@@ -40,7 +40,13 @@ class Navbar extends React.Component {
     let ulTopDescended = (converted + 50) < 200 ? (converted + 50) : 200
     let ulBottomAscended = (converted + 50) < 200 ? (164 - converted) : 64
 
-    let logo_style= {
+    let logo_style = {
+      opacity: this.state && (this.state.class === "closed") ? 0 : 1,
+      top: this.props.route === "/" ? `${logoDescended}px` : 0,
+      cursor: 'pointer'
+    }
+    let bw_logo_style = {
+      opacity: this.state && (this.state.class === "closed") ? 1 : 0,
       top: this.props.route === "/" ? `${logoDescended}px` : 0,
       cursor: 'pointer'
     }
@@ -58,6 +64,7 @@ class Navbar extends React.Component {
 
     this.setState({
       logo_style,
+      bw_logo_style,
       top_style,
       bottom_style,
       style
@@ -76,9 +83,20 @@ class Navbar extends React.Component {
   open() {
     let scrolledFromTop = $(window).scrollTop()
     let windowHeight = $(window).height()
+    let logo_style = {
+      opacity: 1,
+      top: this.props.route === "/" ? $('.nav-logo').css('top') : 0,
+      cursor: 'pointer'
+    }
+    let bw_logo_style = {
+      opacity: 0,
+      top: this.props.route === "/" ? $('.nav-logo').css('top') : 0,
+      cursor: 'pointer'
+    }
     this.setState({
+      logo_style,
+      bw_logo_style,
       class: 'open',
-      logo_class: 'nav-logo logo-color',
       style: {
         left: '0px',
         boxShadow: (scrolledFromTop > (windowHeight * 2)) ? '0 6px 12px 0 rgba(0,0,0,0.16), 0 4px 12px 0 rgba(0,0,0,0.22)' : 'none',
@@ -90,9 +108,20 @@ class Navbar extends React.Component {
   close() {
     let scrolledFromTop = $(window).scrollTop()
     let windowHeight = $(window).height()
+    let logo_style = {
+      opacity: 0,
+      top: this.props.route === "/" ? $('.nav-logo').css('top') : 0,
+      cursor: 'pointer'
+    }
+    let bw_logo_style = {
+      opacity: 1,
+      top: this.props.route === "/" ? $('.nav-logo').css('top') : 0,
+      cursor: 'pointer'
+    }
     if (scrolledFromTop > (windowHeight - 200)) this.setState({
+      logo_style,
+      bw_logo_style,
       class: 'closed',
-      logo_class: 'nav-logo logo-bw',
       style: {
         left: '-200px',
         boxShadow: 'none',
@@ -113,11 +142,16 @@ class Navbar extends React.Component {
     })
   }
 
+  imageLoaded() {
+    this.props.onImageLoaded(this.refs.gallery)
+  }
+
   render() {
     if (!this.state) return null;
     return (
       <nav className={this.state.class} style={this.state.style} onMouseEnter={this.open.bind(this)} onMouseLeave={this.close.bind(this)} onMouseMove={this.open.bind(this)}>
-        <div className={this.state.logo_class} style={this.state.logo_style} onClick={this.scrollToTop.bind(this)}></div>
+        <img src="https://s3.amazonaws.com/merciba.com/assets/mercibalogo-sm.svg" className="nav-logo" style={this.state.logo_style} onClick={this.scrollToTop.bind(this)} onLoad={this.imageLoaded.bind(this)} />
+        <img src="https://s3.amazonaws.com/merciba.com/assets/mercibalogo-sm-bw.svg" className="nav-logo" style={this.state.bw_logo_style} onClick={this.scrollToTop.bind(this)} onLoad={this.imageLoaded.bind(this)} />
         <ul id="nav-items" style={this.state.top_style}>
           {this.getTopLinks()}
         </ul>

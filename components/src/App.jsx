@@ -18,7 +18,6 @@ class App extends React.Component {
         let windowHeight = $(window).height()
         let windowWidth = $(window).width()
         window.addEventListener('scroll', this.handleScroll.bind(this));
-        this.handleScroll()
         getLocale()
           .then((locale) => {
             this.setState({
@@ -61,10 +60,13 @@ class App extends React.Component {
 
     styleProject(project) {
       $(this.refs.logo).hide()
+      $(this.refs.about).hide()
+      $(this.refs.contact).hide()
       $(this.refs.projects).find(`#${project}`).show()
       $(this.refs.projects).find(`#${project}`).css("padding-top", 0)
       $(this.refs.projects).find(`#${project} .section-scroll`).css("margin-top", "6%")
       $(this.refs.projects).find(`#${project} .section-fixed`).css("opacity", 1)
+      window.scroll(0, 1)
     }
 
     styleElements() {
@@ -93,6 +95,7 @@ class App extends React.Component {
             $(this.refs.projects).find('section:first-child').css("padding-top", 0)
             $(this.refs.projects).find('section:first-child .section-scroll').css("margin-top", "6%")
             $(this.refs.projects).find('section:first-child .section-fixed').css("opacity", 1)
+            window.scroll(0, 1)
             break;
           case "/about":
             $(this.refs.logo).hide()
@@ -129,6 +132,7 @@ class App extends React.Component {
               { url: "https://instagram.com/mercibaco", icon: "fa fa-instagram"},
               { url: "https://twitter.com/mercibaco", icon: "fa fa-twitter"}
             ]}
+            onImageLoaded={this.imageLoaded.bind(this)}
             ref="navbar"/>
           <article className="container logo-container" ref="logo">
             <img id="main-logo" src="https://s3.amazonaws.com/merciba.com/assets/merciba-logo.png" style={this.state.logo} onLoad={this.imageLoaded.bind(this)} />
@@ -182,7 +186,7 @@ class App extends React.Component {
             <Project
               ref="software"
               name="software"
-              url="https://github.com/merciba"
+              url="/project/software"
               route={this.props.route}
               scrollSide="section-scroll left"
               fixedSide="section-fixed right"
@@ -195,8 +199,9 @@ class App extends React.Component {
                 { title: "MAIN.PROJECTS.SOFTWARE.CARDS.CARD_4.TITLE", description: "MAIN.PROJECTS.SOFTWARE.CARDS.CARD_4.DESCRIPTION", imageUrl: "https://s3.amazonaws.com/merciba.com/assets/projects/open_source_software/softwarebkg-4.jpg", link: { text: "MAIN.PROJECTS.SOFTWARE.LINK_TEXT", href: "https://github.com/merciba/orequire" }}
               ]}
               icons={[
-                { img: "https://s3.amazonaws.com/merciba.com/assets/projects/open_source_software/Npm-logo.svg.png", href: "https://www.npmjs.com/~merciba"},
-                { img: "https://s3.amazonaws.com/merciba.com/assets/projects/open_source_software/nodejs_logo.png", href: "https://nodejs.org" }
+                { img: "https://s3.amazonaws.com/merciba.com/assets/projects/open_source_software/Npm-logo.svg.png", href: "https://www.npmjs.com/~merciba" },
+                { img: "https://s3.amazonaws.com/merciba.com/assets/projects/open_source_software/nodejs_logo.png", href: "https://nodejs.org" },
+                { img: "https://s3.amazonaws.com/merciba.com/assets/projects/open_source_software/GitHub-Mark-120px-plus.png", href: "https://github.com/merciba" }
               ]}
               tags={[
                 "MAIN.TAGS.DEV"
@@ -265,11 +270,21 @@ class App extends React.Component {
               onImageLoaded={this.imageLoaded.bind(this)} />
           </article>
           <article className="contact" ref="contact">
-            <Contact />
+            <Contact
+              fields={[
+                { text: "CONTACT.FORM.NAME", type: "text", name: "name" },
+                { text: "CONTACT.FORM.EMAIL", type: "text", name: "email" },
+                { text: "CONTACT.FORM.MESSAGE", type: "textarea", name: "message" }
+              ]}
+              title="CONTACT.TITLE"
+              description="CONTACT.DESCRIPTION"
+              locale={this.state.locale}
+              onImageLoaded={this.imageLoaded.bind(this)}
+              />
           </article>
           <footer>
             <div className="footer" ref="footer">
-              <div className="footer-left">Made with 💻&nbsp; in Brooklyn, New York 🌇 </div>
+              <div className="footer-left">Made with <a href="https://facebook.github.io/react/" target="_blank">React.js</a> in Brooklyn, New York 🗽 </div>
               <div className="footer-right">&copy; 2017 Merciba LLC</div>
             </div>
           </footer>

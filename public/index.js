@@ -31788,7 +31788,6 @@
 	          var windowHeight = (0, _jquery2.default)(window).height();
 	          var windowWidth = (0, _jquery2.default)(window).width();
 	          window.addEventListener('scroll', _this2.handleScroll.bind(_this2));
-	          _this2.handleScroll();
 	          getLocale().then(function (locale) {
 	            _this2.setState({
 	              locale: locale,
@@ -31838,10 +31837,13 @@
 	    key: 'styleProject',
 	    value: function styleProject(project) {
 	      (0, _jquery2.default)(this.refs.logo).hide();
+	      (0, _jquery2.default)(this.refs.about).hide();
+	      (0, _jquery2.default)(this.refs.contact).hide();
 	      (0, _jquery2.default)(this.refs.projects).find('#' + project).show();
 	      (0, _jquery2.default)(this.refs.projects).find('#' + project).css("padding-top", 0);
 	      (0, _jquery2.default)(this.refs.projects).find('#' + project + ' .section-scroll').css("margin-top", "6%");
 	      (0, _jquery2.default)(this.refs.projects).find('#' + project + ' .section-fixed').css("opacity", 1);
+	      window.scroll(0, 1);
 	    }
 	  }, {
 	    key: 'styleElements',
@@ -31867,6 +31869,7 @@
 	            (0, _jquery2.default)(this.refs.projects).find('section:first-child').css("padding-top", 0);
 	            (0, _jquery2.default)(this.refs.projects).find('section:first-child .section-scroll').css("margin-top", "6%");
 	            (0, _jquery2.default)(this.refs.projects).find('section:first-child .section-fixed').css("opacity", 1);
+	            window.scroll(0, 1);
 	            break;
 	          case "/about":
 	            (0, _jquery2.default)(this.refs.logo).hide();
@@ -31897,6 +31900,7 @@
 	          locale: this.state.locale,
 	          links: [{ url: "/projects", icon: "circle", text: "NAVBAR.PROJECTS" }, { url: "/about", icon: "square", text: "NAVBAR.ABOUT" }, { url: "/contact", icon: "triangle", text: "NAVBAR.CONTACT" }],
 	          bottomLinks: [{ url: "https://instagram.com/mercibaco", icon: "fa fa-instagram" }, { url: "https://twitter.com/mercibaco", icon: "fa fa-twitter" }],
+	          onImageLoaded: this.imageLoaded.bind(this),
 	          ref: 'navbar' }),
 	        _react2.default.createElement(
 	          'article',
@@ -31937,14 +31941,14 @@
 	          _react2.default.createElement(_Project2.default, {
 	            ref: 'software',
 	            name: 'software',
-	            url: 'https://github.com/merciba',
+	            url: '/project/software',
 	            route: this.props.route,
 	            scrollSide: 'section-scroll left',
 	            fixedSide: 'section-fixed right',
 	            title: 'MAIN.PROJECTS.SOFTWARE.TITLE',
 	            description: 'MAIN.PROJECTS.SOFTWARE.DESCRIPTION',
 	            cards: [{ title: "MAIN.PROJECTS.SOFTWARE.CARDS.CARD_1.TITLE", description: "MAIN.PROJECTS.SOFTWARE.CARDS.CARD_1.DESCRIPTION", imageUrl: "https://s3.amazonaws.com/merciba.com/assets/projects/open_source_software/softwarebkg-1.png", link: { text: "MAIN.PROJECTS.SOFTWARE.LINK_TEXT", href: "https://github.com/merciba/paquet" } }, { title: "MAIN.PROJECTS.SOFTWARE.CARDS.CARD_2.TITLE", description: "MAIN.PROJECTS.SOFTWARE.CARDS.CARD_2.DESCRIPTION", imageUrl: "https://s3.amazonaws.com/merciba.com/assets/projects/open_source_software/softwarebkg-2.jpg", link: { text: "MAIN.PROJECTS.SOFTWARE.LINK_TEXT", href: "https://github.com/alfonsogoberjr/knearest" } }, { title: "MAIN.PROJECTS.SOFTWARE.CARDS.CARD_3.TITLE", description: "MAIN.PROJECTS.SOFTWARE.CARDS.CARD_3.DESCRIPTION", imageUrl: "https://s3.amazonaws.com/merciba.com/assets/projects/open_source_software/softwarebkg-3.jpg", link: { text: "MAIN.PROJECTS.SOFTWARE.LINK_TEXT", href: "https://github.com/merciba/ascii-mirror" } }, { title: "MAIN.PROJECTS.SOFTWARE.CARDS.CARD_4.TITLE", description: "MAIN.PROJECTS.SOFTWARE.CARDS.CARD_4.DESCRIPTION", imageUrl: "https://s3.amazonaws.com/merciba.com/assets/projects/open_source_software/softwarebkg-4.jpg", link: { text: "MAIN.PROJECTS.SOFTWARE.LINK_TEXT", href: "https://github.com/merciba/orequire" } }],
-	            icons: [{ img: "https://s3.amazonaws.com/merciba.com/assets/projects/open_source_software/Npm-logo.svg.png", href: "https://www.npmjs.com/~merciba" }, { img: "https://s3.amazonaws.com/merciba.com/assets/projects/open_source_software/nodejs_logo.png", href: "https://nodejs.org" }],
+	            icons: [{ img: "https://s3.amazonaws.com/merciba.com/assets/projects/open_source_software/Npm-logo.svg.png", href: "https://www.npmjs.com/~merciba" }, { img: "https://s3.amazonaws.com/merciba.com/assets/projects/open_source_software/nodejs_logo.png", href: "https://nodejs.org" }, { img: "https://s3.amazonaws.com/merciba.com/assets/projects/open_source_software/GitHub-Mark-120px-plus.png", href: "https://github.com/merciba" }],
 	            tags: ["MAIN.TAGS.DEV"],
 	            locale: this.state.locale,
 	            onImageLoaded: this.imageLoaded.bind(this) })
@@ -31982,7 +31986,13 @@
 	        _react2.default.createElement(
 	          'article',
 	          { className: 'contact', ref: 'contact' },
-	          _react2.default.createElement(_Contact2.default, null)
+	          _react2.default.createElement(_Contact2.default, {
+	            fields: [{ text: "CONTACT.FORM.NAME", type: "text", name: "name" }, { text: "CONTACT.FORM.EMAIL", type: "text", name: "email" }, { text: "CONTACT.FORM.MESSAGE", type: "textarea", name: "message" }],
+	            title: 'CONTACT.TITLE',
+	            description: 'CONTACT.DESCRIPTION',
+	            locale: this.state.locale,
+	            onImageLoaded: this.imageLoaded.bind(this)
+	          })
 	        ),
 	        _react2.default.createElement(
 	          'footer',
@@ -31993,7 +32003,13 @@
 	            _react2.default.createElement(
 	              'div',
 	              { className: 'footer-left' },
-	              'Made with \uD83D\uDCBB\xA0 in Brooklyn, New York \uD83C\uDF07 '
+	              'Made with ',
+	              _react2.default.createElement(
+	                'a',
+	                { href: 'https://facebook.github.io/react/', target: '_blank' },
+	                'React.js'
+	              ),
+	              ' in Brooklyn, New York \uD83D\uDDFD '
 	            ),
 	            _react2.default.createElement(
 	              'div',
@@ -38016,6 +38032,12 @@
 	      var ulBottomAscended = converted + 50 < 200 ? 164 - converted : 64;
 	
 	      var logo_style = {
+	        opacity: this.state && this.state.class === "closed" ? 0 : 1,
+	        top: this.props.route === "/" ? logoDescended + 'px' : 0,
+	        cursor: 'pointer'
+	      };
+	      var bw_logo_style = {
+	        opacity: this.state && this.state.class === "closed" ? 1 : 0,
 	        top: this.props.route === "/" ? logoDescended + 'px' : 0,
 	        cursor: 'pointer'
 	      };
@@ -38033,6 +38055,7 @@
 	
 	      this.setState({
 	        logo_style: logo_style,
+	        bw_logo_style: bw_logo_style,
 	        top_style: top_style,
 	        bottom_style: bottom_style,
 	        style: style
@@ -38051,9 +38074,20 @@
 	    value: function open() {
 	      var scrolledFromTop = (0, _jquery2.default)(window).scrollTop();
 	      var windowHeight = (0, _jquery2.default)(window).height();
+	      var logo_style = {
+	        opacity: 1,
+	        top: this.props.route === "/" ? (0, _jquery2.default)('.nav-logo').css('top') : 0,
+	        cursor: 'pointer'
+	      };
+	      var bw_logo_style = {
+	        opacity: 0,
+	        top: this.props.route === "/" ? (0, _jquery2.default)('.nav-logo').css('top') : 0,
+	        cursor: 'pointer'
+	      };
 	      this.setState({
+	        logo_style: logo_style,
+	        bw_logo_style: bw_logo_style,
 	        class: 'open',
-	        logo_class: 'nav-logo logo-color',
 	        style: {
 	          left: '0px',
 	          boxShadow: scrolledFromTop > windowHeight * 2 ? '0 6px 12px 0 rgba(0,0,0,0.16), 0 4px 12px 0 rgba(0,0,0,0.22)' : 'none',
@@ -38066,9 +38100,20 @@
 	    value: function close() {
 	      var scrolledFromTop = (0, _jquery2.default)(window).scrollTop();
 	      var windowHeight = (0, _jquery2.default)(window).height();
+	      var logo_style = {
+	        opacity: 0,
+	        top: this.props.route === "/" ? (0, _jquery2.default)('.nav-logo').css('top') : 0,
+	        cursor: 'pointer'
+	      };
+	      var bw_logo_style = {
+	        opacity: 1,
+	        top: this.props.route === "/" ? (0, _jquery2.default)('.nav-logo').css('top') : 0,
+	        cursor: 'pointer'
+	      };
 	      if (scrolledFromTop > windowHeight - 200) this.setState({
+	        logo_style: logo_style,
+	        bw_logo_style: bw_logo_style,
 	        class: 'closed',
-	        logo_class: 'nav-logo logo-bw',
 	        style: {
 	          left: '-200px',
 	          boxShadow: 'none',
@@ -38095,10 +38140,15 @@
 	      });
 	    }
 	  }, {
+	    key: 'imageLoaded',
+	    value: function imageLoaded() {
+	      this.props.onImageLoaded(this.refs.gallery);
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      if (!this.state) return null;
-	      return _react2.default.createElement('nav', { className: this.state.class, style: this.state.style, onMouseEnter: this.open.bind(this), onMouseLeave: this.close.bind(this), onMouseMove: this.open.bind(this) }, _react2.default.createElement('div', { className: this.state.logo_class, style: this.state.logo_style, onClick: this.scrollToTop.bind(this) }), _react2.default.createElement('ul', { id: 'nav-items', style: this.state.top_style }, this.getTopLinks()), _react2.default.createElement('ul', { id: 'nav-links', style: this.state.bottom_style }, this.getBottomLinks()));
+	      return _react2.default.createElement('nav', { className: this.state.class, style: this.state.style, onMouseEnter: this.open.bind(this), onMouseLeave: this.close.bind(this), onMouseMove: this.open.bind(this) }, _react2.default.createElement('img', { src: 'https://s3.amazonaws.com/merciba.com/assets/mercibalogo-sm.svg', className: 'nav-logo', style: this.state.logo_style, onClick: this.scrollToTop.bind(this), onLoad: this.imageLoaded.bind(this) }), _react2.default.createElement('img', { src: 'https://s3.amazonaws.com/merciba.com/assets/mercibalogo-sm-bw.svg', className: 'nav-logo', style: this.state.bw_logo_style, onClick: this.scrollToTop.bind(this), onLoad: this.imageLoaded.bind(this) }), _react2.default.createElement('ul', { id: 'nav-items', style: this.state.top_style }, this.getTopLinks()), _react2.default.createElement('ul', { id: 'nav-links', style: this.state.bottom_style }, this.getBottomLinks()));
 	    }
 	  }]);
 	
@@ -38405,7 +38455,7 @@
 	      if (typeof window !== 'undefined') {
 	        if (this.props.cards && this.props.cards.length) {
 	          return this.props.cards.map(function (card, index) {
-	            return _react2.default.createElement('div', { key: 'card-' + index, className: 'card' }, _react2.default.createElement('img', { src: card.imageUrl, onLoad: _this2.imageLoaded.bind(_this2) }), _react2.default.createElement(_Text2.default, { tag: 'div', locale: _this2.props.locale, sel: 'card-title', translate: card.title }), _react2.default.createElement(_Text2.default, { tag: 'div', locale: _this2.props.locale, sel: 'card-description', translate: card.description }), _react2.default.createElement('a', { href: card.link.href }, _react2.default.createElement(_Text2.default, { tag: 'div', locale: _this2.props.locale, sel: 'card-link', target: '_blank', translate: card.link.text })));
+	            return _react2.default.createElement('div', { key: 'card-' + index, className: 'card' }, _react2.default.createElement('img', { src: card.imageUrl, onLoad: _this2.imageLoaded.bind(_this2) }), _react2.default.createElement(_Text2.default, { tag: 'div', locale: _this2.props.locale, sel: 'card-title', translate: card.title }), _react2.default.createElement(_Text2.default, { tag: 'div', locale: _this2.props.locale, sel: 'card-description', translate: card.description }), _react2.default.createElement('a', { href: card.link.href, target: '_blank' }, _react2.default.createElement(_Text2.default, { tag: 'div', locale: _this2.props.locale, sel: 'card-link', target: '_blank', translate: card.link.text })));
 	          });
 	        }
 	        if (this.props.images && this.props.images.length) {
@@ -38425,7 +38475,7 @@
 	      var _this3 = this;
 	
 	      if (!this.state) return null;
-	      return _react2.default.createElement('section', { id: this.props.name }, _react2.default.createElement('div', { className: this.props.scrollSide, ref: 'gallery' }, this.getScrollSide()), _react2.default.createElement('div', { className: this.props.fixedSide, style: this.state.style, ref: 'fixed' }, _react2.default.createElement('a', { href: this.props.url, target: '_blank' }, _react2.default.createElement(_Text2.default, { tag: 'div', locale: this.props.locale, sel: 'section-title', translate: this.props.title })), _react2.default.createElement(_Text2.default, { tag: 'p', locale: this.props.locale, sel: 'section-description', translate: this.props.description }), _react2.default.createElement('div', { className: 'section-tags' }, this.props.tags.map(function (tag) {
+	      return _react2.default.createElement('section', { id: this.props.name }, _react2.default.createElement('div', { className: this.props.scrollSide, ref: 'gallery' }, this.getScrollSide()), _react2.default.createElement('div', { className: this.props.fixedSide, style: this.state.style, ref: 'fixed' }, _react2.default.createElement('a', { href: this.props.url }, _react2.default.createElement(_Text2.default, { tag: 'div', locale: this.props.locale, sel: 'section-title', translate: this.props.title })), _react2.default.createElement(_Text2.default, { tag: 'p', locale: this.props.locale, sel: 'section-description', translate: this.props.description }), _react2.default.createElement('div', { className: 'section-tags' }, this.props.tags.map(function (tag) {
 	        return _react2.default.createElement(_Text2.default, { tag: 'div', locale: _this3.props.locale, key: tag, translate: tag });
 	      })), this.props.icons ? this.props.icons.map(function (icon, index) {
 	        return _react2.default.createElement('a', { href: icon.href, target: '_blank', style: _this3.state.links, key: 'link-' + index }, _react2.default.createElement('img', { className: 'software-logo', height: '50', key: 'icon-' + index, src: icon.img, onLoad: _this3.imageLoaded.bind(_this3) }));
@@ -38685,13 +38735,29 @@
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
 	      if (typeof window !== 'undefined') {
-	        console.log('Contact page ready.');
+	        (0, _jquery2.default)(this.refs.fixed).css({
+	          opacity: 1,
+	          marginTop: (0, _jquery2.default)(window).height() / 3
+	        });
+	        (0, _jquery2.default)(this.refs.scroll).css({
+	          marginTop: 180,
+	          marginBottom: 0
+	        });
 	      }
+	    }
+	  }, {
+	    key: 'getContactForm',
+	    value: function getContactForm() {
+	      var _this2 = this;
+	
+	      return _react2.default.createElement('form', { className: 'contact-form' }, this.props.fields.map(function (field) {
+	        return _react2.default.createElement('div', { key: field.name }, _react2.default.createElement('label', { htmlFor: field.name }, _react2.default.createElement(_Text2.default, { tag: 'div', locale: _this2.props.locale, translate: field.text })), field.type === 'textarea' ? _react2.default.createElement('textarea', { name: field.name }) : _react2.default.createElement('input', { name: field.name, type: field.type }));
+	      }), _react2.default.createElement('input', { type: 'submit' }));
 	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      return _react2.default.createElement('div', null, 'Contact');
+	      return _react2.default.createElement('div', { id: 'contact' }, _react2.default.createElement('div', { className: 'section-scroll right', ref: 'scroll' }, this.getContactForm()), _react2.default.createElement('div', { className: 'section-fixed left', ref: 'fixed' }, _react2.default.createElement(_Text2.default, { tag: 'div', locale: this.props.locale, sel: 'section-title', translate: this.props.title }), _react2.default.createElement(_Text2.default, { tag: 'p', locale: this.props.locale, sel: 'section-description', translate: this.props.description })));
 	    }
 	  }]);
 	
@@ -49853,10 +49919,11 @@
 		"./About.jsx": 255,
 		"./App.jsx": 179,
 		"./Contact.jsx": 256,
-		"./NavItem.jsx": 257,
-		"./Navbar.jsx": 258,
-		"./Project.jsx": 259,
-		"./Text.jsx": 260
+		"./Form.jsx": 257,
+		"./NavItem.jsx": 258,
+		"./Navbar.jsx": 259,
+		"./Project.jsx": 260,
+		"./Text.jsx": 261
 	};
 	function webpackContext(req) {
 		return __webpack_require__(webpackContextResolve(req));
@@ -50117,16 +50184,56 @@
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
 	      if (typeof window !== 'undefined') {
-	        console.log('Contact page ready.');
+	        (0, _jquery2.default)(this.refs.fixed).css({
+	          opacity: 1,
+	          marginTop: (0, _jquery2.default)(window).height() / 3
+	        });
+	        (0, _jquery2.default)(this.refs.scroll).css({
+	          marginTop: 180,
+	          marginBottom: 0
+	        });
 	      }
+	    }
+	  }, {
+	    key: 'getContactForm',
+	    value: function getContactForm() {
+	      var _this2 = this;
+	
+	      return _react2.default.createElement(
+	        'form',
+	        { className: 'contact-form' },
+	        this.props.fields.map(function (field) {
+	          return _react2.default.createElement(
+	            'div',
+	            { key: field.name },
+	            _react2.default.createElement(
+	              'label',
+	              { htmlFor: field.name },
+	              _react2.default.createElement(_Text2.default, { tag: 'div', locale: _this2.props.locale, translate: field.text })
+	            ),
+	            field.type === 'textarea' ? _react2.default.createElement('textarea', { name: field.name }) : _react2.default.createElement('input', { name: field.name, type: field.type })
+	          );
+	        }),
+	        _react2.default.createElement('input', { type: 'submit' })
+	      );
 	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
 	        'div',
-	        null,
-	        'Contact'
+	        { id: 'contact' },
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'section-scroll right', ref: 'scroll' },
+	          this.getContactForm()
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'section-fixed left', ref: 'fixed' },
+	          _react2.default.createElement(_Text2.default, { tag: 'div', locale: this.props.locale, sel: 'section-title', translate: this.props.title }),
+	          _react2.default.createElement(_Text2.default, { tag: 'p', locale: this.props.locale, sel: 'section-description', translate: this.props.description })
+	        )
 	      );
 	    }
 	  }]);
@@ -50138,6 +50245,12 @@
 
 /***/ },
 /* 257 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+/***/ },
+/* 258 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -50204,7 +50317,7 @@
 	exports.default = NavItem;
 
 /***/ },
-/* 258 */
+/* 259 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -50282,6 +50395,12 @@
 	      var ulBottomAscended = converted + 50 < 200 ? 164 - converted : 64;
 	
 	      var logo_style = {
+	        opacity: this.state && this.state.class === "closed" ? 0 : 1,
+	        top: this.props.route === "/" ? logoDescended + 'px' : 0,
+	        cursor: 'pointer'
+	      };
+	      var bw_logo_style = {
+	        opacity: this.state && this.state.class === "closed" ? 1 : 0,
 	        top: this.props.route === "/" ? logoDescended + 'px' : 0,
 	        cursor: 'pointer'
 	      };
@@ -50299,6 +50418,7 @@
 	
 	      this.setState({
 	        logo_style: logo_style,
+	        bw_logo_style: bw_logo_style,
 	        top_style: top_style,
 	        bottom_style: bottom_style,
 	        style: style
@@ -50317,9 +50437,20 @@
 	    value: function open() {
 	      var scrolledFromTop = (0, _jquery2.default)(window).scrollTop();
 	      var windowHeight = (0, _jquery2.default)(window).height();
+	      var logo_style = {
+	        opacity: 1,
+	        top: this.props.route === "/" ? (0, _jquery2.default)('.nav-logo').css('top') : 0,
+	        cursor: 'pointer'
+	      };
+	      var bw_logo_style = {
+	        opacity: 0,
+	        top: this.props.route === "/" ? (0, _jquery2.default)('.nav-logo').css('top') : 0,
+	        cursor: 'pointer'
+	      };
 	      this.setState({
+	        logo_style: logo_style,
+	        bw_logo_style: bw_logo_style,
 	        class: 'open',
-	        logo_class: 'nav-logo logo-color',
 	        style: {
 	          left: '0px',
 	          boxShadow: scrolledFromTop > windowHeight * 2 ? '0 6px 12px 0 rgba(0,0,0,0.16), 0 4px 12px 0 rgba(0,0,0,0.22)' : 'none',
@@ -50332,9 +50463,20 @@
 	    value: function close() {
 	      var scrolledFromTop = (0, _jquery2.default)(window).scrollTop();
 	      var windowHeight = (0, _jquery2.default)(window).height();
+	      var logo_style = {
+	        opacity: 0,
+	        top: this.props.route === "/" ? (0, _jquery2.default)('.nav-logo').css('top') : 0,
+	        cursor: 'pointer'
+	      };
+	      var bw_logo_style = {
+	        opacity: 1,
+	        top: this.props.route === "/" ? (0, _jquery2.default)('.nav-logo').css('top') : 0,
+	        cursor: 'pointer'
+	      };
 	      if (scrolledFromTop > windowHeight - 200) this.setState({
+	        logo_style: logo_style,
+	        bw_logo_style: bw_logo_style,
 	        class: 'closed',
-	        logo_class: 'nav-logo logo-bw',
 	        style: {
 	          left: '-200px',
 	          boxShadow: 'none',
@@ -50361,13 +50503,19 @@
 	      });
 	    }
 	  }, {
+	    key: 'imageLoaded',
+	    value: function imageLoaded() {
+	      this.props.onImageLoaded(this.refs.gallery);
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      if (!this.state) return null;
 	      return _react2.default.createElement(
 	        'nav',
 	        { className: this.state.class, style: this.state.style, onMouseEnter: this.open.bind(this), onMouseLeave: this.close.bind(this), onMouseMove: this.open.bind(this) },
-	        _react2.default.createElement('div', { className: this.state.logo_class, style: this.state.logo_style, onClick: this.scrollToTop.bind(this) }),
+	        _react2.default.createElement('img', { src: 'https://s3.amazonaws.com/merciba.com/assets/mercibalogo-sm.svg', className: 'nav-logo', style: this.state.logo_style, onClick: this.scrollToTop.bind(this), onLoad: this.imageLoaded.bind(this) }),
+	        _react2.default.createElement('img', { src: 'https://s3.amazonaws.com/merciba.com/assets/mercibalogo-sm-bw.svg', className: 'nav-logo', style: this.state.bw_logo_style, onClick: this.scrollToTop.bind(this), onLoad: this.imageLoaded.bind(this) }),
 	        _react2.default.createElement(
 	          'ul',
 	          { id: 'nav-items', style: this.state.top_style },
@@ -50388,7 +50536,7 @@
 	exports.default = Navbar;
 
 /***/ },
-/* 259 */
+/* 260 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -50499,7 +50647,7 @@
 	              _react2.default.createElement(_Text2.default, { tag: 'div', locale: _this2.props.locale, sel: 'card-description', translate: card.description }),
 	              _react2.default.createElement(
 	                'a',
-	                { href: card.link.href },
+	                { href: card.link.href, target: '_blank' },
 	                _react2.default.createElement(_Text2.default, { tag: 'div', locale: _this2.props.locale, sel: 'card-link', target: '_blank', translate: card.link.text })
 	              )
 	            );
@@ -50535,7 +50683,7 @@
 	          { className: this.props.fixedSide, style: this.state.style, ref: 'fixed' },
 	          _react2.default.createElement(
 	            'a',
-	            { href: this.props.url, target: '_blank' },
+	            { href: this.props.url },
 	            _react2.default.createElement(_Text2.default, { tag: 'div', locale: this.props.locale, sel: 'section-title', translate: this.props.title })
 	          ),
 	          _react2.default.createElement(_Text2.default, { tag: 'p', locale: this.props.locale, sel: 'section-description', translate: this.props.description }),
@@ -50568,7 +50716,7 @@
 	exports.default = Project;
 
 /***/ },
-/* 260 */
+/* 261 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';

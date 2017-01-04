@@ -70,7 +70,7 @@ class Project extends React.Component {
             <img src={card.imageUrl} onLoad={this.imageLoaded.bind(this)}/>
             <Text tag="div" locale={this.props.locale} sel="card-title" translate={card.title} />
             <Text tag="div" locale={this.props.locale} sel="card-description" translate={card.description} />
-            <a href={card.link.href}>
+            <a href={card.link.href} target="_blank">
               <Text tag="div" locale={this.props.locale} sel="card-link" target="_blank" translate={card.link.text} />
             </a>
           </div>)
@@ -96,7 +96,7 @@ class Project extends React.Component {
           {this.getScrollSide()}
         </div>
         <div className={this.props.fixedSide} style={this.state.style} ref="fixed">
-          <a href={this.props.url} target="_blank"><Text tag="div" locale={this.props.locale} sel="section-title" translate={this.props.title}/></a>
+          <a href={this.props.url}><Text tag="div" locale={this.props.locale} sel="section-title" translate={this.props.title}/></a>
           <Text tag="p" locale={this.props.locale} sel="section-description" translate={this.props.description}/>
           <div className="section-tags">
             {this.props.tags.map((tag) => <Text tag="div" locale={this.props.locale} key={tag} translate={tag}/>)}

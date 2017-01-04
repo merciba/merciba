@@ -17,21 +17,13 @@ a, a:visited {
 }
 
 #main-logo {
+  opacity: 1;
   width: 610px;
   height: 585px;
   float: none;
   margin: 300px 30%;
   cursor: default;
-}
-
-.logo-bw {
-  background: url('https://s3.amazonaws.com/merciba.com/assets/mercibalogo-sm-bw.svg');
-  background-size: cover;
-}
-
-.logo-color {
-  background: url('https://s3.amazonaws.com/merciba.com/assets/mercibalogo-sm.svg');
-  background-size: cover;
+  transition: opacity 0.25s;
 }
 
 .logo-container {
@@ -175,4 +167,9 @@ article section {
 
 .software-logo {
   margin: 10px;
+}
+
+@media (min-width:320px) and (max-width:1330px) {
+/* smartphones, iPhone, portrait 480x320 phones */
+
 }

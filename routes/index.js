@@ -4,9 +4,13 @@ const React = require('react'),
   Promise = require('bluebird'),
   path = require('path'),
   ReactDOMServer = require('react-dom/server'),
+  pug = require('pug'),
   App = React.createFactory(require('../components/dist/App').default);
 
 const fs = Promise.promisifyAll(require('fs'))
+const render = (file, locals) => {
+  return Promise.resolve(pug.renderFile(path.join(__dirname, '..', 'views', file), locals))
+}
 
 module.exports = function(app) {
 
@@ -15,7 +19,7 @@ module.exports = function(app) {
       '/': function * () {
         try {
           let reactHtml = ReactDOMServer.renderToString(App({}));
-          let html = yield this.response.render('index.jade', { title: '', reactOutput: reactHtml, route: '/' });
+          let html = yield render('index.pug', { title: '', reactOutput: reactHtml, route: '/' });
 
           this.response.success(html)
         }
@@ -27,7 +31,7 @@ module.exports = function(app) {
       '/projects': function * () {
         try {
           let reactHtml = ReactDOMServer.renderToString(App({ route: '/projects' }));
-          let html = yield this.response.render('index.jade', { title: 'Projects | ', reactOutput: reactHtml, route: '/projects' });
+          let html = yield render('index.pug', { title: 'Projects | ', reactOutput: reactHtml, route: '/projects' });
 
           this.response.success(html)
         }
@@ -41,8 +45,10 @@ module.exports = function(app) {
           let title = ''
           if (this.params.project === 'perengo') title = 'Perengo'
           if (this.params.project === 'sweet-unity-farms') title = 'Sweet Unity Farms'
+          if (this.params.project === 'software') title = 'Open-Source Software'
+
           let reactHtml = ReactDOMServer.renderToString(App({ route: `/project/${this.params.project}` }));
-          let html = yield this.response.render('index.jade', { title: `${title} | `, reactOutput: reactHtml, route: `/project/${this.params.project}` });
+          let html = yield render('index.pug', { title: `${title} | `, reactOutput: reactHtml, route: `/project/${this.params.project}` });
 
           this.response.success(html)
         }
@@ -54,7 +60,7 @@ module.exports = function(app) {
       '/about': function * () {
         try {
           let reactHtml = ReactDOMServer.renderToString(App({ route: `/about` }));
-          let html = yield this.response.render('index.jade', { title: 'About Us | ', reactOutput: reactHtml, route: `/about` });
+          let html = yield render('index.pug', { title: 'About Us | ', reactOutput: reactHtml, route: `/about` });
 
           this.response.success(html)
         }
@@ -66,7 +72,7 @@ module.exports = function(app) {
       '/contact': function * () {
         try {
           let reactHtml = ReactDOMServer.renderToString(App({ route: `/contact` }));
-          let html = yield this.response.render('index.jade', { title: 'Contact Us | ', reactOutput: reactHtml, route: `/contact` });
+          let html = yield render('index.pug', { title: 'Contact Us | ', reactOutput: reactHtml, route: `/contact` });
 
           this.response.success(html)
         }
