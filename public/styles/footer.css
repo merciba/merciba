@@ -14,7 +14,9 @@ footer {
 }
 
 .footer-right {
-  margin-right: 100px;
+  position: absolute;
+  right: 20px;
+  top: 20px;
 }
 
 .footer-left {

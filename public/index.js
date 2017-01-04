@@ -38368,7 +38368,7 @@
 	        window.addEventListener('scroll', this.handleScroll.bind(this));
 	        this.handleScroll();
 	        if (this.props.route === "/") {
-	          if ((0, _jquery2.default)(window).scrollTop() === 0) (0, _jquery2.default)('a').hide();else (0, _jquery2.default)('a').show();
+	          if ((0, _jquery2.default)(window).scrollTop() === 0) (0, _jquery2.default)('main a').hide();else (0, _jquery2.default)('main a').show();
 	        } else {
 	          var routePaths = this.props.route.split('/');
 	          (0, _jquery2.default)('.projects-container > section:first-child').css({
@@ -50545,7 +50545,7 @@
 	        window.addEventListener('scroll', this.handleScroll.bind(this));
 	        this.handleScroll();
 	        if (this.props.route === "/") {
-	          if ((0, _jquery2.default)(window).scrollTop() === 0) (0, _jquery2.default)('a').hide();else (0, _jquery2.default)('a').show();
+	          if ((0, _jquery2.default)(window).scrollTop() === 0) (0, _jquery2.default)('main a').hide();else (0, _jquery2.default)('main a').show();
 	        } else {
 	          var routePaths = this.props.route.split('/');
 	          (0, _jquery2.default)('.projects-container > section:first-child').css({

@@ -12,8 +12,8 @@ class Project extends React.Component {
       window.addEventListener('scroll', this.handleScroll.bind(this));
       this.handleScroll()
       if (this.props.route === "/") {
-        if ($(window).scrollTop() === 0) $('a').hide();
-        else $('a').show();
+        if ($(window).scrollTop() === 0) $('main a').hide();
+        else $('main a').show();
       }
       else {
         let routePaths = this.props.route.split('/')
