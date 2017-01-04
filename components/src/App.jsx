@@ -38,7 +38,6 @@ class App extends React.Component {
 
     handleScroll() {
       // Scroll handler. Fired on each scroll
-      this.checkFooter();
     }
 
     imageLoaded() {
@@ -50,12 +49,10 @@ class App extends React.Component {
     }
 
     loaded() {
-      setTimeout(() => window.scroll(0, 0))
-    }
-
-    checkFooter() {
-      if ($(window).scrollTop() + $(window).height() == $(document).height()) $('.footer').show()
-      else $('.footer').hide()
+      setTimeout(() => {
+        $('html, body, #app, main').css('height', $(document).height() - 80)
+        $('footer').show()
+      })
     }
 
     styleProject(project) {
@@ -65,8 +62,7 @@ class App extends React.Component {
       $(this.refs.projects).find(`#${project}`).show()
       $(this.refs.projects).find(`#${project}`).css("padding-top", 0)
       $(this.refs.projects).find(`#${project} .section-scroll`).css("margin-top", "6%")
-      $(this.refs.projects).find(`#${project} .section-fixed`).css("opacity", 1)
-      window.scroll(0, 1)
+      $(this.refs.projects).find(`#${project} .section-fixed`).css({"opacity": 1, "visibility": "visible"});
     }
 
     styleElements() {
@@ -94,8 +90,7 @@ class App extends React.Component {
             $(this.refs.contact).hide()
             $(this.refs.projects).find('section:first-child').css("padding-top", 0)
             $(this.refs.projects).find('section:first-child .section-scroll').css("margin-top", "6%")
-            $(this.refs.projects).find('section:first-child .section-fixed').css("opacity", 1)
-            window.scroll(0, 1)
+            $(this.refs.projects).find('section:first-child .section-fixed').css({"opacity": 1, "visibility": "visible"})
             break;
           case "/about":
             $(this.refs.logo).hide()
@@ -282,12 +277,6 @@ class App extends React.Component {
               onImageLoaded={this.imageLoaded.bind(this)}
               />
           </article>
-          <footer>
-            <div className="footer" ref="footer">
-              <div className="footer-left">Made with <a href="https://facebook.github.io/react/" target="_blank">React.js</a> in Brooklyn, New York 🗽 </div>
-              <div className="footer-right">&copy; 2017 Merciba LLC</div>
-            </div>
-          </footer>
         </main>
       )
     }
