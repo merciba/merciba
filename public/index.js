@@ -49919,11 +49919,10 @@
 		"./About.jsx": 255,
 		"./App.jsx": 179,
 		"./Contact.jsx": 256,
-		"./Form.jsx": 257,
-		"./NavItem.jsx": 258,
-		"./Navbar.jsx": 259,
-		"./Project.jsx": 260,
-		"./Text.jsx": 261
+		"./NavItem.jsx": 257,
+		"./Navbar.jsx": 258,
+		"./Project.jsx": 259,
+		"./Text.jsx": 260
 	};
 	function webpackContext(req) {
 		return __webpack_require__(webpackContextResolve(req));
@@ -50245,12 +50244,6 @@
 
 /***/ },
 /* 257 */
-/***/ function(module, exports) {
-
-	"use strict";
-
-/***/ },
-/* 258 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -50317,7 +50310,7 @@
 	exports.default = NavItem;
 
 /***/ },
-/* 259 */
+/* 258 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -50536,7 +50529,7 @@
 	exports.default = Navbar;
 
 /***/ },
-/* 260 */
+/* 259 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -50716,7 +50709,7 @@
 	exports.default = Project;
 
 /***/ },
-/* 261 */
+/* 260 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
