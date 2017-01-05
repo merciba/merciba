@@ -31810,7 +31810,6 @@
 	    key: 'handleScroll',
 	    value: function handleScroll() {
 	      // Scroll handler. Fired on each scroll
-	      this.checkFooter();
 	    }
 	  }, {
 	    key: 'imageLoaded',
@@ -31825,13 +31824,9 @@
 	    key: 'loaded',
 	    value: function loaded() {
 	      setTimeout(function () {
-	        return window.scroll(0, 0);
+	        (0, _jquery2.default)('html, body, #app, main').css('height', (0, _jquery2.default)(document).height() - 80);
+	        (0, _jquery2.default)('footer').show();
 	      });
-	    }
-	  }, {
-	    key: 'checkFooter',
-	    value: function checkFooter() {
-	      if ((0, _jquery2.default)(window).scrollTop() + (0, _jquery2.default)(window).height() == (0, _jquery2.default)(document).height()) (0, _jquery2.default)('.footer').show();else (0, _jquery2.default)('.footer').hide();
 	    }
 	  }, {
 	    key: 'styleProject',
@@ -31842,8 +31837,7 @@
 	      (0, _jquery2.default)(this.refs.projects).find('#' + project).show();
 	      (0, _jquery2.default)(this.refs.projects).find('#' + project).css("padding-top", 0);
 	      (0, _jquery2.default)(this.refs.projects).find('#' + project + ' .section-scroll').css("margin-top", "6%");
-	      (0, _jquery2.default)(this.refs.projects).find('#' + project + ' .section-fixed').css("opacity", 1);
-	      window.scroll(0, 1);
+	      (0, _jquery2.default)(this.refs.projects).find('#' + project + ' .section-fixed').css({ "opacity": 1, "visibility": "visible" });
 	    }
 	  }, {
 	    key: 'styleElements',
@@ -31868,8 +31862,7 @@
 	            (0, _jquery2.default)(this.refs.contact).hide();
 	            (0, _jquery2.default)(this.refs.projects).find('section:first-child').css("padding-top", 0);
 	            (0, _jquery2.default)(this.refs.projects).find('section:first-child .section-scroll').css("margin-top", "6%");
-	            (0, _jquery2.default)(this.refs.projects).find('section:first-child .section-fixed').css("opacity", 1);
-	            window.scroll(0, 1);
+	            (0, _jquery2.default)(this.refs.projects).find('section:first-child .section-fixed').css({ "opacity": 1, "visibility": "visible" });
 	            break;
 	          case "/about":
 	            (0, _jquery2.default)(this.refs.logo).hide();
@@ -31993,30 +31986,6 @@
 	            locale: this.state.locale,
 	            onImageLoaded: this.imageLoaded.bind(this)
 	          })
-	        ),
-	        _react2.default.createElement(
-	          'footer',
-	          null,
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'footer', ref: 'footer' },
-	            _react2.default.createElement(
-	              'div',
-	              { className: 'footer-left' },
-	              'Made with ',
-	              _react2.default.createElement(
-	                'a',
-	                { href: 'https://facebook.github.io/react/', target: '_blank' },
-	                'React.js'
-	              ),
-	              ' in Brooklyn, New York \uD83D\uDDFD '
-	            ),
-	            _react2.default.createElement(
-	              'div',
-	              { className: 'footer-right' },
-	              '\xA9 2017 Merciba LLC'
-	            )
-	          )
 	        )
 	      );
 	    }
@@ -38399,7 +38368,7 @@
 	        window.addEventListener('scroll', this.handleScroll.bind(this));
 	        this.handleScroll();
 	        if (this.props.route === "/") {
-	          if ((0, _jquery2.default)(window).scrollTop() === 0) (0, _jquery2.default)('a').hide();else (0, _jquery2.default)('a').show();
+	          if ((0, _jquery2.default)(window).scrollTop() === 0) (0, _jquery2.default)('main a').hide();else (0, _jquery2.default)('main a').show();
 	        } else {
 	          var routePaths = this.props.route.split('/');
 	          (0, _jquery2.default)('.projects-container > section:first-child').css({
@@ -38616,7 +38585,7 @@
 	  }, {
 	    key: 'renderScrollContainer',
 	    value: function renderScrollContainer() {
-	      if (typeof window !== 'undefined') return { position: 'absolute', height: (0, _jquery2.default)(window).height() / 1.5 };else return {};
+	      if (typeof window !== 'undefined') return { position: 'absolute', marginTop: 100 };else return {};
 	    }
 	  }, {
 	    key: 'renderCards',
@@ -50038,7 +50007,7 @@
 	  }, {
 	    key: 'renderScrollContainer',
 	    value: function renderScrollContainer() {
-	      if (typeof window !== 'undefined') return { position: 'absolute', height: (0, _jquery2.default)(window).height() / 1.5 };else return {};
+	      if (typeof window !== 'undefined') return { position: 'absolute', marginTop: 100 };else return {};
 	    }
 	  }, {
 	    key: 'renderCards',
@@ -50576,7 +50545,7 @@
 	        window.addEventListener('scroll', this.handleScroll.bind(this));
 	        this.handleScroll();
 	        if (this.props.route === "/") {
-	          if ((0, _jquery2.default)(window).scrollTop() === 0) (0, _jquery2.default)('a').hide();else (0, _jquery2.default)('a').show();
+	          if ((0, _jquery2.default)(window).scrollTop() === 0) (0, _jquery2.default)('main a').hide();else (0, _jquery2.default)('main a').show();
 	        } else {
 	          var routePaths = this.props.route.split('/');
 	          (0, _jquery2.default)('.projects-container > section:first-child').css({

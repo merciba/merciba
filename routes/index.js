@@ -8,9 +8,7 @@ const React = require('react'),
   App = React.createFactory(require('../components/dist/App').default);
 
 const fs = Promise.promisifyAll(require('fs'))
-const render = (file, locals) => {
-  return Promise.resolve(pug.renderFile(path.join(__dirname, '..', 'views', file), locals))
-}
+const render = (file, locals) => Promise.resolve(pug.renderFile(path.join(__dirname, '..', 'views', file), locals))
 
 module.exports = function(app) {
 

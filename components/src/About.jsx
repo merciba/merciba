@@ -55,7 +55,7 @@ class About extends React.Component {
   }
 
   renderScrollContainer() {
-    if (typeof window !== 'undefined') return { position: 'absolute', height: $(window).height() / 1.5 }
+    if (typeof window !== 'undefined') return { position: 'absolute', marginTop: 100 }
     else return {}
   }
 
