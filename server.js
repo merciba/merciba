@@ -1,8 +1,11 @@
-const Paquet = require('paquet')
-const app = new Paquet('es6')
-const path = require('path')
-const Promise = require('bluebird')
-const mime = require('mime-types')
+const Paquet = require('paquet'),
+  app = new Paquet('es6'),
+  path = require('path'),
+  pug = require('pug'),
+  Promise = require('bluebird'),
+  mime = require('mime-types')
+
+require('dotenv').config({silent: true})
 
 app.start({
     port: 5000,
@@ -12,6 +15,7 @@ app.start({
       '/*': function * (next) {
         // middleware placeholder
         this.response.set('Content-Type', mime.lookup(this.request.url))
+        this.render = (file, locals) => Promise.resolve(pug.renderFile(path.join(__dirname, 'views', file), locals))
         yield next;
       }
     }

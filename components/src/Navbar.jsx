@@ -38,7 +38,7 @@ class Navbar extends React.Component {
     let converted = scrolledFromTop * factor
     let logoDescended = (-120 + converted) < 0 ? (-120 + converted) : 0
     let ulTopDescended = (converted + 50) < 200 ? (converted + 50) : 200
-    let ulBottomAscended = (converted + 50) < 200 ? (164 - converted) : 64
+    let ulBottomAscended = (converted + 50) < 200 ? (190 - converted) : 90
 
     let logo_style = {
       opacity: this.state && (this.state.class === "closed") ? 0 : 1,
@@ -54,7 +54,7 @@ class Navbar extends React.Component {
       marginTop: this.props.route === "/" ? `${ulTopDescended}px` : 200
     }
     let bottom_style = {
-      bottom: this.props.route === "/" ? `${ulBottomAscended}px` : 64
+      bottom: this.props.route === "/" ? `${ulBottomAscended}px` : 90
     }
     let style = {
       left: (this.state && this.state.style.left ? this.state.style.left : -200),

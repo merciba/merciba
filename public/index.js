@@ -37998,7 +37998,7 @@
 	      var converted = scrolledFromTop * factor;
 	      var logoDescended = -120 + converted < 0 ? -120 + converted : 0;
 	      var ulTopDescended = converted + 50 < 200 ? converted + 50 : 200;
-	      var ulBottomAscended = converted + 50 < 200 ? 164 - converted : 64;
+	      var ulBottomAscended = converted + 50 < 200 ? 190 - converted : 90;
 	
 	      var logo_style = {
 	        opacity: this.state && this.state.class === "closed" ? 0 : 1,
@@ -38014,7 +38014,7 @@
 	        marginTop: this.props.route === "/" ? ulTopDescended + 'px' : 200
 	      };
 	      var bottom_style = {
-	        bottom: this.props.route === "/" ? ulBottomAscended + 'px' : 64
+	        bottom: this.props.route === "/" ? ulBottomAscended + 'px' : 90
 	      };
 	      var style = {
 	        left: this.state && this.state.style.left ? this.state.style.left : -200,
@@ -50354,7 +50354,7 @@
 	      var converted = scrolledFromTop * factor;
 	      var logoDescended = -120 + converted < 0 ? -120 + converted : 0;
 	      var ulTopDescended = converted + 50 < 200 ? converted + 50 : 200;
-	      var ulBottomAscended = converted + 50 < 200 ? 164 - converted : 64;
+	      var ulBottomAscended = converted + 50 < 200 ? 190 - converted : 90;
 	
 	      var logo_style = {
 	        opacity: this.state && this.state.class === "closed" ? 0 : 1,
@@ -50370,7 +50370,7 @@
 	        marginTop: this.props.route === "/" ? ulTopDescended + 'px' : 200
 	      };
 	      var bottom_style = {
-	        bottom: this.props.route === "/" ? ulBottomAscended + 'px' : 64
+	        bottom: this.props.route === "/" ? ulBottomAscended + 'px' : 90
 	      };
 	      var style = {
 	        left: this.state && this.state.style.left ? this.state.style.left : -200,
