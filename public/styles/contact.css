@@ -3,7 +3,7 @@
 }
 
 .contact-form {
-
+  transition: opacity 0.5s;
 }
 
 .contact-form label {
@@ -25,13 +25,57 @@
   font-size: 16px;
 }
 
+.contact-form input[type="checkbox"] {
+  display: block;
+  width: 30px;
+  margin-bottom: 5px;
+  margin-top: -33px;
+}
+
+.contact-form label[for="subscribe"] div {
+  display: inline;
+  margin-bottom: 5px;
+  margin-left: 30px;
+}
+
 .contact-form input[type="submit"] {
+  margin-top: 24px;
   text-transform: uppercase;
   background: black;
   color: white;
 }
 
+.contact-form input[disabled] {
+  opacity: .3;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
 .contact-form textarea {
   height: 165px;
   font-size: 16px;
+}
+
+.contact-submitted {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.5s;
+}
+
+.contact-submitted-text {
+  z-index: 0;
+  position: absolute;
+  color: white;
+  top: 45%;
+  margin: auto 160px;
+  text-transform: uppercase;
+  width: 15%;
+  text-align: center;
+}
+
+.contact-submitted-image {
+  z-index: -1;
+  position: absolute;
+  top: 20%;
+  height: 555px;
 }

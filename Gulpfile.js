@@ -36,6 +36,9 @@ gulp.task('server', function() {
     console.log(data.toString())
     if (regex.test(data.toString())) browserSync.reload()
   })
+  node.stderr.on('data', (data) => {
+    throw new Error(data.toString())
+  })
   node.on('close', function (code) {
     if (code === 8) {
       gulp.log('Error detected, waiting for changes...');

@@ -52,7 +52,7 @@
 	"ABOUT": {
 		"PAGE_1": {
 			"TITLE": "At Merciba, we think big while considering the smallest of details.",
-			"DESCRIPTION": "[REPLACE] Lorem Khaled Ipsum is a major key to success. They don’t want us to win. Bless up. Eliptical talk. Surround yourself with angels, positive energy, beautiful people, beautiful souls, clean heart, angel. Lion! We don’t see them, we will never see them. They key is to have every key, the key to open every.[/REPLACE]",
+			"DESCRIPTION": "Our process is both art and science, with a heavy dose of communication. From ideation to execution, we seek the optimal conditions at all stages for the best results.",
 			"CARDS": {
 				"CARD_1": {
 					"TITLE": "Iterative",
@@ -113,12 +113,14 @@
 	},
 	"CONTACT": {
 		"TITLE": "Reach Out",
-		"DESCRIPTION": "We are currently open to consultation work and are always interested in connecting with like-minded creatives, designers, developers, managers, and influencers. Send us a message if you’d like to discuss a project or connect with us.",
+		"DESCRIPTION": "Need a consultant? Like our website? Let us know - we are always interested in connecting with like-minded creatives, designers, developers, managers, entrepreneurs and influencers. Send us a message if you’d like to discuss a project or connect with us.",
 		"FORM": {
 			"NAME": "Your Name",
 			"EMAIL": "Your Email",
 			"MESSAGE": "Message",
+			"SUBSCRIBE": "Subscribe to Merciba's newsletter",
 			"SEND": "Send"
-		}
+		},
+		"SUBMITTED": "Thanks for reaching out. We'll be in touch."
 	}
 }
