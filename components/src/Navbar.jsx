@@ -8,10 +8,15 @@ class Navbar extends React.Component {
   }
 
   componentDidMount() {
-    this.open()
     if (typeof window !== 'undefined') {
-      window.addEventListener('scroll', this.handleScroll.bind(this));
-      this.handleScroll()
+      if (window.isMobile()) {
+        this.setState({ style: { top: $(window).height() }})
+      }
+      else {
+        this.open()
+        window.addEventListener('scroll', this.handleScroll.bind(this));
+        this.handleScroll()
+      }
     }
   }
 
@@ -22,7 +27,7 @@ class Navbar extends React.Component {
   handleScroll() {
     if (typeof window !== 'undefined') {
       if (window.isMobile()) {
-        console.log('Mobile device detected')
+
       }
       else {
         this.styleDesktop()
@@ -38,7 +43,7 @@ class Navbar extends React.Component {
     let converted = scrolledFromTop * factor
     let logoDescended = (-120 + converted) < 0 ? (-120 + converted) : 0
     let ulTopDescended = (converted + 50) < 200 ? (converted + 50) : 200
-    let ulBottomAscended = (converted + 50) < 200 ? (190 - converted) : 90
+    let ulBottomAscended = 90
 
     let logo_style = {
       opacity: this.state && (this.state.class === "closed") ? 0 : 1,

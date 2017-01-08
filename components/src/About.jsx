@@ -62,7 +62,7 @@ class About extends React.Component {
   renderCards() {
     if (typeof window !== 'undefined') {
       return this.props.cards.map((card, index) => {
-        return <div key={`card-${index}`} className="about-card">
+        return <div key={`card-${index}`} className="about-card" style={{ background: `url('${card.img}') no-repeat`}}>
             <Text locale={this.props.locale} sel="about-card-title" translate={card.title} />
             <Text locale={this.props.locale} sel="about-card-description" translate={card.description} />
           </div>

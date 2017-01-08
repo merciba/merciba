@@ -25,7 +25,7 @@ gulp.task('watch', function () {
 	gulp.watch(['components/src/**/*.jsx', 'views/**/*.pug'], function () {
 		runSequence('build', 'server');
 	})
-	gulp.watch(['server.js', 'routes/**/*.js'], ['server'])
+	gulp.watch(['server.js', 'routes/**/*.js', 'controllers/**/*.js'], ['server'])
 	gulp.watch(['client.js'], ['webpack'])
 });
 

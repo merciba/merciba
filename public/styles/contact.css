@@ -39,16 +39,19 @@
 }
 
 .contact-form input[type="submit"] {
+  opacity: 1;
+  cursor: pointer;
   margin-top: 24px;
   text-transform: uppercase;
   background: black;
   color: white;
+  transition: opacity .5s;
 }
 
 .contact-form input[disabled] {
-  opacity: .3;
-  cursor: not-allowed;
-  pointer-events: none;
+  opacity: .3 !important;
+  cursor: not-allowed !important;
+  pointer-events: none !important;
 }
 
 .contact-form textarea {

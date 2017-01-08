@@ -16,10 +16,8 @@ class Contact extends React.Component {
         else fields[field.name] = ''
         this.setState(fields)
       })
-      this.setState({
-        form: {},
-        submitted: {}
-      })
+      if (this.props.route === "/contacted") this.setState({ submitted: { opacity: 1, visibility: 'visible' }})
+      else this.setState({ form: { opacity: 1, visibility: 'visible' }})
     }
   }
 
@@ -46,63 +44,14 @@ class Contact extends React.Component {
     else return null
   }
 
-  subscribe(callback) {
-    return new Promise((resolve, reject) => {
-      $.ajax({
-        type: 'POST',
-        url: '/subscribe',
-        data: { email: this.state.email }
-      })
-      .done(resolve)
-      .fail(reject)
-    })
-  }
-
   imageLoaded() {
     this.props.onImageLoaded(this.refs.gallery)
   }
 
-  message() {
-    return new Promise((resolve, reject) => {
-      $.ajax({
-        type: 'POST',
-        url: '/message',
-        data: {
-          name: this.state.name,
-          email: this.state.email,
-          message: this.state.message
-        }
-      })
-      .done(resolve)
-      .fail(reject)
-    })
-  }
-
-  handleSuccess() {
-    this.setState({
-      form: { opacity: 0, visibility: 'hidden' },
-      submitted: { opacity: 1, visibility: 'visible' }
-    })
-  }
-
   validate() {
     let emailValid = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-    if (this.state.human && emailValid.test(this.state.email) && ((this.state.name && this.state.message) || this.state.subscribe)) $(this.refs.submit).removeAttr('disabled')
+    if (this.state.human && emailValid.test(this.state.email) && this.state.name && (this.state.message || this.state.subscribe)) $(this.refs.submit).removeAttr('disabled')
     else $(this.refs.submit).attr('disabled', true)
-  }
-
-  submit(e) {
-    e.preventDefault()
-    if (this.state.subscribe) this.subscribe()
-      .then(this.handleSuccess.bind(this))
-      .catch(this.handleError.bind(this))
-    if (this.state.name && this.state.message) this.message()
-      .then(this.handleSuccess.bind(this))
-      .catch(this.handleError.bind(this))
-  }
-
-  handleError(err) {
-    console.log("Error: ", err)
   }
 
   getContactForm() {
@@ -116,8 +65,15 @@ class Contact extends React.Component {
         </div>
       })}
       <ReCAPTCHA ref="recaptcha" sitekey="6LfZ6hAUAAAAAGRWkvMyGA1epGTbA8D1xUuX32xE" onChange={this.handleCaptcha.bind(this)} />
-      <input type="submit" ref="submit" disabled onClick={this.submit.bind(this)}/>
+      <input type="submit" ref="submit" disabled />
     </form>
+  }
+
+  getSubmittedCard() {
+    return <div className="contact-submitted" style={this.state.submitted}>
+      <Text tag="div" sel="contact-submitted-text" locale={this.props.locale} translate={this.props.submitted.text} />
+      <img src={this.props.submitted.img} className="contact-submitted-image" onLoad={this.imageLoaded.bind(this)}/>
+    </div>
   }
 
   render() {
@@ -125,11 +81,7 @@ class Contact extends React.Component {
     return (
       <div id="contact">
         <div className="section-scroll right" ref="scroll" style={{ marginTop: '10%'}}>
-          {this.getContactForm()}
-          <div className="contact-submitted" style={this.state.submitted}>
-            <Text tag="div" sel="contact-submitted-text" locale={this.props.locale} translate={this.props.submitted.text} />
-            <img src={this.props.submitted.img} className="contact-submitted-image" onLoad={this.imageLoaded.bind(this)}/>
-          </div>
+          {this.props.route === "/contact" ? this.getContactForm() : this.getSubmittedCard()}
         </div>
         <div className="section-fixed left" ref="fixed" style={{ opacity: 1, marginTop: '20%', marginBottom: 0 }}>
           <Text tag="div" locale={this.props.locale} sel="section-title" translate={this.props.title} />

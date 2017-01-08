@@ -31838,8 +31838,10 @@
 	    key: 'loaded',
 	    value: function loaded() {
 	      setTimeout(function () {
-	        (0, _jquery2.default)('html, body, #app, main').css('height', (0, _jquery2.default)(document).height() - 80);
-	        (0, _jquery2.default)('footer').show();
+	        if (window.isMobile()) {} else {
+	          (0, _jquery2.default)('html, body, #app, main').css('height', (0, _jquery2.default)(document).height());
+	          (0, _jquery2.default)('footer').show();
+	        }
 	      });
 	    }
 	  }, {
@@ -31873,6 +31875,8 @@
 	          case "/about":
 	            break;
 	          case "/contact":
+	            break;
+	          case "/contacted":
 	            break;
 	          default:
 	            window.location.href = "/";
@@ -31964,7 +31968,7 @@
 	          'article',
 	          { className: 'about', ref: 'about' },
 	          _react2.default.createElement(_About2.default, {
-	            cards: [{ title: "ABOUT.PAGE_1.CARDS.CARD_1.TITLE", description: "ABOUT.PAGE_1.CARDS.CARD_1.DESCRIPTION" }, { title: "ABOUT.PAGE_1.CARDS.CARD_2.TITLE", description: "ABOUT.PAGE_1.CARDS.CARD_2.DESCRIPTION" }, { title: "ABOUT.PAGE_1.CARDS.CARD_3.TITLE", description: "ABOUT.PAGE_1.CARDS.CARD_3.DESCRIPTION" }],
+	            cards: [{ title: "ABOUT.PAGE_1.CARDS.CARD_1.TITLE", description: "ABOUT.PAGE_1.CARDS.CARD_1.DESCRIPTION", img: window.isMobile() ? "https://s3.amazonaws.com/merciba.com/assets/about/mobile-processbkg-iterative.jpg" : "https://s3.amazonaws.com/merciba.com/assets/about/desktop-processbkg-iterative.jpg" }, { title: "ABOUT.PAGE_1.CARDS.CARD_2.TITLE", description: "ABOUT.PAGE_1.CARDS.CARD_2.DESCRIPTION", img: window.isMobile() ? "https://s3.amazonaws.com/merciba.com/assets/about/mobile-processbkg-collaborative.jpg" : "https://s3.amazonaws.com/merciba.com/assets/about/desktop-processbkg-collaborative.jpg" }, { title: "ABOUT.PAGE_1.CARDS.CARD_3.TITLE", description: "ABOUT.PAGE_1.CARDS.CARD_3.DESCRIPTION", img: window.isMobile() ? "https://s3.amazonaws.com/merciba.com/assets/about/mobile-processbkg-flex.jpg" : "https://s3.amazonaws.com/merciba.com/assets/about/desktop-processbkg-flex.jpg" }],
 	            title: 'ABOUT.PAGE_1.TITLE',
 	            description: 'ABOUT.PAGE_1.DESCRIPTION',
 	            cols: [{
@@ -31995,7 +31999,7 @@
 	  }, {
 	    key: 'getContact',
 	    value: function getContact() {
-	      if (this.props.route === "/contact") {
+	      if (this.props.route === "/contact" || this.props.route === "/contacted") {
 	        return _react2.default.createElement(
 	          'article',
 	          { className: 'contact', ref: 'contact' },
@@ -32004,6 +32008,7 @@
 	            title: 'CONTACT.TITLE',
 	            description: 'CONTACT.DESCRIPTION',
 	            locale: this.state.locale,
+	            route: this.props.route,
 	            submitted: { img: "https://s3.amazonaws.com/merciba.com/assets/contact/formbkg-confirm.jpg", text: "CONTACT.SUBMITTED" },
 	            onImageLoaded: this.imageLoaded.bind(this)
 	          })
@@ -38002,10 +38007,14 @@
 	  _createClass(Navbar, [{
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
-	      this.open();
 	      if (typeof window !== 'undefined') {
-	        window.addEventListener('scroll', this.handleScroll.bind(this));
-	        this.handleScroll();
+	        if (window.isMobile()) {
+	          this.setState({ style: { top: (0, _jquery2.default)(window).height() } });
+	        } else {
+	          this.open();
+	          window.addEventListener('scroll', this.handleScroll.bind(this));
+	          this.handleScroll();
+	        }
 	      }
 	    }
 	  }, {
@@ -38017,9 +38026,7 @@
 	    key: 'handleScroll',
 	    value: function handleScroll() {
 	      if (typeof window !== 'undefined') {
-	        if (window.isMobile()) {
-	          console.log('Mobile device detected');
-	        } else {
+	        if (window.isMobile()) {} else {
 	          this.styleDesktop();
 	        }
 	      }
@@ -38034,7 +38041,7 @@
 	      var converted = scrolledFromTop * factor;
 	      var logoDescended = -120 + converted < 0 ? -120 + converted : 0;
 	      var ulTopDescended = converted + 50 < 200 ? converted + 50 : 200;
-	      var ulBottomAscended = converted + 50 < 200 ? 190 - converted : 90;
+	      var ulBottomAscended = 90;
 	
 	      var logo_style = {
 	        opacity: this.state && this.state.class === "closed" ? 0 : 1,
@@ -38630,7 +38637,7 @@
 	
 	      if (typeof window !== 'undefined') {
 	        return this.props.cards.map(function (card, index) {
-	          return _react2.default.createElement('div', { key: 'card-' + index, className: 'about-card' }, _react2.default.createElement(_Text2.default, { locale: _this2.props.locale, sel: 'about-card-title', translate: card.title }), _react2.default.createElement(_Text2.default, { locale: _this2.props.locale, sel: 'about-card-description', translate: card.description }));
+	          return _react2.default.createElement('div', { key: 'card-' + index, className: 'about-card', style: { background: 'url(\'' + card.img + '\') no-repeat' } }, _react2.default.createElement(_Text2.default, { locale: _this2.props.locale, sel: 'about-card-title', translate: card.title }), _react2.default.createElement(_Text2.default, { locale: _this2.props.locale, sel: 'about-card-description', translate: card.description }));
 	        });
 	      }
 	    }
@@ -38751,10 +38758,7 @@
 	          if (fields.type === 'checkbox') fields[field.name] = false;else fields[field.name] = '';
 	          _this2.setState(fields);
 	        });
-	        this.setState({
-	          form: {},
-	          submitted: {}
-	        });
+	        if (this.props.route === "/contacted") this.setState({ submitted: { opacity: 1, visibility: 'visible' } });else this.setState({ form: { opacity: 1, visibility: 'visible' } });
 	      }
 	    }
 	  }, {
@@ -38781,47 +38785,9 @@
 	      if (field.type === 'textarea') return _react2.default.createElement('textarea', { name: field.name, value: this.state[field.name], onChange: this.handleChange.bind(this) });else if (field.type === 'text') return _react2.default.createElement('input', { name: field.name, type: field.type, value: this.state[field.name], onChange: this.handleChange.bind(this) });else if (field.type === 'checkbox') return _react2.default.createElement('input', { name: field.name, type: field.type, value: this.state[field.name], onChange: this.handleChange.bind(this) });else return null;
 	    }
 	  }, {
-	    key: 'subscribe',
-	    value: function subscribe(callback) {
-	      var _this3 = this;
-	
-	      return new Promise(function (resolve, reject) {
-	        _jquery2.default.ajax({
-	          type: 'POST',
-	          url: '/subscribe',
-	          data: { email: _this3.state.email }
-	        }).done(resolve).fail(reject);
-	      });
-	    }
-	  }, {
 	    key: 'imageLoaded',
 	    value: function imageLoaded() {
 	      this.props.onImageLoaded(this.refs.gallery);
-	    }
-	  }, {
-	    key: 'message',
-	    value: function message() {
-	      var _this4 = this;
-	
-	      return new Promise(function (resolve, reject) {
-	        _jquery2.default.ajax({
-	          type: 'POST',
-	          url: '/message',
-	          data: {
-	            name: _this4.state.name,
-	            email: _this4.state.email,
-	            message: _this4.state.message
-	          }
-	        }).done(resolve).fail(reject);
-	      });
-	    }
-	  }, {
-	    key: 'handleSuccess',
-	    value: function handleSuccess() {
-	      this.setState({
-	        form: { opacity: 0, visibility: 'hidden' },
-	        submitted: { opacity: 1, visibility: 'visible' }
-	      });
 	    }
 	  }, {
 	    key: 'validate',
@@ -38830,33 +38796,26 @@
 	      if (this.state.human && emailValid.test(this.state.email) && (this.state.name && this.state.message || this.state.subscribe)) (0, _jquery2.default)(this.refs.submit).removeAttr('disabled');else (0, _jquery2.default)(this.refs.submit).attr('disabled', true);
 	    }
 	  }, {
-	    key: 'submit',
-	    value: function submit(e) {
-	      e.preventDefault();
-	      if (this.state.subscribe) this.subscribe().then(this.handleSuccess.bind(this)).catch(this.handleError.bind(this));
-	      if (this.state.name && this.state.message) this.message().then(this.handleSuccess.bind(this)).catch(this.handleError.bind(this));
-	    }
-	  }, {
-	    key: 'handleError',
-	    value: function handleError(err) {
-	      console.log("Error: ", err);
-	    }
-	  }, {
 	    key: 'getContactForm',
 	    value: function getContactForm() {
-	      var _this5 = this;
+	      var _this3 = this;
 	
 	      return _react2.default.createElement('form', { className: 'contact-form', style: this.state.form }, this.props.fields.map(function (field) {
 	        return _react2.default.createElement('div', { key: field.name, onClick: function onClick(e) {
 	            return field.type === 'checkbox' ? (0, _jquery2.default)(e.target).next().click() : null;
-	          } }, _react2.default.createElement('label', { htmlFor: field.name }, _react2.default.createElement(_Text2.default, { tag: 'div', locale: _this5.props.locale, translate: field.text })), _this5.getFormField(field));
-	      }), _react2.default.createElement(_reactGoogleRecaptcha2.default, { ref: 'recaptcha', sitekey: '6LfZ6hAUAAAAAGRWkvMyGA1epGTbA8D1xUuX32xE', onChange: this.handleCaptcha.bind(this) }), _react2.default.createElement('input', { type: 'submit', ref: 'submit', disabled: true, onClick: this.submit.bind(this) }));
+	          } }, _react2.default.createElement('label', { htmlFor: field.name }, _react2.default.createElement(_Text2.default, { tag: 'div', locale: _this3.props.locale, translate: field.text })), _this3.getFormField(field));
+	      }), _react2.default.createElement(_reactGoogleRecaptcha2.default, { ref: 'recaptcha', sitekey: '6LfZ6hAUAAAAAGRWkvMyGA1epGTbA8D1xUuX32xE', onChange: this.handleCaptcha.bind(this) }), _react2.default.createElement('input', { type: 'submit', ref: 'submit', disabled: true }));
+	    }
+	  }, {
+	    key: 'getSubmittedCard',
+	    value: function getSubmittedCard() {
+	      return _react2.default.createElement('div', { className: 'contact-submitted', style: this.state.submitted }, _react2.default.createElement(_Text2.default, { tag: 'div', sel: 'contact-submitted-text', locale: this.props.locale, translate: this.props.submitted.text }), _react2.default.createElement('img', { src: this.props.submitted.img, className: 'contact-submitted-image', onLoad: this.imageLoaded.bind(this) }));
 	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
 	      if (!this.state) return null;
-	      return _react2.default.createElement('div', { id: 'contact' }, _react2.default.createElement('div', { className: 'section-scroll right', ref: 'scroll', style: { marginTop: '10%' } }, this.getContactForm(), _react2.default.createElement('div', { className: 'contact-submitted', style: this.state.submitted }, _react2.default.createElement(_Text2.default, { tag: 'div', sel: 'contact-submitted-text', locale: this.props.locale, translate: this.props.submitted.text }), _react2.default.createElement('img', { src: this.props.submitted.img, className: 'contact-submitted-image', onLoad: this.imageLoaded.bind(this) }))), _react2.default.createElement('div', { className: 'section-fixed left', ref: 'fixed', style: { opacity: 1, marginTop: '20%', marginBottom: 0 } }, _react2.default.createElement(_Text2.default, { tag: 'div', locale: this.props.locale, sel: 'section-title', translate: this.props.title }), _react2.default.createElement(_Text2.default, { tag: 'p', locale: this.props.locale, sel: 'section-description', translate: this.props.description })));
+	      return _react2.default.createElement('div', { id: 'contact' }, _react2.default.createElement('div', { className: 'section-scroll right', ref: 'scroll', style: { marginTop: '10%' } }, this.props.route === "/contact" ? this.getContactForm() : this.getSubmittedCard()), _react2.default.createElement('div', { className: 'section-fixed left', ref: 'fixed', style: { opacity: 1, marginTop: '20%', marginBottom: 0 } }, _react2.default.createElement(_Text2.default, { tag: 'div', locale: this.props.locale, sel: 'section-title', translate: this.props.title }), _react2.default.createElement(_Text2.default, { tag: 'p', locale: this.props.locale, sel: 'section-description', translate: this.props.description })));
 	    }
 	  }]);
 	
@@ -51919,7 +51878,7 @@
 	        return this.props.cards.map(function (card, index) {
 	          return _react2.default.createElement(
 	            'div',
-	            { key: 'card-' + index, className: 'about-card' },
+	            { key: 'card-' + index, className: 'about-card', style: { background: 'url(\'' + card.img + '\') no-repeat' } },
 	            _react2.default.createElement(_Text2.default, { locale: _this2.props.locale, sel: 'about-card-title', translate: card.title }),
 	            _react2.default.createElement(_Text2.default, { locale: _this2.props.locale, sel: 'about-card-description', translate: card.description })
 	          );
@@ -52064,10 +52023,7 @@
 	          if (fields.type === 'checkbox') fields[field.name] = false;else fields[field.name] = '';
 	          _this2.setState(fields);
 	        });
-	        this.setState({
-	          form: {},
-	          submitted: {}
-	        });
+	        if (this.props.route === "/contacted") this.setState({ submitted: { opacity: 1, visibility: 'visible' } });else this.setState({ form: { opacity: 1, visibility: 'visible' } });
 	      }
 	    }
 	  }, {
@@ -52094,47 +52050,9 @@
 	      if (field.type === 'textarea') return _react2.default.createElement('textarea', { name: field.name, value: this.state[field.name], onChange: this.handleChange.bind(this) });else if (field.type === 'text') return _react2.default.createElement('input', { name: field.name, type: field.type, value: this.state[field.name], onChange: this.handleChange.bind(this) });else if (field.type === 'checkbox') return _react2.default.createElement('input', { name: field.name, type: field.type, value: this.state[field.name], onChange: this.handleChange.bind(this) });else return null;
 	    }
 	  }, {
-	    key: 'subscribe',
-	    value: function subscribe(callback) {
-	      var _this3 = this;
-	
-	      return new Promise(function (resolve, reject) {
-	        _jquery2.default.ajax({
-	          type: 'POST',
-	          url: '/subscribe',
-	          data: { email: _this3.state.email }
-	        }).done(resolve).fail(reject);
-	      });
-	    }
-	  }, {
 	    key: 'imageLoaded',
 	    value: function imageLoaded() {
 	      this.props.onImageLoaded(this.refs.gallery);
-	    }
-	  }, {
-	    key: 'message',
-	    value: function message() {
-	      var _this4 = this;
-	
-	      return new Promise(function (resolve, reject) {
-	        _jquery2.default.ajax({
-	          type: 'POST',
-	          url: '/message',
-	          data: {
-	            name: _this4.state.name,
-	            email: _this4.state.email,
-	            message: _this4.state.message
-	          }
-	        }).done(resolve).fail(reject);
-	      });
-	    }
-	  }, {
-	    key: 'handleSuccess',
-	    value: function handleSuccess() {
-	      this.setState({
-	        form: { opacity: 0, visibility: 'hidden' },
-	        submitted: { opacity: 1, visibility: 'visible' }
-	      });
 	    }
 	  }, {
 	    key: 'validate',
@@ -52143,21 +52061,9 @@
 	      if (this.state.human && emailValid.test(this.state.email) && (this.state.name && this.state.message || this.state.subscribe)) (0, _jquery2.default)(this.refs.submit).removeAttr('disabled');else (0, _jquery2.default)(this.refs.submit).attr('disabled', true);
 	    }
 	  }, {
-	    key: 'submit',
-	    value: function submit(e) {
-	      e.preventDefault();
-	      if (this.state.subscribe) this.subscribe().then(this.handleSuccess.bind(this)).catch(this.handleError.bind(this));
-	      if (this.state.name && this.state.message) this.message().then(this.handleSuccess.bind(this)).catch(this.handleError.bind(this));
-	    }
-	  }, {
-	    key: 'handleError',
-	    value: function handleError(err) {
-	      console.log("Error: ", err);
-	    }
-	  }, {
 	    key: 'getContactForm',
 	    value: function getContactForm() {
-	      var _this5 = this;
+	      var _this3 = this;
 	
 	      return _react2.default.createElement(
 	        'form',
@@ -52171,13 +52077,23 @@
 	            _react2.default.createElement(
 	              'label',
 	              { htmlFor: field.name },
-	              _react2.default.createElement(_Text2.default, { tag: 'div', locale: _this5.props.locale, translate: field.text })
+	              _react2.default.createElement(_Text2.default, { tag: 'div', locale: _this3.props.locale, translate: field.text })
 	            ),
-	            _this5.getFormField(field)
+	            _this3.getFormField(field)
 	          );
 	        }),
 	        _react2.default.createElement(_reactGoogleRecaptcha2.default, { ref: 'recaptcha', sitekey: '6LfZ6hAUAAAAAGRWkvMyGA1epGTbA8D1xUuX32xE', onChange: this.handleCaptcha.bind(this) }),
-	        _react2.default.createElement('input', { type: 'submit', ref: 'submit', disabled: true, onClick: this.submit.bind(this) })
+	        _react2.default.createElement('input', { type: 'submit', ref: 'submit', disabled: true })
+	      );
+	    }
+	  }, {
+	    key: 'getSubmittedCard',
+	    value: function getSubmittedCard() {
+	      return _react2.default.createElement(
+	        'div',
+	        { className: 'contact-submitted', style: this.state.submitted },
+	        _react2.default.createElement(_Text2.default, { tag: 'div', sel: 'contact-submitted-text', locale: this.props.locale, translate: this.props.submitted.text }),
+	        _react2.default.createElement('img', { src: this.props.submitted.img, className: 'contact-submitted-image', onLoad: this.imageLoaded.bind(this) })
 	      );
 	    }
 	  }, {
@@ -52190,13 +52106,7 @@
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'section-scroll right', ref: 'scroll', style: { marginTop: '10%' } },
-	          this.getContactForm(),
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'contact-submitted', style: this.state.submitted },
-	            _react2.default.createElement(_Text2.default, { tag: 'div', sel: 'contact-submitted-text', locale: this.props.locale, translate: this.props.submitted.text }),
-	            _react2.default.createElement('img', { src: this.props.submitted.img, className: 'contact-submitted-image', onLoad: this.imageLoaded.bind(this) })
-	          )
+	          this.props.route === "/contact" ? this.getContactForm() : this.getSubmittedCard()
 	        ),
 	        _react2.default.createElement(
 	          'div',
@@ -52324,10 +52234,14 @@
 	  _createClass(Navbar, [{
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
-	      this.open();
 	      if (typeof window !== 'undefined') {
-	        window.addEventListener('scroll', this.handleScroll.bind(this));
-	        this.handleScroll();
+	        if (window.isMobile()) {
+	          this.setState({ style: { top: (0, _jquery2.default)(window).height() } });
+	        } else {
+	          this.open();
+	          window.addEventListener('scroll', this.handleScroll.bind(this));
+	          this.handleScroll();
+	        }
 	      }
 	    }
 	  }, {
@@ -52339,9 +52253,7 @@
 	    key: 'handleScroll',
 	    value: function handleScroll() {
 	      if (typeof window !== 'undefined') {
-	        if (window.isMobile()) {
-	          console.log('Mobile device detected');
-	        } else {
+	        if (window.isMobile()) {} else {
 	          this.styleDesktop();
 	        }
 	      }
@@ -52356,7 +52268,7 @@
 	      var converted = scrolledFromTop * factor;
 	      var logoDescended = -120 + converted < 0 ? -120 + converted : 0;
 	      var ulTopDescended = converted + 50 < 200 ? converted + 50 : 200;
-	      var ulBottomAscended = converted + 50 < 200 ? 190 - converted : 90;
+	      var ulBottomAscended = 90;
 	
 	      var logo_style = {
 	        opacity: this.state && this.state.class === "closed" ? 0 : 1,

@@ -50,8 +50,12 @@ class App extends React.Component {
 
     loaded() {
       setTimeout(() => {
-        $('html, body, #app, main').css('height', $(document).height() - 80)
-        $('footer').show()
+        if (window.isMobile()) {
+        }
+        else {
+          $('html, body, #app, main').css('height', $(document).height())
+          $('footer').show()
+        }
       })
     }
 
@@ -87,6 +91,8 @@ class App extends React.Component {
           case "/about":
             break;
           case "/contact":
+            break;
+          case "/contacted":
             break;
           default:
             window.location.href = "/"
@@ -207,9 +213,9 @@ class App extends React.Component {
         return <article className="about" ref="about">
           <About
             cards={[
-              { title: "ABOUT.PAGE_1.CARDS.CARD_1.TITLE", description: "ABOUT.PAGE_1.CARDS.CARD_1.DESCRIPTION" },
-              { title: "ABOUT.PAGE_1.CARDS.CARD_2.TITLE", description: "ABOUT.PAGE_1.CARDS.CARD_2.DESCRIPTION" },
-              { title: "ABOUT.PAGE_1.CARDS.CARD_3.TITLE", description: "ABOUT.PAGE_1.CARDS.CARD_3.DESCRIPTION" }
+              { title: "ABOUT.PAGE_1.CARDS.CARD_1.TITLE", description: "ABOUT.PAGE_1.CARDS.CARD_1.DESCRIPTION", img: window.isMobile() ? "https://s3.amazonaws.com/merciba.com/assets/about/mobile-processbkg-iterative.jpg" : "https://s3.amazonaws.com/merciba.com/assets/about/desktop-processbkg-iterative.jpg" },
+              { title: "ABOUT.PAGE_1.CARDS.CARD_2.TITLE", description: "ABOUT.PAGE_1.CARDS.CARD_2.DESCRIPTION", img: window.isMobile() ? "https://s3.amazonaws.com/merciba.com/assets/about/mobile-processbkg-collaborative.jpg" : "https://s3.amazonaws.com/merciba.com/assets/about/desktop-processbkg-collaborative.jpg" },
+              { title: "ABOUT.PAGE_1.CARDS.CARD_3.TITLE", description: "ABOUT.PAGE_1.CARDS.CARD_3.DESCRIPTION", img: window.isMobile() ? "https://s3.amazonaws.com/merciba.com/assets/about/mobile-processbkg-flex.jpg" : "https://s3.amazonaws.com/merciba.com/assets/about/desktop-processbkg-flex.jpg" }
             ]}
             title="ABOUT.PAGE_1.TITLE"
             description="ABOUT.PAGE_1.DESCRIPTION"
@@ -269,7 +275,7 @@ class App extends React.Component {
     }
 
     getContact() {
-      if (this.props.route === "/contact") {
+      if ((this.props.route === "/contact") || (this.props.route === "/contacted")) {
         return <article className="contact" ref="contact">
           <Contact
             fields={[
@@ -281,6 +287,7 @@ class App extends React.Component {
             title="CONTACT.TITLE"
             description="CONTACT.DESCRIPTION"
             locale={this.state.locale}
+            route={this.props.route}
             submitted={{ img: "https://s3.amazonaws.com/merciba.com/assets/contact/formbkg-confirm.jpg", text: "CONTACT.SUBMITTED" }}
             onImageLoaded={this.imageLoaded.bind(this)}
             />
