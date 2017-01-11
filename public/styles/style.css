@@ -1,175 +1,211 @@
-html {
-  height:100%;
-  min-height:100%;
-  width:100%;
-  min-width:100%;
-}
 
-body {
-  font-family: 'Karla', sans-serif;
-  min-height: 100%;
-  min-width: 100%;
-}
 
-a, a:visited {
-  visibility: inherit;
-  text-decoration: none !important;
-}
+@media (min-width:1330px) {
 
-#main-logo {
-  opacity: 1;
-  width: 610px;
-  height: 585px;
-  float: none;
-  margin: 300px 30%;
-  cursor: default;
-  transition: opacity 0.25s;
-}
+  html {
+    height:100%;
+    min-height:100%;
+    width:100%;
+    min-width:100%;
+  }
 
-.logo-container {
-  cursor: default;
-}
+  body {
+    font-family: 'Karla', sans-serif !important;
+    min-height: 100%;
+    min-width: 100%;
+    –webkit-overflow-scrolling: touch;
+  }
 
-.projects-container {
-  z-index: -1;
-}
+  a, a:visited {
+    visibility: inherit;
+    text-decoration: none !important;
+  }
 
-article section {
-  padding-top: 140px;
-}
+  #main-logo {
+    opacity: 1;
+    width: 610px;
+    height: 585px;
+    float: none;
+    margin: 300px 30%;
+    cursor: default;
+    transition: opacity 0.25s;
+  }
 
-.left {
-  margin: 160px 50% 323px 15%;
-}
+  .logo-container {
+    cursor: default;
+  }
 
-.right {
-  margin: 160px 10% 323px 55%;
-}
+  .projects-container {
+    z-index: -1;
+  }
 
-.section-scroll {
-  margin-top: 350px;
-}
+  article section {
+    padding-top: 140px;
+  }
 
-.section-scroll.left {
-  width: 35%;
-  float: left;
-}
+  .left {
+    margin: 160px 50% 323px 15%;
+  }
 
-.section-scroll.right {
-  width: 35%;
-  float: right;
-}
+  .right {
+    margin: 160px 10% 323px 55%;
+  }
 
-.section-scroll > img {
-  margin: 25px auto;
-  display: block;
-  box-shadow: 0 6px 12px 0 rgba(0,0,0,0.16), 0 4px 12px 0 rgba(0,0,0,0.22);
-}
+  .section-scroll {
+    margin-top: 350px;
+  }
 
-.section-fixed {
-  position: fixed;
-  width: 35%;
-  top: 0;
-  opacity: 0;
-  transition: opacity 0.25s, visibility 0.25s;
-}
+  .section-scroll.left {
+    width: 35%;
+    float: left;
+  }
 
-.section-fixed.left {
-  left: 10px;
-}
+  .section-scroll.right {
+    width: 35%;
+    float: right;
+  }
 
-.section-fixed.right {
-  right: -10px;
-}
+  .section-scroll > img {
+    margin: 25px auto;
+    display: block;
+    box-shadow: 0 6px 12px 0 rgba(0,0,0,0.16), 0 4px 12px 0 rgba(0,0,0,0.22);
+  }
 
-.section-title {
-  font-size: 35px;
-  font-weight: bold;
-  line-height: 41px;
-  color: #3A4045;
-  margin: 12px 0;
-}
+  .section-fixed {
+    position: fixed;
+    width: 35%;
+    top: 0;
+    opacity: 0;
+    transition: opacity 0.25s, visibility 0.25s;
+  }
 
-.section-description {
-  font-size: 16px;
-  line-height: 24px;
-  color: #3A4045;
-  margin-top: 12px;
-  padding-bottom: 12px;
-  border-bottom: 1px solid #9B9EA2;
-}
+  .section-fixed.left {
+    left: 10px;
+  }
 
-.section-tags {
-  font-size: 13px;
-  font-weight: bold;
-  line-height: 20px;
-  color: #9B9EA2;
-  margin: 12px 0;
-  text-transform: uppercase;
-}
+  .section-fixed.right {
+    right: -10px;
+  }
 
-.spinner {
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 2;
-  background: white url('http://sites.jamanetwork.com/help/images/spinner-transparent.gif') no-repeat;
-  background-size: 50px 50px;
-  background-position: 50%;
-  width: 100%;
-  height: 100%;
-}
+  .section-title {
+    font-size: 35px;
+    font-weight: bold;
+    line-height: 41px;
+    color: #3A4045;
+    margin: 12px 0;
+  }
 
-.card {
-  position: relative;
-}
+  .section-description {
+    font-size: 16px;
+    line-height: 24px;
+    color: #3A4045;
+    margin-top: 12px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #9B9EA2;
+  }
 
-.card img {
-  width: 100%;
-  max-height: 250px;
-  margin: 25px auto;
-  display: block;
-  box-shadow: 0 6px 12px 0 rgba(0,0,0,0.16), 0 4px 12px 0 rgba(0,0,0,0.22);
-}
+  .section-tags {
+    font-size: 13px;
+    font-weight: bold;
+    line-height: 20px;
+    color: #9B9EA2;
+    margin: 12px 0;
+    text-transform: uppercase;
+  }
 
-.card div {
-  position: absolute;
-  font-weight: bold;
-  text-align: center;
-  color: #FFFFFF;
-}
+  .spinner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    background: white url('http://sites.jamanetwork.com/help/images/spinner-transparent.gif') no-repeat;
+    background-size: 50px 50px;
+    background-position: 50%;
+    width: 100%;
+    height: 100%;
+  }
 
-.card .card-title {
-  text-transform: uppercase;
-  top: 0;
-  width: 100%;
-  margin: 24px 0;
-  font-size: 22px;
-  line-height: 26px;
-}
+  .card {
+    position: relative;
+  }
 
-.card .card-description {
-  position: absolute;
-  top: 68px;
-  width: 90%;
-  margin: 0 30px;
-  font-size: 16px;
-  line-height: 24px;
-}
+  .card img {
+    width: 100%;
+    max-height: 250px;
+    margin: 25px auto;
+    display: block;
+    box-shadow: 0 6px 12px 0 rgba(0,0,0,0.16), 0 4px 12px 0 rgba(0,0,0,0.22);
+  }
 
-.card .card-link {
-  text-transform: uppercase;
-  z-index: 1;
-  bottom: 0;
-  width: 100%;
-  margin: 24px 0;
-}
+  .card div {
+    position: absolute;
+    font-weight: bold;
+    text-align: center;
+    color: #FFFFFF;
+  }
 
-.software-logo {
-  margin: 10px;
+  .card .card-title {
+    text-transform: uppercase;
+    top: 0;
+    width: 100%;
+    margin: 24px 0;
+    font-size: 22px;
+    line-height: 26px;
+  }
+
+  .card .card-description {
+    position: absolute;
+    top: 68px;
+    width: 90%;
+    margin: 0 30px;
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  .card .card-link {
+    text-transform: uppercase;
+    z-index: 1;
+    bottom: 0;
+    width: 100%;
+    margin: 24px 0;
+  }
+
+  .software-logo {
+    margin: 10px;
+  }
 }
 
 @media (min-width:320px) and (max-width:1330px) {
 /* smartphones, iPhone, portrait 480x320 phones */
+  html {
+    height:100%;
+    min-height:100%;
+    width:100%;
+    min-width:100%;
+  }
 
+  body {
+    font-family: 'Karla', sans-serif !important;
+    min-height: 100%;
+    min-width: 100%;
+    –webkit-overflow-scrolling: touch;
+  }
+
+  a, a:visited {
+    visibility: inherit;
+    text-decoration: none !important;
+  }
+
+  #main-logo {
+    width: 60%;
+    float: none;
+    margin: auto;
+    cursor: default;
+  }
+
+  .logo-container {
+    height: 100%;
+    width: 100%;
+    padding: 20% 10%;
+  }
 }

@@ -13,6 +13,20 @@ class App extends React.Component {
       super(props);
     }
 
+    render() {
+      if (!this.state) return null;
+      return (
+        <main role="main" ref="gallery">
+          <div className="spinner" style={this.state.loading ? { display: 'block', position: 'fixed' } : { display: 'none' }}></div>
+          {this.getNavbar()}
+          {this.getLanding()}
+          {this.getProjects()}
+          {this.getAbout()}
+          {this.getContact()}
+        </main>
+      )
+    }
+
     componentDidMount() {
       if (typeof window !== 'undefined') {
         let windowHeight = $(window).height()
@@ -20,14 +34,22 @@ class App extends React.Component {
         window.addEventListener('scroll', this.handleScroll.bind(this));
         getLocale()
           .then((locale) => {
-            this.setState({
-              locale,
-              loading: true,
-              logo: {
-                margin: `${(windowHeight - 585) / 2}px ${(windowWidth / 3)}px`
-              }
-            })
-            this.styleElements()
+            if (window.isMobile()) {
+              this.setState({
+                locale,
+                loading: true
+              })
+            }
+            else {
+              this.setState({
+                locale,
+                loading: true,
+                logo: {
+                  margin: `${(windowHeight - 585) / 2}px ${(windowWidth / 3)}px`
+                }
+              })
+              this.styleElements()
+            }
           })
       }
     }
@@ -38,6 +60,7 @@ class App extends React.Component {
 
     handleScroll() {
       // Scroll handler. Fired on each scroll
+
     }
 
     imageLoaded() {
@@ -51,9 +74,14 @@ class App extends React.Component {
     loaded() {
       setTimeout(() => {
         if (window.isMobile()) {
+          $(this.refs.navbar).data('position', 'fixed')
+          $(this.refs.navbar.refs.bottom).css({ bottom: $(window).height() - 85 })
+          $('#main-logo').css({
+            margin: `${(($(window).height() - $('#main-logo').height()) / 4) + 30}px 10%`
+          })
         }
         else {
-          $('html, body, #app, main').css('height', $(document).height())
+          $('html, body, #app').css('height', $(document).height())
           $('footer').show()
         }
       })
@@ -115,6 +143,7 @@ class App extends React.Component {
           { url: "https://instagram.com/mercibaco", icon: "fa fa-instagram"},
           { url: "https://twitter.com/mercibaco", icon: "fa fa-twitter"}
         ]}
+        blog={{ url: "https://medium.com/merciba", text: "NAVBAR.BLOG" }}
         onImageLoaded={this.imageLoaded.bind(this)}
         ref="navbar"/>
     }
@@ -296,19 +325,7 @@ class App extends React.Component {
       else return null
     }
 
-    render() {
-      if (!this.state) return null;
-      return (
-        <main role="main" ref="gallery">
-          <div className="spinner" style={this.state.loading ? { display: 'block', position: 'fixed' } : { display: 'none' }}></div>
-          {this.getNavbar()}
-          {this.getLanding()}
-          {this.getProjects()}
-          {this.getAbout()}
-          {this.getContact()}
-        </main>
-      )
-    }
+
 }
 
 function imagesLoaded(parentNode) {

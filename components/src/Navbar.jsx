@@ -1,6 +1,7 @@
 import React from 'react'
 import $ from 'jquery'
 import NavItem from '../dist/NavItem'
+import Text from '../dist/Text'
 
 class Navbar extends React.Component {
   constructor(props) {
@@ -10,7 +11,8 @@ class Navbar extends React.Component {
   componentDidMount() {
     if (typeof window !== 'undefined') {
       if (window.isMobile()) {
-        this.setState({ style: { top: $(window).height() }})
+        this.setState({ style: { top: $(window).height() - 48 }})
+        window.addEventListener('scroll', this.handleScroll.bind(this));
       }
       else {
         this.open()
@@ -27,11 +29,39 @@ class Navbar extends React.Component {
   handleScroll() {
     if (typeof window !== 'undefined') {
       if (window.isMobile()) {
-
+        this.styleMobile()
       }
       else {
         this.styleDesktop()
       }
+    }
+  }
+
+  styleMobile() {
+    let scrolledFromTop = $(window).scrollTop()
+    let windowHeight = $(window).height() - 48
+    let top = windowHeight - scrolledFromTop
+    let factor = 52 / windowHeight
+    let converted = scrolledFromTop * factor
+    let logoDescended = (-52 + converted) < 0 ? (-52 + converted) : 0
+    console.log(scrolledFromTop, windowHeight, top)
+    if (scrolledFromTop < windowHeight) {
+      this.setState({
+        logo_style: {
+          top: logoDescended
+        },
+        style: {
+          top: top > 100 ? top : 100 
+        }
+      })
+    }
+    else {
+      this.setState({
+        logo_style: {
+          top: 0
+        },
+        style: this.state.style
+      })
     }
   }
 
@@ -86,53 +116,63 @@ class Navbar extends React.Component {
   }
 
   open() {
-    let scrolledFromTop = $(window).scrollTop()
-    let windowHeight = $(window).height()
-    let logo_style = {
-      opacity: 1,
-      top: this.props.route === "/" ? $('.nav-logo').css('top') : 0,
-      cursor: 'pointer'
+    if (window.isMobile()) {
+
     }
-    let bw_logo_style = {
-      opacity: 0,
-      top: this.props.route === "/" ? $('.nav-logo').css('top') : 0,
-      cursor: 'pointer'
-    }
-    this.setState({
-      logo_style,
-      bw_logo_style,
-      class: 'open',
-      style: {
-        left: '0px',
-        boxShadow: (scrolledFromTop > (windowHeight * 2)) ? '0 6px 12px 0 rgba(0,0,0,0.16), 0 4px 12px 0 rgba(0,0,0,0.22)' : 'none',
-        background: (scrolledFromTop > (windowHeight * 2)) ? 'white' : 'transparent'
+    else {
+      let scrolledFromTop = $(window).scrollTop()
+      let windowHeight = $(window).height()
+      let logo_style = {
+        opacity: 1,
+        top: this.props.route === "/" ? $('.nav-logo').css('top') : 0,
+        cursor: 'pointer'
       }
-    });
+      let bw_logo_style = {
+        opacity: 0,
+        top: this.props.route === "/" ? $('.nav-logo').css('top') : 0,
+        cursor: 'pointer'
+      }
+      this.setState({
+        logo_style,
+        bw_logo_style,
+        class: 'open',
+        style: {
+          left: '0px',
+          boxShadow: (scrolledFromTop > (windowHeight * 2)) ? '0 6px 12px 0 rgba(0,0,0,0.16), 0 4px 12px 0 rgba(0,0,0,0.22)' : 'none',
+          background: (scrolledFromTop > (windowHeight * 2)) ? 'white' : 'transparent'
+        }
+      });
+    }
   }
 
   close() {
-    let scrolledFromTop = $(window).scrollTop()
-    let windowHeight = $(window).height()
-    let logo_style = {
-      opacity: 0,
-      top: this.props.route === "/" ? $('.nav-logo').css('top') : 0,
-      cursor: 'pointer'
+    if (window.isMobile()) {
+
     }
-    let bw_logo_style = {
-      opacity: 1,
-      top: this.props.route === "/" ? $('.nav-logo').css('top') : 0,
-      cursor: 'pointer'
-    }
-    if (scrolledFromTop > (windowHeight - 200)) this.setState({
-      logo_style,
-      bw_logo_style,
-      class: 'closed',
-      style: {
-        left: '-200px',
-        boxShadow: 'none',
-        background: 'transparent'
+    else {
+      let scrolledFromTop = $(window).scrollTop()
+      let windowHeight = $(window).height()
+      let logo_style = {
+        opacity: 0,
+        top: this.props.route === "/" ? $('.nav-logo').css('top') : 0,
+        cursor: 'pointer'
       }
-    });
+      let bw_logo_style = {
+        opacity: 1,
+        top: this.props.route === "/" ? $('.nav-logo').css('top') : 0,
+        cursor: 'pointer'
+      }
+      if (scrolledFromTop > (windowHeight - 200)) this.setState({
+        logo_style,
+        bw_logo_style,
+        class: 'closed',
+        style: {
+          left: '-200px',
+          boxShadow: 'none',
+          background: 'transparent'
+        }
+      });
+    }
   }
 
   getTopLinks() {
@@ -143,7 +183,8 @@ class Navbar extends React.Component {
 
   getBottomLinks() {
     return this.props.bottomLinks.map((link, index)=> {
-      return <NavItem key={`nav-link-${index}`} url={link.url} icon={link.icon} color="blk" locale={this.props.locale} position="bottom"/>
+      if (link.icon) return <NavItem key={`nav-link-${index}`} url={link.url} icon={link.icon} color="blk" locale={this.props.locale} position="bottom"/>
+      else return <NavItem key={`nav-link-${index}`} url={link.url} color="blk" locale={this.props.locale} translate={link.text} position="bottom"/>
     })
   }
 
@@ -155,13 +196,14 @@ class Navbar extends React.Component {
     if (!this.state) return null;
     return (
       <nav className={this.state.class} style={this.state.style} onMouseEnter={this.open.bind(this)} onMouseLeave={this.close.bind(this)} onMouseMove={this.open.bind(this)}>
-        <img src="https://s3.amazonaws.com/merciba.com/assets/mercibalogo-sm.svg" className="nav-logo" style={this.state.logo_style} onClick={this.scrollToTop.bind(this)} onLoad={this.imageLoaded.bind(this)} />
+        <img src="https://s3.amazonaws.com/merciba.com/assets/mercibalogo-sm.svg" className="nav-logo color-logo" style={this.state.logo_style} onClick={this.scrollToTop.bind(this)} onLoad={this.imageLoaded.bind(this)} />
         <img src="https://s3.amazonaws.com/merciba.com/assets/mercibalogo-sm-bw.svg" className="nav-logo" style={this.state.bw_logo_style} onClick={this.scrollToTop.bind(this)} onLoad={this.imageLoaded.bind(this)} />
-        <ul id="nav-items" style={this.state.top_style}>
+        <ul id="nav-items" style={this.state.top_style} ref="top">
           {this.getTopLinks()}
         </ul>
-        <ul id="nav-links" style={this.state.bottom_style}>
+        <ul id="nav-links" style={this.state.bottom_style} ref="bottom">
           {this.getBottomLinks()}
+          <li id="blog-link"><a href={this.props.blog.url} target="_blank"><Text tag="div" locale={this.props.locale} translate={this.props.blog.text} /></a></li>
         </ul>
       </nav>
     )

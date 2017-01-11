@@ -74,6 +74,10 @@
 	  window.clone = function (obj) {
 	    return JSON.parse(JSON.stringify(obj));
 	  };
+	  window.onerror = function myErrorHandler(errorMsg, url, lineNumber) {
+	    console.log("Error occured: " + errorMsg);
+	    return false;
+	  };
 	} // This is the front-end entrypoint.
 	// It is packaged, along with any referenced components into public/client.js
 	// This allows using ES6 import for including front-end libraries.
@@ -31793,6 +31797,21 @@
 	  }
 	
 	  _createClass(App, [{
+	    key: 'render',
+	    value: function render() {
+	      if (!this.state) return null;
+	      return _react2.default.createElement(
+	        'main',
+	        { role: 'main', ref: 'gallery' },
+	        _react2.default.createElement('div', { className: 'spinner', style: this.state.loading ? { display: 'block', position: 'fixed' } : { display: 'none' } }),
+	        this.getNavbar(),
+	        this.getLanding(),
+	        this.getProjects(),
+	        this.getAbout(),
+	        this.getContact()
+	      );
+	    }
+	  }, {
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
 	      var _this2 = this;
@@ -31803,14 +31822,21 @@
 	          var windowWidth = (0, _jquery2.default)(window).width();
 	          window.addEventListener('scroll', _this2.handleScroll.bind(_this2));
 	          getLocale().then(function (locale) {
-	            _this2.setState({
-	              locale: locale,
-	              loading: true,
-	              logo: {
-	                margin: (windowHeight - 585) / 2 + 'px ' + windowWidth / 3 + 'px'
-	              }
-	            });
-	            _this2.styleElements();
+	            if (window.isMobile()) {
+	              _this2.setState({
+	                locale: locale,
+	                loading: true
+	              });
+	            } else {
+	              _this2.setState({
+	                locale: locale,
+	                loading: true,
+	                logo: {
+	                  margin: (windowHeight - 585) / 2 + 'px ' + windowWidth / 3 + 'px'
+	                }
+	              });
+	              _this2.styleElements();
+	            }
 	          });
 	        })();
 	      }
@@ -31824,6 +31850,7 @@
 	    key: 'handleScroll',
 	    value: function handleScroll() {
 	      // Scroll handler. Fired on each scroll
+	
 	    }
 	  }, {
 	    key: 'imageLoaded',
@@ -31837,9 +31864,17 @@
 	  }, {
 	    key: 'loaded',
 	    value: function loaded() {
+	      var _this3 = this;
+	
 	      setTimeout(function () {
-	        if (window.isMobile()) {} else {
-	          (0, _jquery2.default)('html, body, #app, main').css('height', (0, _jquery2.default)(document).height());
+	        if (window.isMobile()) {
+	          (0, _jquery2.default)(_this3.refs.navbar).data('position', 'fixed');
+	          (0, _jquery2.default)(_this3.refs.navbar.refs.bottom).css({ bottom: (0, _jquery2.default)(window).height() - 85 });
+	          (0, _jquery2.default)('#main-logo').css({
+	            margin: ((0, _jquery2.default)(window).height() - (0, _jquery2.default)('#main-logo').height()) / 4 + 30 + 'px 10%'
+	          });
+	        } else {
+	          (0, _jquery2.default)('html, body, #app').css('height', (0, _jquery2.default)(document).height());
 	          (0, _jquery2.default)('footer').show();
 	        }
 	      });
@@ -31892,6 +31927,7 @@
 	        locale: this.state.locale,
 	        links: [{ url: "/projects", icon: "circle", text: "NAVBAR.PROJECTS" }, { url: "/about", icon: "square", text: "NAVBAR.ABOUT" }, { url: "/contact", icon: "triangle", text: "NAVBAR.CONTACT" }],
 	        bottomLinks: [{ url: "https://instagram.com/mercibaco", icon: "fa fa-instagram" }, { url: "https://twitter.com/mercibaco", icon: "fa fa-twitter" }],
+	        blog: { url: "https://medium.com/merciba", text: "NAVBAR.BLOG" },
 	        onImageLoaded: this.imageLoaded.bind(this),
 	        ref: 'navbar' });
 	    }
@@ -32014,21 +32050,6 @@
 	          })
 	        );
 	      } else return null;
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      if (!this.state) return null;
-	      return _react2.default.createElement(
-	        'main',
-	        { role: 'main', ref: 'gallery' },
-	        _react2.default.createElement('div', { className: 'spinner', style: this.state.loading ? { display: 'block', position: 'fixed' } : { display: 'none' } }),
-	        this.getNavbar(),
-	        this.getLanding(),
-	        this.getProjects(),
-	        this.getAbout(),
-	        this.getContact()
-	      );
 	    }
 	  }]);
 	
@@ -37973,6 +37994,10 @@
 	
 	var _NavItem2 = _interopRequireDefault(_NavItem);
 	
+	var _Text = __webpack_require__(185);
+	
+	var _Text2 = _interopRequireDefault(_Text);
+	
 	function _interopRequireDefault(obj) {
 	  return obj && obj.__esModule ? obj : { default: obj };
 	}
@@ -38009,7 +38034,8 @@
 	    value: function componentDidMount() {
 	      if (typeof window !== 'undefined') {
 	        if (window.isMobile()) {
-	          this.setState({ style: { top: (0, _jquery2.default)(window).height() } });
+	          this.setState({ style: { top: (0, _jquery2.default)(window).height() - 48 } });
+	          window.addEventListener('scroll', this.handleScroll.bind(this));
 	        } else {
 	          this.open();
 	          window.addEventListener('scroll', this.handleScroll.bind(this));
@@ -38026,9 +38052,39 @@
 	    key: 'handleScroll',
 	    value: function handleScroll() {
 	      if (typeof window !== 'undefined') {
-	        if (window.isMobile()) {} else {
+	        if (window.isMobile()) {
+	          this.styleMobile();
+	        } else {
 	          this.styleDesktop();
 	        }
+	      }
+	    }
+	  }, {
+	    key: 'styleMobile',
+	    value: function styleMobile() {
+	      var scrolledFromTop = (0, _jquery2.default)(window).scrollTop();
+	      var windowHeight = (0, _jquery2.default)(window).height() - 48;
+	      var top = windowHeight - scrolledFromTop;
+	      var factor = 52 / windowHeight;
+	      var converted = scrolledFromTop * factor;
+	      var logoDescended = -52 + converted < 0 ? -52 + converted : 0;
+	      console.log(scrolledFromTop, windowHeight, top);
+	      if (scrolledFromTop < windowHeight) {
+	        this.setState({
+	          logo_style: {
+	            top: logoDescended
+	          },
+	          style: {
+	            top: top > 100 ? top : 100
+	          }
+	        });
+	      } else {
+	        this.setState({
+	          logo_style: {
+	            top: 0
+	          },
+	          style: this.state.style
+	        });
 	      }
 	    }
 	  }, {
@@ -38084,54 +38140,58 @@
 	  }, {
 	    key: 'open',
 	    value: function open() {
-	      var scrolledFromTop = (0, _jquery2.default)(window).scrollTop();
-	      var windowHeight = (0, _jquery2.default)(window).height();
-	      var logo_style = {
-	        opacity: 1,
-	        top: this.props.route === "/" ? (0, _jquery2.default)('.nav-logo').css('top') : 0,
-	        cursor: 'pointer'
-	      };
-	      var bw_logo_style = {
-	        opacity: 0,
-	        top: this.props.route === "/" ? (0, _jquery2.default)('.nav-logo').css('top') : 0,
-	        cursor: 'pointer'
-	      };
-	      this.setState({
-	        logo_style: logo_style,
-	        bw_logo_style: bw_logo_style,
-	        class: 'open',
-	        style: {
-	          left: '0px',
-	          boxShadow: scrolledFromTop > windowHeight * 2 ? '0 6px 12px 0 rgba(0,0,0,0.16), 0 4px 12px 0 rgba(0,0,0,0.22)' : 'none',
-	          background: scrolledFromTop > windowHeight * 2 ? 'white' : 'transparent'
-	        }
-	      });
+	      if (window.isMobile()) {} else {
+	        var scrolledFromTop = (0, _jquery2.default)(window).scrollTop();
+	        var windowHeight = (0, _jquery2.default)(window).height();
+	        var logo_style = {
+	          opacity: 1,
+	          top: this.props.route === "/" ? (0, _jquery2.default)('.nav-logo').css('top') : 0,
+	          cursor: 'pointer'
+	        };
+	        var bw_logo_style = {
+	          opacity: 0,
+	          top: this.props.route === "/" ? (0, _jquery2.default)('.nav-logo').css('top') : 0,
+	          cursor: 'pointer'
+	        };
+	        this.setState({
+	          logo_style: logo_style,
+	          bw_logo_style: bw_logo_style,
+	          class: 'open',
+	          style: {
+	            left: '0px',
+	            boxShadow: scrolledFromTop > windowHeight * 2 ? '0 6px 12px 0 rgba(0,0,0,0.16), 0 4px 12px 0 rgba(0,0,0,0.22)' : 'none',
+	            background: scrolledFromTop > windowHeight * 2 ? 'white' : 'transparent'
+	          }
+	        });
+	      }
 	    }
 	  }, {
 	    key: 'close',
 	    value: function close() {
-	      var scrolledFromTop = (0, _jquery2.default)(window).scrollTop();
-	      var windowHeight = (0, _jquery2.default)(window).height();
-	      var logo_style = {
-	        opacity: 0,
-	        top: this.props.route === "/" ? (0, _jquery2.default)('.nav-logo').css('top') : 0,
-	        cursor: 'pointer'
-	      };
-	      var bw_logo_style = {
-	        opacity: 1,
-	        top: this.props.route === "/" ? (0, _jquery2.default)('.nav-logo').css('top') : 0,
-	        cursor: 'pointer'
-	      };
-	      if (scrolledFromTop > windowHeight - 200) this.setState({
-	        logo_style: logo_style,
-	        bw_logo_style: bw_logo_style,
-	        class: 'closed',
-	        style: {
-	          left: '-200px',
-	          boxShadow: 'none',
-	          background: 'transparent'
-	        }
-	      });
+	      if (window.isMobile()) {} else {
+	        var scrolledFromTop = (0, _jquery2.default)(window).scrollTop();
+	        var windowHeight = (0, _jquery2.default)(window).height();
+	        var logo_style = {
+	          opacity: 0,
+	          top: this.props.route === "/" ? (0, _jquery2.default)('.nav-logo').css('top') : 0,
+	          cursor: 'pointer'
+	        };
+	        var bw_logo_style = {
+	          opacity: 1,
+	          top: this.props.route === "/" ? (0, _jquery2.default)('.nav-logo').css('top') : 0,
+	          cursor: 'pointer'
+	        };
+	        if (scrolledFromTop > windowHeight - 200) this.setState({
+	          logo_style: logo_style,
+	          bw_logo_style: bw_logo_style,
+	          class: 'closed',
+	          style: {
+	            left: '-200px',
+	            boxShadow: 'none',
+	            background: 'transparent'
+	          }
+	        });
+	      }
 	    }
 	  }, {
 	    key: 'getTopLinks',
@@ -38148,7 +38208,7 @@
 	      var _this3 = this;
 	
 	      return this.props.bottomLinks.map(function (link, index) {
-	        return _react2.default.createElement(_NavItem2.default, { key: 'nav-link-' + index, url: link.url, icon: link.icon, color: 'blk', locale: _this3.props.locale, position: 'bottom' });
+	        if (link.icon) return _react2.default.createElement(_NavItem2.default, { key: 'nav-link-' + index, url: link.url, icon: link.icon, color: 'blk', locale: _this3.props.locale, position: 'bottom' });else return _react2.default.createElement(_NavItem2.default, { key: 'nav-link-' + index, url: link.url, color: 'blk', locale: _this3.props.locale, translate: link.text, position: 'bottom' });
 	      });
 	    }
 	  }, {
@@ -38160,7 +38220,7 @@
 	    key: 'render',
 	    value: function render() {
 	      if (!this.state) return null;
-	      return _react2.default.createElement('nav', { className: this.state.class, style: this.state.style, onMouseEnter: this.open.bind(this), onMouseLeave: this.close.bind(this), onMouseMove: this.open.bind(this) }, _react2.default.createElement('img', { src: 'https://s3.amazonaws.com/merciba.com/assets/mercibalogo-sm.svg', className: 'nav-logo', style: this.state.logo_style, onClick: this.scrollToTop.bind(this), onLoad: this.imageLoaded.bind(this) }), _react2.default.createElement('img', { src: 'https://s3.amazonaws.com/merciba.com/assets/mercibalogo-sm-bw.svg', className: 'nav-logo', style: this.state.bw_logo_style, onClick: this.scrollToTop.bind(this), onLoad: this.imageLoaded.bind(this) }), _react2.default.createElement('ul', { id: 'nav-items', style: this.state.top_style }, this.getTopLinks()), _react2.default.createElement('ul', { id: 'nav-links', style: this.state.bottom_style }, this.getBottomLinks()));
+	      return _react2.default.createElement('nav', { className: this.state.class, style: this.state.style, onMouseEnter: this.open.bind(this), onMouseLeave: this.close.bind(this), onMouseMove: this.open.bind(this) }, _react2.default.createElement('img', { src: 'https://s3.amazonaws.com/merciba.com/assets/mercibalogo-sm.svg', className: 'nav-logo color-logo', style: this.state.logo_style, onClick: this.scrollToTop.bind(this), onLoad: this.imageLoaded.bind(this) }), _react2.default.createElement('img', { src: 'https://s3.amazonaws.com/merciba.com/assets/mercibalogo-sm-bw.svg', className: 'nav-logo', style: this.state.bw_logo_style, onClick: this.scrollToTop.bind(this), onLoad: this.imageLoaded.bind(this) }), _react2.default.createElement('ul', { id: 'nav-items', style: this.state.top_style, ref: 'top' }, this.getTopLinks()), _react2.default.createElement('ul', { id: 'nav-links', style: this.state.bottom_style, ref: 'bottom' }, this.getBottomLinks(), _react2.default.createElement('li', { id: 'blog-link' }, _react2.default.createElement('a', { href: this.props.blog.url, target: '_blank' }, _react2.default.createElement(_Text2.default, { tag: 'div', locale: this.props.locale, translate: this.props.blog.text })))));
 	    }
 	  }]);
 	
@@ -38233,16 +38293,28 @@
 	  _createClass(NavItem, [{
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
-	      this.setState({
+	      if (this.props.icon && this.props.color) this.setState({
 	        icon_id: this.props.icon + '-icon',
 	        icon_url: 'https://s3.amazonaws.com/merciba.com/assets/menu-' + this.props.icon + '-' + this.props.color + '.svg'
 	      });
 	    }
 	  }, {
+	    key: 'getIcon',
+	    value: function getIcon() {
+	      if (this.props.position === "top") return _react2.default.createElement('object', { id: this.state.icon_id, className: 'menu-icon', data: this.state.icon_url, type: 'image/svg+xml' });else if (this.props.position === "bottom") {
+	        if (this.props.icon) return _react2.default.createElement('i', { className: 'menu-icon ' + this.props.icon, 'aria-hidden': 'true' });else return null;
+	      } else return null;
+	    }
+	  }, {
+	    key: 'getText',
+	    value: function getText() {
+	      if (this.props.translate && this.props.locale) return _react2.default.createElement(_Text2.default, { tag: 'p', locale: this.props.locale, translate: this.props.translate });else return null;
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      if (!this.state) return null;
-	      return _react2.default.createElement('li', null, _react2.default.createElement('a', { href: this.props.url }, this.props.position === "top" ? _react2.default.createElement('object', { id: this.state.icon_id, className: 'menu-icon', data: this.state.icon_url, type: 'image/svg+xml' }) : _react2.default.createElement('i', { className: 'menu-icon ' + this.props.icon, 'aria-hidden': 'true' }), this.props.translate ? _react2.default.createElement(_Text2.default, { tag: 'p', locale: this.props.locale, translate: this.props.translate }) : _react2.default.createElement('span', null)));
+	      return _react2.default.createElement('li', null, _react2.default.createElement('a', { href: this.props.url, target: this.props.position === "top" ? "_self" : "_blank" }, this.getIcon(), this.getText()));
 	    }
 	  }]);
 	
@@ -38487,7 +38559,7 @@
 	      var _this3 = this;
 	
 	      if (!this.state) return null;
-	      return _react2.default.createElement('section', { id: this.props.name }, _react2.default.createElement('div', { className: this.props.scrollSide, ref: 'gallery' }, this.getScrollSide()), _react2.default.createElement('div', { className: this.props.fixedSide, style: this.state.style, ref: 'fixed' }, _react2.default.createElement('a', { href: this.props.url }, _react2.default.createElement(_Text2.default, { tag: 'div', locale: this.props.locale, sel: 'section-title', translate: this.props.title })), _react2.default.createElement(_Text2.default, { tag: 'p', locale: this.props.locale, sel: 'section-description', translate: this.props.description }), _react2.default.createElement('div', { className: 'section-tags' }, this.props.tags.map(function (tag) {
+	      return _react2.default.createElement('section', { id: this.props.name }, _react2.default.createElement('div', { className: this.props.scrollSide, ref: 'gallery' }, this.getScrollSide()), _react2.default.createElement('div', { className: this.props.fixedSide, style: this.state.style, ref: 'fixed' }, _react2.default.createElement('a', { href: this.props.url, target: '_self' }, _react2.default.createElement(_Text2.default, { tag: 'div', locale: this.props.locale, sel: 'section-title', translate: this.props.title })), _react2.default.createElement(_Text2.default, { tag: 'p', locale: this.props.locale, sel: 'section-description', translate: this.props.description }), _react2.default.createElement('div', { className: 'section-tags' }, this.props.tags.map(function (tag) {
 	        return _react2.default.createElement(_Text2.default, { tag: 'div', locale: _this3.props.locale, key: tag, translate: tag });
 	      })), this.props.icons ? this.props.icons.map(function (icon, index) {
 	        return _react2.default.createElement('a', { href: icon.href, target: '_blank', style: _this3.state.links, key: 'link-' + index }, _react2.default.createElement('img', { className: 'software-logo', height: '50', key: 'icon-' + index, src: icon.img, onLoad: _this3.imageLoaded.bind(_this3) }));
@@ -38793,7 +38865,7 @@
 	    key: 'validate',
 	    value: function validate() {
 	      var emailValid = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-	      if (this.state.human && emailValid.test(this.state.email) && (this.state.name && this.state.message || this.state.subscribe)) (0, _jquery2.default)(this.refs.submit).removeAttr('disabled');else (0, _jquery2.default)(this.refs.submit).attr('disabled', true);
+	      if (this.state.human && emailValid.test(this.state.email) && this.state.name && (this.state.message || this.state.subscribe)) (0, _jquery2.default)(this.refs.submit).removeAttr('disabled');else (0, _jquery2.default)(this.refs.submit).attr('disabled', true);
 	    }
 	  }, {
 	    key: 'getContactForm',
@@ -52058,7 +52130,7 @@
 	    key: 'validate',
 	    value: function validate() {
 	      var emailValid = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-	      if (this.state.human && emailValid.test(this.state.email) && (this.state.name && this.state.message || this.state.subscribe)) (0, _jquery2.default)(this.refs.submit).removeAttr('disabled');else (0, _jquery2.default)(this.refs.submit).attr('disabled', true);
+	      if (this.state.human && emailValid.test(this.state.email) && this.state.name && (this.state.message || this.state.subscribe)) (0, _jquery2.default)(this.refs.submit).removeAttr('disabled');else (0, _jquery2.default)(this.refs.submit).attr('disabled', true);
 	    }
 	  }, {
 	    key: 'getContactForm',
@@ -52163,10 +52235,22 @@
 	  _createClass(NavItem, [{
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
-	      this.setState({
+	      if (this.props.icon && this.props.color) this.setState({
 	        icon_id: this.props.icon + '-icon',
 	        icon_url: 'https://s3.amazonaws.com/merciba.com/assets/menu-' + this.props.icon + '-' + this.props.color + '.svg'
 	      });
+	    }
+	  }, {
+	    key: 'getIcon',
+	    value: function getIcon() {
+	      if (this.props.position === "top") return _react2.default.createElement('object', { id: this.state.icon_id, className: 'menu-icon', data: this.state.icon_url, type: 'image/svg+xml' });else if (this.props.position === "bottom") {
+	        if (this.props.icon) return _react2.default.createElement('i', { className: 'menu-icon ' + this.props.icon, 'aria-hidden': 'true' });else return null;
+	      } else return null;
+	    }
+	  }, {
+	    key: 'getText',
+	    value: function getText() {
+	      if (this.props.translate && this.props.locale) return _react2.default.createElement(_Text2.default, { tag: 'p', locale: this.props.locale, translate: this.props.translate });else return null;
 	    }
 	  }, {
 	    key: 'render',
@@ -52177,9 +52261,9 @@
 	        null,
 	        _react2.default.createElement(
 	          'a',
-	          { href: this.props.url },
-	          this.props.position === "top" ? _react2.default.createElement('object', { id: this.state.icon_id, className: 'menu-icon', data: this.state.icon_url, type: 'image/svg+xml' }) : _react2.default.createElement('i', { className: 'menu-icon ' + this.props.icon, 'aria-hidden': 'true' }),
-	          this.props.translate ? _react2.default.createElement(_Text2.default, { tag: 'p', locale: this.props.locale, translate: this.props.translate }) : _react2.default.createElement('span', null)
+	          { href: this.props.url, target: this.props.position === "top" ? "_self" : "_blank" },
+	          this.getIcon(),
+	          this.getText()
 	        )
 	      );
 	    }
@@ -52214,6 +52298,10 @@
 	
 	var _NavItem2 = _interopRequireDefault(_NavItem);
 	
+	var _Text = __webpack_require__(185);
+	
+	var _Text2 = _interopRequireDefault(_Text);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -52236,7 +52324,8 @@
 	    value: function componentDidMount() {
 	      if (typeof window !== 'undefined') {
 	        if (window.isMobile()) {
-	          this.setState({ style: { top: (0, _jquery2.default)(window).height() } });
+	          this.setState({ style: { top: (0, _jquery2.default)(window).height() - 48 } });
+	          window.addEventListener('scroll', this.handleScroll.bind(this));
 	        } else {
 	          this.open();
 	          window.addEventListener('scroll', this.handleScroll.bind(this));
@@ -52253,9 +52342,39 @@
 	    key: 'handleScroll',
 	    value: function handleScroll() {
 	      if (typeof window !== 'undefined') {
-	        if (window.isMobile()) {} else {
+	        if (window.isMobile()) {
+	          this.styleMobile();
+	        } else {
 	          this.styleDesktop();
 	        }
+	      }
+	    }
+	  }, {
+	    key: 'styleMobile',
+	    value: function styleMobile() {
+	      var scrolledFromTop = (0, _jquery2.default)(window).scrollTop();
+	      var windowHeight = (0, _jquery2.default)(window).height() - 48;
+	      var top = windowHeight - scrolledFromTop;
+	      var factor = 52 / windowHeight;
+	      var converted = scrolledFromTop * factor;
+	      var logoDescended = -52 + converted < 0 ? -52 + converted : 0;
+	      console.log(scrolledFromTop, windowHeight, top);
+	      if (scrolledFromTop < windowHeight) {
+	        this.setState({
+	          logo_style: {
+	            top: logoDescended
+	          },
+	          style: {
+	            top: top > 100 ? top : 100
+	          }
+	        });
+	      } else {
+	        this.setState({
+	          logo_style: {
+	            top: 0
+	          },
+	          style: this.state.style
+	        });
 	      }
 	    }
 	  }, {
@@ -52311,54 +52430,58 @@
 	  }, {
 	    key: 'open',
 	    value: function open() {
-	      var scrolledFromTop = (0, _jquery2.default)(window).scrollTop();
-	      var windowHeight = (0, _jquery2.default)(window).height();
-	      var logo_style = {
-	        opacity: 1,
-	        top: this.props.route === "/" ? (0, _jquery2.default)('.nav-logo').css('top') : 0,
-	        cursor: 'pointer'
-	      };
-	      var bw_logo_style = {
-	        opacity: 0,
-	        top: this.props.route === "/" ? (0, _jquery2.default)('.nav-logo').css('top') : 0,
-	        cursor: 'pointer'
-	      };
-	      this.setState({
-	        logo_style: logo_style,
-	        bw_logo_style: bw_logo_style,
-	        class: 'open',
-	        style: {
-	          left: '0px',
-	          boxShadow: scrolledFromTop > windowHeight * 2 ? '0 6px 12px 0 rgba(0,0,0,0.16), 0 4px 12px 0 rgba(0,0,0,0.22)' : 'none',
-	          background: scrolledFromTop > windowHeight * 2 ? 'white' : 'transparent'
-	        }
-	      });
+	      if (window.isMobile()) {} else {
+	        var scrolledFromTop = (0, _jquery2.default)(window).scrollTop();
+	        var windowHeight = (0, _jquery2.default)(window).height();
+	        var logo_style = {
+	          opacity: 1,
+	          top: this.props.route === "/" ? (0, _jquery2.default)('.nav-logo').css('top') : 0,
+	          cursor: 'pointer'
+	        };
+	        var bw_logo_style = {
+	          opacity: 0,
+	          top: this.props.route === "/" ? (0, _jquery2.default)('.nav-logo').css('top') : 0,
+	          cursor: 'pointer'
+	        };
+	        this.setState({
+	          logo_style: logo_style,
+	          bw_logo_style: bw_logo_style,
+	          class: 'open',
+	          style: {
+	            left: '0px',
+	            boxShadow: scrolledFromTop > windowHeight * 2 ? '0 6px 12px 0 rgba(0,0,0,0.16), 0 4px 12px 0 rgba(0,0,0,0.22)' : 'none',
+	            background: scrolledFromTop > windowHeight * 2 ? 'white' : 'transparent'
+	          }
+	        });
+	      }
 	    }
 	  }, {
 	    key: 'close',
 	    value: function close() {
-	      var scrolledFromTop = (0, _jquery2.default)(window).scrollTop();
-	      var windowHeight = (0, _jquery2.default)(window).height();
-	      var logo_style = {
-	        opacity: 0,
-	        top: this.props.route === "/" ? (0, _jquery2.default)('.nav-logo').css('top') : 0,
-	        cursor: 'pointer'
-	      };
-	      var bw_logo_style = {
-	        opacity: 1,
-	        top: this.props.route === "/" ? (0, _jquery2.default)('.nav-logo').css('top') : 0,
-	        cursor: 'pointer'
-	      };
-	      if (scrolledFromTop > windowHeight - 200) this.setState({
-	        logo_style: logo_style,
-	        bw_logo_style: bw_logo_style,
-	        class: 'closed',
-	        style: {
-	          left: '-200px',
-	          boxShadow: 'none',
-	          background: 'transparent'
-	        }
-	      });
+	      if (window.isMobile()) {} else {
+	        var scrolledFromTop = (0, _jquery2.default)(window).scrollTop();
+	        var windowHeight = (0, _jquery2.default)(window).height();
+	        var logo_style = {
+	          opacity: 0,
+	          top: this.props.route === "/" ? (0, _jquery2.default)('.nav-logo').css('top') : 0,
+	          cursor: 'pointer'
+	        };
+	        var bw_logo_style = {
+	          opacity: 1,
+	          top: this.props.route === "/" ? (0, _jquery2.default)('.nav-logo').css('top') : 0,
+	          cursor: 'pointer'
+	        };
+	        if (scrolledFromTop > windowHeight - 200) this.setState({
+	          logo_style: logo_style,
+	          bw_logo_style: bw_logo_style,
+	          class: 'closed',
+	          style: {
+	            left: '-200px',
+	            boxShadow: 'none',
+	            background: 'transparent'
+	          }
+	        });
+	      }
 	    }
 	  }, {
 	    key: 'getTopLinks',
@@ -52375,7 +52498,7 @@
 	      var _this3 = this;
 	
 	      return this.props.bottomLinks.map(function (link, index) {
-	        return _react2.default.createElement(_NavItem2.default, { key: 'nav-link-' + index, url: link.url, icon: link.icon, color: 'blk', locale: _this3.props.locale, position: 'bottom' });
+	        if (link.icon) return _react2.default.createElement(_NavItem2.default, { key: 'nav-link-' + index, url: link.url, icon: link.icon, color: 'blk', locale: _this3.props.locale, position: 'bottom' });else return _react2.default.createElement(_NavItem2.default, { key: 'nav-link-' + index, url: link.url, color: 'blk', locale: _this3.props.locale, translate: link.text, position: 'bottom' });
 	      });
 	    }
 	  }, {
@@ -52390,17 +52513,26 @@
 	      return _react2.default.createElement(
 	        'nav',
 	        { className: this.state.class, style: this.state.style, onMouseEnter: this.open.bind(this), onMouseLeave: this.close.bind(this), onMouseMove: this.open.bind(this) },
-	        _react2.default.createElement('img', { src: 'https://s3.amazonaws.com/merciba.com/assets/mercibalogo-sm.svg', className: 'nav-logo', style: this.state.logo_style, onClick: this.scrollToTop.bind(this), onLoad: this.imageLoaded.bind(this) }),
+	        _react2.default.createElement('img', { src: 'https://s3.amazonaws.com/merciba.com/assets/mercibalogo-sm.svg', className: 'nav-logo color-logo', style: this.state.logo_style, onClick: this.scrollToTop.bind(this), onLoad: this.imageLoaded.bind(this) }),
 	        _react2.default.createElement('img', { src: 'https://s3.amazonaws.com/merciba.com/assets/mercibalogo-sm-bw.svg', className: 'nav-logo', style: this.state.bw_logo_style, onClick: this.scrollToTop.bind(this), onLoad: this.imageLoaded.bind(this) }),
 	        _react2.default.createElement(
 	          'ul',
-	          { id: 'nav-items', style: this.state.top_style },
+	          { id: 'nav-items', style: this.state.top_style, ref: 'top' },
 	          this.getTopLinks()
 	        ),
 	        _react2.default.createElement(
 	          'ul',
-	          { id: 'nav-links', style: this.state.bottom_style },
-	          this.getBottomLinks()
+	          { id: 'nav-links', style: this.state.bottom_style, ref: 'bottom' },
+	          this.getBottomLinks(),
+	          _react2.default.createElement(
+	            'li',
+	            { id: 'blog-link' },
+	            _react2.default.createElement(
+	              'a',
+	              { href: this.props.blog.url, target: '_blank' },
+	              _react2.default.createElement(_Text2.default, { tag: 'div', locale: this.props.locale, translate: this.props.blog.text })
+	            )
+	          )
 	        )
 	      );
 	    }
@@ -52559,7 +52691,7 @@
 	          { className: this.props.fixedSide, style: this.state.style, ref: 'fixed' },
 	          _react2.default.createElement(
 	            'a',
-	            { href: this.props.url },
+	            { href: this.props.url, target: '_self' },
 	            _react2.default.createElement(_Text2.default, { tag: 'div', locale: this.props.locale, sel: 'section-title', translate: this.props.title })
 	          ),
 	          _react2.default.createElement(_Text2.default, { tag: 'p', locale: this.props.locale, sel: 'section-description', translate: this.props.description }),

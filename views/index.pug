@@ -10,13 +10,16 @@ html
     script.
       try{Typekit.load();}catch(e){}
     title #{title}Merciba Design and Development
-    link(rel="stylesheet", href='https://fonts.googleapis.com/css?family=Karla')
+    link(rel="stylesheet", href='http://fonts.googleapis.com/css?family=Karla')
     link(rel='stylesheet', href='/styles/font-awesome.min.css')
     link(rel='stylesheet', href='/styles/style.css')
     link(rel='stylesheet', href='/styles/nav.css')
     link(rel='stylesheet', href='/styles/footer.css')
     link(rel='stylesheet', href='/styles/about.css')
     link(rel='stylesheet', href='/styles/contact.css')
+    link(rel='stylesheet', href='http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css')
+    script(src='http://code.jquery.com/jquery-1.11.1.min.js')
+    script(src='http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js')
   body(data-route=route)
     #app
       | !{reactOutput}

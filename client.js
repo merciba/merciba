@@ -14,7 +14,11 @@ if (typeof window !== 'undefined') {
     if ($(window).width() > 1330) return false
     else return true
   }
-  window.clone = (obj) => JSON.parse(JSON.stringify(obj)) 
+  window.clone = (obj) => JSON.parse(JSON.stringify(obj))
+  window.onerror = function myErrorHandler(errorMsg, url, lineNumber) {
+    console.log("Error occured: " + errorMsg);
+    return false;
+  }
 }
 
 import App from './components/src/App.jsx'
