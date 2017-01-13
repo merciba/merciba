@@ -31869,7 +31869,6 @@
 	      setTimeout(function () {
 	        if (window.isMobile()) {
 	          (0, _jquery2.default)(_this3.refs.navbar).data('position', 'fixed');
-	          (0, _jquery2.default)(_this3.refs.navbar.refs.bottom).css({ bottom: (0, _jquery2.default)(window).height() - 85 });
 	          (0, _jquery2.default)('#main-logo').css({
 	            margin: ((0, _jquery2.default)(window).height() - (0, _jquery2.default)('#main-logo').height()) / 4 + 30 + 'px 10%'
 	          });
@@ -38034,7 +38033,16 @@
 	    value: function componentDidMount() {
 	      if (typeof window !== 'undefined') {
 	        if (window.isMobile()) {
-	          this.setState({ style: { top: (0, _jquery2.default)(window).height() - 48 } });
+	          this.setState({
+	            style: {
+	              top: (0, _jquery2.default)(window).height() - 48
+	            },
+	            bottom_style: {
+	              bottom: (0, _jquery2.default)(window).height() - 95,
+	              background: 'white'
+	            },
+	            original_bottom: (0, _jquery2.default)(window).height() - 95
+	          });
 	          window.addEventListener('scroll', this.handleScroll.bind(this));
 	        } else {
 	          this.open();
@@ -38063,27 +38071,45 @@
 	    key: 'styleMobile',
 	    value: function styleMobile() {
 	      var scrolledFromTop = (0, _jquery2.default)(window).scrollTop();
-	      var windowHeight = (0, _jquery2.default)(window).height() - 48;
-	      var top = windowHeight - scrolledFromTop;
-	      var factor = 52 / windowHeight;
+	      var windowHeight = (0, _jquery2.default)(window).height();
+	      var bottomOfLinks = windowHeight - 48;
+	      var top = bottomOfLinks - scrolledFromTop;
+	      var factor = 62 / bottomOfLinks;
 	      var converted = scrolledFromTop * factor;
-	      var logoDescended = -52 + converted < 0 ? -52 + converted : 0;
-	      console.log(scrolledFromTop, windowHeight, top);
-	      if (scrolledFromTop < windowHeight) {
+	      var logoDescended = -52 + converted < 10 ? -52 + converted : 10;
+	      if (scrolledFromTop < bottomOfLinks) {
 	        this.setState({
 	          logo_style: {
 	            top: logoDescended
 	          },
 	          style: {
-	            top: top > 100 ? top : 100
+	            top: top > 79 ? top : 79
+	          },
+	          bottom_style: {
+	            bottom: windowHeight - 95,
+	            background: 'white'
+	          }
+	        });
+	      } else if (scrolledFromTop < windowHeight) {
+	        this.setState({
+	          style: {
+	            top: windowHeight - scrolledFromTop
+	          },
+	          bottom_style: {
+	            bottom: bottomOfLinks - (bottomOfLinks - scrolledFromTop),
+	            background: 'white'
 	          }
 	        });
 	      } else {
 	        this.setState({
 	          logo_style: {
-	            top: 0
+	            top: 10
 	          },
-	          style: this.state.style
+	          style: this.state.style,
+	          bottom_style: {
+	            bottom: windowHeight,
+	            background: 'white'
+	          }
 	        });
 	      }
 	    }
@@ -52324,7 +52350,16 @@
 	    value: function componentDidMount() {
 	      if (typeof window !== 'undefined') {
 	        if (window.isMobile()) {
-	          this.setState({ style: { top: (0, _jquery2.default)(window).height() - 48 } });
+	          this.setState({
+	            style: {
+	              top: (0, _jquery2.default)(window).height() - 48
+	            },
+	            bottom_style: {
+	              bottom: (0, _jquery2.default)(window).height() - 95,
+	              background: 'white'
+	            },
+	            original_bottom: (0, _jquery2.default)(window).height() - 95
+	          });
 	          window.addEventListener('scroll', this.handleScroll.bind(this));
 	        } else {
 	          this.open();
@@ -52353,27 +52388,45 @@
 	    key: 'styleMobile',
 	    value: function styleMobile() {
 	      var scrolledFromTop = (0, _jquery2.default)(window).scrollTop();
-	      var windowHeight = (0, _jquery2.default)(window).height() - 48;
-	      var top = windowHeight - scrolledFromTop;
-	      var factor = 52 / windowHeight;
+	      var windowHeight = (0, _jquery2.default)(window).height();
+	      var bottomOfLinks = windowHeight - 48;
+	      var top = bottomOfLinks - scrolledFromTop;
+	      var factor = 62 / bottomOfLinks;
 	      var converted = scrolledFromTop * factor;
-	      var logoDescended = -52 + converted < 0 ? -52 + converted : 0;
-	      console.log(scrolledFromTop, windowHeight, top);
-	      if (scrolledFromTop < windowHeight) {
+	      var logoDescended = -52 + converted < 10 ? -52 + converted : 10;
+	      if (scrolledFromTop < bottomOfLinks) {
 	        this.setState({
 	          logo_style: {
 	            top: logoDescended
 	          },
 	          style: {
-	            top: top > 100 ? top : 100
+	            top: top > 79 ? top : 79
+	          },
+	          bottom_style: {
+	            bottom: windowHeight - 95,
+	            background: 'white'
+	          }
+	        });
+	      } else if (scrolledFromTop < windowHeight) {
+	        this.setState({
+	          style: {
+	            top: windowHeight - scrolledFromTop
+	          },
+	          bottom_style: {
+	            bottom: bottomOfLinks - (bottomOfLinks - scrolledFromTop),
+	            background: 'white'
 	          }
 	        });
 	      } else {
 	        this.setState({
 	          logo_style: {
-	            top: 0
+	            top: 10
 	          },
-	          style: this.state.style
+	          style: this.state.style,
+	          bottom_style: {
+	            bottom: windowHeight,
+	            background: 'white'
+	          }
 	        });
 	      }
 	    }

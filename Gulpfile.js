@@ -36,7 +36,7 @@ gulp.task('server', function() {
     if (regex.test(data.toString())) browserSync.reload()
   })
   node.stderr.on('data', (data) => {
-    throw new Error(data.toString())
+    //throw new Error(data.toString())
   })
   node.on('close', function (code) {
     if (code === 8) {

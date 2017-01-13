@@ -75,7 +75,6 @@ class App extends React.Component {
       setTimeout(() => {
         if (window.isMobile()) {
           $(this.refs.navbar).data('position', 'fixed')
-          $(this.refs.navbar.refs.bottom).css({ bottom: $(window).height() - 85 })
           $('#main-logo').css({
             margin: `${(($(window).height() - $('#main-logo').height()) / 4) + 30}px 10%`
           })

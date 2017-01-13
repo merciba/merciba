@@ -11,7 +11,16 @@ class Navbar extends React.Component {
   componentDidMount() {
     if (typeof window !== 'undefined') {
       if (window.isMobile()) {
-        this.setState({ style: { top: $(window).height() - 48 }})
+        this.setState({
+          style: {
+            top: $(window).height() - 48
+          },
+          bottom_style: {
+            bottom: $(window).height() - 95,
+            background: 'white'
+          },
+          original_bottom: $(window).height() - 95
+        })
         window.addEventListener('scroll', this.handleScroll.bind(this));
       }
       else {
@@ -39,28 +48,47 @@ class Navbar extends React.Component {
 
   styleMobile() {
     let scrolledFromTop = $(window).scrollTop()
-    let windowHeight = $(window).height() - 48
-    let top = windowHeight - scrolledFromTop
-    let factor = 52 / windowHeight
+    let windowHeight = $(window).height()
+    let bottomOfLinks = windowHeight - 48
+    let top = bottomOfLinks - scrolledFromTop
+    let factor = 62 / bottomOfLinks
     let converted = scrolledFromTop * factor
-    let logoDescended = (-52 + converted) < 0 ? (-52 + converted) : 0
-    console.log(scrolledFromTop, windowHeight, top)
-    if (scrolledFromTop < windowHeight) {
+    let logoDescended = (-52 + converted) < 10 ? (-52 + converted) : 10
+    if (scrolledFromTop < bottomOfLinks) {
       this.setState({
         logo_style: {
           top: logoDescended
         },
         style: {
-          top: top > 100 ? top : 100 
+          top: top > 79 ? top : 79
+        },
+        bottom_style: {
+          bottom: windowHeight - 95,
+          background: 'white'
+        }
+      })
+    }
+    else if (scrolledFromTop < windowHeight) {
+      this.setState({
+        style: {
+          top: windowHeight - scrolledFromTop
+        },
+        bottom_style: {
+          bottom: bottomOfLinks - (bottomOfLinks - scrolledFromTop),
+          background: 'white'
         }
       })
     }
     else {
       this.setState({
         logo_style: {
-          top: 0
+          top: 10
         },
-        style: this.state.style
+        style: this.state.style,
+        bottom_style: {
+          bottom: windowHeight,
+          background: 'white'
+        }
       })
     }
   }
