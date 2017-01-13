@@ -3,7 +3,12 @@
 const Mandrill = require('mandrill-api/mandrill'),
       Promise = require('bluebird')
 
-const mandrill = new Mandrill.Mandrill(process.env.MANDRILL_KEY);
+try{
+  const mandrill = new Mandrill.Mandrill(process.env.MANDRILL_KEY);
+}
+catch (e) {
+  const mandrill = { messages: { send: (payload, cb) => cb(null, {})}}
+}
 
 module.exports = (options) => {
   console.log(options)

@@ -1,3 +1,5 @@
 node_modules/
 components/dist/
+public/index.js
+public/index.js.map
 .env
