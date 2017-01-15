@@ -12,16 +12,20 @@ class Navbar extends React.Component {
     if (typeof window !== 'undefined') {
       if (window.isMobile()) {
         this.setState({
+          logo_style: {
+            top: (this.props.route === "/") ? -52 : 10
+          },
+          scroll: $('main').scrollTop(),
           style: {
             top: $(window).height() - 48
           },
           bottom_style: {
-            bottom: $(window).height() - 95,
+            bottom: $(window).height() - 85,
             background: 'white'
-          },
-          original_bottom: $(window).height() - 95
+          }
         })
-        window.addEventListener('scroll', this.handleScroll.bind(this));
+        $('main').on('scroll', this.handleScroll.bind(this));
+        this.handleScroll()
       }
       else {
         this.open()
@@ -47,50 +51,64 @@ class Navbar extends React.Component {
   }
 
   styleMobile() {
-    let scrolledFromTop = $(window).scrollTop()
+    let scrolledFromTop = $('main').scrollTop()
     let windowHeight = $(window).height()
-    let bottomOfLinks = windowHeight - 48
-    let top = bottomOfLinks - scrolledFromTop
-    let factor = 62 / bottomOfLinks
-    let converted = scrolledFromTop * factor
-    let logoDescended = (-52 + converted) < 10 ? (-52 + converted) : 10
+    let bottomOfLinks = windowHeight - 85
+    let topOfItems = windowHeight - 48
+    let top = topOfItems - scrolledFromTop
+
     if (scrolledFromTop < bottomOfLinks) {
       this.setState({
         logo_style: {
-          top: logoDescended
+          top: (scrolledFromTop < (bottomOfLinks - 150)) && (this.props.route === "/") ? -52 : 10
         },
         style: {
-          top: top > 79 ? top : 79
+          top: (top > 79) && (this.props.route === "/") ? top : 79,
+          boxShadow: (this.props.route === "/") ? 'none' : '0 6px 12px 0 rgba(0,0,0,0.16), 0 4px 12px 0 rgba(0,0,0,0.22)'
         },
         bottom_style: {
-          bottom: windowHeight - 95,
+          bottom: bottomOfLinks,
           background: 'white'
         }
       })
     }
     else if (scrolledFromTop < windowHeight) {
-      this.setState({
-        style: {
-          top: windowHeight - scrolledFromTop
-        },
-        bottom_style: {
-          bottom: bottomOfLinks - (bottomOfLinks - scrolledFromTop),
-          background: 'white'
-        }
-      })
+      if (scrolledFromTop < this.state.scroll) this.showMobileNav(windowHeight)
+      else {
+        this.setState({
+          logo_style: {
+            top: (this.props.route === "/") ? -52 : 10
+          },
+          style: {
+            top: windowHeight - scrolledFromTop,
+            boxShadow: '0 6px 12px 0 rgba(0,0,0,0.16), 0 4px 12px 0 rgba(0,0,0,0.22)'
+          },
+          bottom_style: {
+            bottom: windowHeight - (windowHeight - scrolledFromTop),
+            background: 'white'
+          }
+        })
+      }
     }
     else {
       this.setState({
         logo_style: {
-          top: 10
+          top: -52
         },
-        style: this.state.style,
+        style: {
+          top: 0,
+          boxShadow: '0 6px 12px 0 rgba(0,0,0,0.16), 0 4px 12px 0 rgba(0,0,0,0.22)'
+        },
         bottom_style: {
           bottom: windowHeight,
           background: 'white'
         }
       })
+      if (scrolledFromTop < this.state.scroll) this.showMobileNav(windowHeight)
     }
+    this.setState({
+      scroll: scrolledFromTop
+    })
   }
 
   styleDesktop() {
@@ -138,15 +156,32 @@ class Navbar extends React.Component {
 
   scrollToTop() {
     if (this.props.route !== "/") window.location.href = "/"
-    else $("html, body").animate({
+    else $("html, body, main").animate({
       scrollTop: 0
     }, 500);
   }
 
-  open() {
-    if (window.isMobile()) {
-
+  showMobileNav(windowHeight) {
+    let logo_style = {
+      top: 10
     }
+    let style = {
+      top: 85,
+      boxShadow: '0 6px 12px 0 rgba(0,0,0,0.16), 0 4px 12px 0 rgba(0,0,0,0.22)'
+    }
+    let bottom_style = {
+      bottom: windowHeight - 85,
+      background: 'white'
+    }
+    this.setState({
+      logo_style,
+      bottom_style,
+      style
+    })
+  }
+
+  open() {
+    if (window.isMobile()) return
     else {
       let scrolledFromTop = $(window).scrollTop()
       let windowHeight = $(window).height()
@@ -174,9 +209,7 @@ class Navbar extends React.Component {
   }
 
   close() {
-    if (window.isMobile()) {
-
-    }
+    if (window.isMobile()) return
     else {
       let scrolledFromTop = $(window).scrollTop()
       let windowHeight = $(window).height()
@@ -224,7 +257,7 @@ class Navbar extends React.Component {
     if (!this.state) return null;
     return (
       <nav className={this.state.class} style={this.state.style} onMouseEnter={this.open.bind(this)} onMouseLeave={this.close.bind(this)} onMouseMove={this.open.bind(this)}>
-        <img src="https://s3.amazonaws.com/merciba.com/assets/mercibalogo-sm.svg" className="nav-logo color-logo" style={this.state.logo_style} onClick={this.scrollToTop.bind(this)} onLoad={this.imageLoaded.bind(this)} />
+        <img src="https://s3.amazonaws.com/merciba.com/assets/mercibalogo-sm.svg" className="nav-logo color-logo" style={this.state.logo_style} onClick={this.scrollToTop.bind(this)} onTouchStart={this.scrollToTop.bind(this)} onLoad={this.imageLoaded.bind(this)} />
         <img src="https://s3.amazonaws.com/merciba.com/assets/mercibalogo-sm-bw.svg" className="nav-logo" style={this.state.bw_logo_style} onClick={this.scrollToTop.bind(this)} onLoad={this.imageLoaded.bind(this)} />
         <ul id="nav-items" style={this.state.top_style} ref="top">
           {this.getTopLinks()}

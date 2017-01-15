@@ -69,7 +69,7 @@
 	  window.React = _react2.default;
 	  window.ReactDOM = _reactDom2.default;
 	  window.isMobile = function () {
-	    if ((0, _jquery2.default)(window).width() > 1330) return false;else return true;
+	    if ((0, _jquery2.default)(window).width() > 1400) return false;else return true;
 	  };
 	  window.clone = function (obj) {
 	    return JSON.parse(JSON.stringify(obj));
@@ -31802,7 +31802,7 @@
 	      if (!this.state) return null;
 	      return _react2.default.createElement(
 	        'main',
-	        { role: 'main', ref: 'gallery' },
+	        { role: 'main', ref: 'gallery', 'data-enhance': window.isMobile(), style: window.isMobile() ? { height: (0, _jquery2.default)(window).height() } : null },
 	        _react2.default.createElement('div', { className: 'spinner', style: this.state.loading ? { display: 'block', position: 'fixed' } : { display: 'none' } }),
 	        this.getNavbar(),
 	        this.getLanding(),
@@ -31875,6 +31875,7 @@
 	        } else {
 	          (0, _jquery2.default)('html, body, #app').css('height', (0, _jquery2.default)(document).height());
 	          (0, _jquery2.default)('footer').show();
+	          (0, _jquery2.default)('.ui-page-theme-a').removeClass('ui-page-theme-a');
 	        }
 	      });
 	    }
@@ -38034,16 +38035,20 @@
 	      if (typeof window !== 'undefined') {
 	        if (window.isMobile()) {
 	          this.setState({
+	            logo_style: {
+	              top: this.props.route === "/" ? -52 : 10
+	            },
+	            scroll: (0, _jquery2.default)('main').scrollTop(),
 	            style: {
 	              top: (0, _jquery2.default)(window).height() - 48
 	            },
 	            bottom_style: {
-	              bottom: (0, _jquery2.default)(window).height() - 95,
+	              bottom: (0, _jquery2.default)(window).height() - 85,
 	              background: 'white'
-	            },
-	            original_bottom: (0, _jquery2.default)(window).height() - 95
+	            }
 	          });
-	          window.addEventListener('scroll', this.handleScroll.bind(this));
+	          (0, _jquery2.default)('main').on('scroll', this.handleScroll.bind(this));
+	          this.handleScroll();
 	        } else {
 	          this.open();
 	          window.addEventListener('scroll', this.handleScroll.bind(this));
@@ -38070,48 +38075,61 @@
 	  }, {
 	    key: 'styleMobile',
 	    value: function styleMobile() {
-	      var scrolledFromTop = (0, _jquery2.default)(window).scrollTop();
+	      var scrolledFromTop = (0, _jquery2.default)('main').scrollTop();
 	      var windowHeight = (0, _jquery2.default)(window).height();
-	      var bottomOfLinks = windowHeight - 48;
-	      var top = bottomOfLinks - scrolledFromTop;
-	      var factor = 62 / bottomOfLinks;
-	      var converted = scrolledFromTop * factor;
-	      var logoDescended = -52 + converted < 10 ? -52 + converted : 10;
+	      var bottomOfLinks = windowHeight - 85;
+	      var topOfItems = windowHeight - 48;
+	      var top = topOfItems - scrolledFromTop;
+	
 	      if (scrolledFromTop < bottomOfLinks) {
 	        this.setState({
 	          logo_style: {
-	            top: logoDescended
+	            top: scrolledFromTop < bottomOfLinks - 150 && this.props.route === "/" ? -52 : 10
 	          },
 	          style: {
-	            top: top > 79 ? top : 79
+	            top: top > 79 && this.props.route === "/" ? top : 79,
+	            boxShadow: this.props.route === "/" ? 'none' : '0 6px 12px 0 rgba(0,0,0,0.16), 0 4px 12px 0 rgba(0,0,0,0.22)'
 	          },
 	          bottom_style: {
-	            bottom: windowHeight - 95,
+	            bottom: bottomOfLinks,
 	            background: 'white'
 	          }
 	        });
 	      } else if (scrolledFromTop < windowHeight) {
-	        this.setState({
-	          style: {
-	            top: windowHeight - scrolledFromTop
-	          },
-	          bottom_style: {
-	            bottom: bottomOfLinks - (bottomOfLinks - scrolledFromTop),
-	            background: 'white'
-	          }
-	        });
+	        if (scrolledFromTop < this.state.scroll) this.showMobileNav(windowHeight);else {
+	          this.setState({
+	            logo_style: {
+	              top: this.props.route === "/" ? -52 : 10
+	            },
+	            style: {
+	              top: windowHeight - scrolledFromTop,
+	              boxShadow: '0 6px 12px 0 rgba(0,0,0,0.16), 0 4px 12px 0 rgba(0,0,0,0.22)'
+	            },
+	            bottom_style: {
+	              bottom: windowHeight - (windowHeight - scrolledFromTop),
+	              background: 'white'
+	            }
+	          });
+	        }
 	      } else {
 	        this.setState({
 	          logo_style: {
-	            top: 10
+	            top: -52
 	          },
-	          style: this.state.style,
+	          style: {
+	            top: 0,
+	            boxShadow: '0 6px 12px 0 rgba(0,0,0,0.16), 0 4px 12px 0 rgba(0,0,0,0.22)'
+	          },
 	          bottom_style: {
 	            bottom: windowHeight,
 	            background: 'white'
 	          }
 	        });
+	        if (scrolledFromTop < this.state.scroll) this.showMobileNav(windowHeight);
 	      }
+	      this.setState({
+	        scroll: scrolledFromTop
+	      });
 	    }
 	  }, {
 	    key: 'styleDesktop',
@@ -38159,14 +38177,34 @@
 	  }, {
 	    key: 'scrollToTop',
 	    value: function scrollToTop() {
-	      if (this.props.route !== "/") window.location.href = "/";else (0, _jquery2.default)("html, body").animate({
+	      if (this.props.route !== "/") window.location.href = "/";else (0, _jquery2.default)("html, body, main").animate({
 	        scrollTop: 0
 	      }, 500);
 	    }
 	  }, {
+	    key: 'showMobileNav',
+	    value: function showMobileNav(windowHeight) {
+	      var logo_style = {
+	        top: 10
+	      };
+	      var style = {
+	        top: 85,
+	        boxShadow: '0 6px 12px 0 rgba(0,0,0,0.16), 0 4px 12px 0 rgba(0,0,0,0.22)'
+	      };
+	      var bottom_style = {
+	        bottom: windowHeight - 85,
+	        background: 'white'
+	      };
+	      this.setState({
+	        logo_style: logo_style,
+	        bottom_style: bottom_style,
+	        style: style
+	      });
+	    }
+	  }, {
 	    key: 'open',
 	    value: function open() {
-	      if (window.isMobile()) {} else {
+	      if (window.isMobile()) return;else {
 	        var scrolledFromTop = (0, _jquery2.default)(window).scrollTop();
 	        var windowHeight = (0, _jquery2.default)(window).height();
 	        var logo_style = {
@@ -38194,7 +38232,7 @@
 	  }, {
 	    key: 'close',
 	    value: function close() {
-	      if (window.isMobile()) {} else {
+	      if (window.isMobile()) return;else {
 	        var scrolledFromTop = (0, _jquery2.default)(window).scrollTop();
 	        var windowHeight = (0, _jquery2.default)(window).height();
 	        var logo_style = {
@@ -38246,7 +38284,7 @@
 	    key: 'render',
 	    value: function render() {
 	      if (!this.state) return null;
-	      return _react2.default.createElement('nav', { className: this.state.class, style: this.state.style, onMouseEnter: this.open.bind(this), onMouseLeave: this.close.bind(this), onMouseMove: this.open.bind(this) }, _react2.default.createElement('img', { src: 'https://s3.amazonaws.com/merciba.com/assets/mercibalogo-sm.svg', className: 'nav-logo color-logo', style: this.state.logo_style, onClick: this.scrollToTop.bind(this), onLoad: this.imageLoaded.bind(this) }), _react2.default.createElement('img', { src: 'https://s3.amazonaws.com/merciba.com/assets/mercibalogo-sm-bw.svg', className: 'nav-logo', style: this.state.bw_logo_style, onClick: this.scrollToTop.bind(this), onLoad: this.imageLoaded.bind(this) }), _react2.default.createElement('ul', { id: 'nav-items', style: this.state.top_style, ref: 'top' }, this.getTopLinks()), _react2.default.createElement('ul', { id: 'nav-links', style: this.state.bottom_style, ref: 'bottom' }, this.getBottomLinks(), _react2.default.createElement('li', { id: 'blog-link' }, _react2.default.createElement('a', { href: this.props.blog.url, target: '_blank' }, _react2.default.createElement(_Text2.default, { tag: 'div', locale: this.props.locale, translate: this.props.blog.text })))));
+	      return _react2.default.createElement('nav', { className: this.state.class, style: this.state.style, onMouseEnter: this.open.bind(this), onMouseLeave: this.close.bind(this), onMouseMove: this.open.bind(this) }, _react2.default.createElement('img', { src: 'https://s3.amazonaws.com/merciba.com/assets/mercibalogo-sm.svg', className: 'nav-logo color-logo', style: this.state.logo_style, onClick: this.scrollToTop.bind(this), onTouchStart: this.scrollToTop.bind(this), onLoad: this.imageLoaded.bind(this) }), _react2.default.createElement('img', { src: 'https://s3.amazonaws.com/merciba.com/assets/mercibalogo-sm-bw.svg', className: 'nav-logo', style: this.state.bw_logo_style, onClick: this.scrollToTop.bind(this), onLoad: this.imageLoaded.bind(this) }), _react2.default.createElement('ul', { id: 'nav-items', style: this.state.top_style, ref: 'top' }, this.getTopLinks()), _react2.default.createElement('ul', { id: 'nav-links', style: this.state.bottom_style, ref: 'bottom' }, this.getBottomLinks(), _react2.default.createElement('li', { id: 'blog-link' }, _react2.default.createElement('a', { href: this.props.blog.url, target: '_blank' }, _react2.default.createElement(_Text2.default, { tag: 'div', locale: this.props.locale, translate: this.props.blog.text })))));
 	    }
 	  }]);
 	
@@ -38585,7 +38623,11 @@
 	      var _this3 = this;
 	
 	      if (!this.state) return null;
-	      return _react2.default.createElement('section', { id: this.props.name }, _react2.default.createElement('div', { className: this.props.scrollSide, ref: 'gallery' }, this.getScrollSide()), _react2.default.createElement('div', { className: this.props.fixedSide, style: this.state.style, ref: 'fixed' }, _react2.default.createElement('a', { href: this.props.url, target: '_self' }, _react2.default.createElement(_Text2.default, { tag: 'div', locale: this.props.locale, sel: 'section-title', translate: this.props.title })), _react2.default.createElement(_Text2.default, { tag: 'p', locale: this.props.locale, sel: 'section-description', translate: this.props.description }), _react2.default.createElement('div', { className: 'section-tags' }, this.props.tags.map(function (tag) {
+	      if (window.isMobile()) return _react2.default.createElement('section', { id: this.props.name }, _react2.default.createElement('div', { ref: 'gallery' }), _react2.default.createElement('div', { ref: 'fixed' }, _react2.default.createElement('a', { href: this.props.url, target: '_self' }, _react2.default.createElement(_Text2.default, { tag: 'div', locale: this.props.locale, sel: 'section-title', translate: this.props.title })), _react2.default.createElement(_Text2.default, { tag: 'p', locale: this.props.locale, sel: 'section-description', translate: this.props.description }), _react2.default.createElement('div', { className: 'section-tags' }, this.props.tags.map(function (tag) {
+	        return _react2.default.createElement(_Text2.default, { tag: 'div', locale: _this3.props.locale, key: tag, translate: tag });
+	      })), this.props.icons ? this.props.icons.map(function (icon, index) {
+	        return _react2.default.createElement('a', { href: icon.href, target: '_blank', style: _this3.state.links, key: 'link-' + index }, _react2.default.createElement('img', { className: 'software-logo', height: '50', key: 'icon-' + index, src: icon.img, onLoad: _this3.imageLoaded.bind(_this3) }));
+	      }) : _react2.default.createElement('span', null)));else return _react2.default.createElement('section', { id: this.props.name }, _react2.default.createElement('div', { className: this.props.scrollSide, ref: 'gallery' }, this.getScrollSide()), _react2.default.createElement('div', { className: this.props.fixedSide, style: this.state.style, ref: 'fixed' }, _react2.default.createElement('a', { href: this.props.url, target: '_self' }, _react2.default.createElement(_Text2.default, { tag: 'div', locale: this.props.locale, sel: 'section-title', translate: this.props.title })), _react2.default.createElement(_Text2.default, { tag: 'p', locale: this.props.locale, sel: 'section-description', translate: this.props.description }), _react2.default.createElement('div', { className: 'section-tags' }, this.props.tags.map(function (tag) {
 	        return _react2.default.createElement(_Text2.default, { tag: 'div', locale: _this3.props.locale, key: tag, translate: tag });
 	      })), this.props.icons ? this.props.icons.map(function (icon, index) {
 	        return _react2.default.createElement('a', { href: icon.href, target: '_blank', style: _this3.state.links, key: 'link-' + index }, _react2.default.createElement('img', { className: 'software-logo', height: '50', key: 'icon-' + index, src: icon.img, onLoad: _this3.imageLoaded.bind(_this3) }));
@@ -52351,16 +52393,20 @@
 	      if (typeof window !== 'undefined') {
 	        if (window.isMobile()) {
 	          this.setState({
+	            logo_style: {
+	              top: this.props.route === "/" ? -52 : 10
+	            },
+	            scroll: (0, _jquery2.default)('main').scrollTop(),
 	            style: {
 	              top: (0, _jquery2.default)(window).height() - 48
 	            },
 	            bottom_style: {
-	              bottom: (0, _jquery2.default)(window).height() - 95,
+	              bottom: (0, _jquery2.default)(window).height() - 85,
 	              background: 'white'
-	            },
-	            original_bottom: (0, _jquery2.default)(window).height() - 95
+	            }
 	          });
-	          window.addEventListener('scroll', this.handleScroll.bind(this));
+	          (0, _jquery2.default)('main').on('scroll', this.handleScroll.bind(this));
+	          this.handleScroll();
 	        } else {
 	          this.open();
 	          window.addEventListener('scroll', this.handleScroll.bind(this));
@@ -52387,48 +52433,61 @@
 	  }, {
 	    key: 'styleMobile',
 	    value: function styleMobile() {
-	      var scrolledFromTop = (0, _jquery2.default)(window).scrollTop();
+	      var scrolledFromTop = (0, _jquery2.default)('main').scrollTop();
 	      var windowHeight = (0, _jquery2.default)(window).height();
-	      var bottomOfLinks = windowHeight - 48;
-	      var top = bottomOfLinks - scrolledFromTop;
-	      var factor = 62 / bottomOfLinks;
-	      var converted = scrolledFromTop * factor;
-	      var logoDescended = -52 + converted < 10 ? -52 + converted : 10;
+	      var bottomOfLinks = windowHeight - 85;
+	      var topOfItems = windowHeight - 48;
+	      var top = topOfItems - scrolledFromTop;
+	
 	      if (scrolledFromTop < bottomOfLinks) {
 	        this.setState({
 	          logo_style: {
-	            top: logoDescended
+	            top: scrolledFromTop < bottomOfLinks - 150 && this.props.route === "/" ? -52 : 10
 	          },
 	          style: {
-	            top: top > 79 ? top : 79
+	            top: top > 79 && this.props.route === "/" ? top : 79,
+	            boxShadow: this.props.route === "/" ? 'none' : '0 6px 12px 0 rgba(0,0,0,0.16), 0 4px 12px 0 rgba(0,0,0,0.22)'
 	          },
 	          bottom_style: {
-	            bottom: windowHeight - 95,
+	            bottom: bottomOfLinks,
 	            background: 'white'
 	          }
 	        });
 	      } else if (scrolledFromTop < windowHeight) {
-	        this.setState({
-	          style: {
-	            top: windowHeight - scrolledFromTop
-	          },
-	          bottom_style: {
-	            bottom: bottomOfLinks - (bottomOfLinks - scrolledFromTop),
-	            background: 'white'
-	          }
-	        });
+	        if (scrolledFromTop < this.state.scroll) this.showMobileNav(windowHeight);else {
+	          this.setState({
+	            logo_style: {
+	              top: this.props.route === "/" ? -52 : 10
+	            },
+	            style: {
+	              top: windowHeight - scrolledFromTop,
+	              boxShadow: '0 6px 12px 0 rgba(0,0,0,0.16), 0 4px 12px 0 rgba(0,0,0,0.22)'
+	            },
+	            bottom_style: {
+	              bottom: windowHeight - (windowHeight - scrolledFromTop),
+	              background: 'white'
+	            }
+	          });
+	        }
 	      } else {
 	        this.setState({
 	          logo_style: {
-	            top: 10
+	            top: -52
 	          },
-	          style: this.state.style,
+	          style: {
+	            top: 0,
+	            boxShadow: '0 6px 12px 0 rgba(0,0,0,0.16), 0 4px 12px 0 rgba(0,0,0,0.22)'
+	          },
 	          bottom_style: {
 	            bottom: windowHeight,
 	            background: 'white'
 	          }
 	        });
+	        if (scrolledFromTop < this.state.scroll) this.showMobileNav(windowHeight);
 	      }
+	      this.setState({
+	        scroll: scrolledFromTop
+	      });
 	    }
 	  }, {
 	    key: 'styleDesktop',
@@ -52476,14 +52535,34 @@
 	  }, {
 	    key: 'scrollToTop',
 	    value: function scrollToTop() {
-	      if (this.props.route !== "/") window.location.href = "/";else (0, _jquery2.default)("html, body").animate({
+	      if (this.props.route !== "/") window.location.href = "/";else (0, _jquery2.default)("html, body, main").animate({
 	        scrollTop: 0
 	      }, 500);
 	    }
 	  }, {
+	    key: 'showMobileNav',
+	    value: function showMobileNav(windowHeight) {
+	      var logo_style = {
+	        top: 10
+	      };
+	      var style = {
+	        top: 85,
+	        boxShadow: '0 6px 12px 0 rgba(0,0,0,0.16), 0 4px 12px 0 rgba(0,0,0,0.22)'
+	      };
+	      var bottom_style = {
+	        bottom: windowHeight - 85,
+	        background: 'white'
+	      };
+	      this.setState({
+	        logo_style: logo_style,
+	        bottom_style: bottom_style,
+	        style: style
+	      });
+	    }
+	  }, {
 	    key: 'open',
 	    value: function open() {
-	      if (window.isMobile()) {} else {
+	      if (window.isMobile()) return;else {
 	        var scrolledFromTop = (0, _jquery2.default)(window).scrollTop();
 	        var windowHeight = (0, _jquery2.default)(window).height();
 	        var logo_style = {
@@ -52511,7 +52590,7 @@
 	  }, {
 	    key: 'close',
 	    value: function close() {
-	      if (window.isMobile()) {} else {
+	      if (window.isMobile()) return;else {
 	        var scrolledFromTop = (0, _jquery2.default)(window).scrollTop();
 	        var windowHeight = (0, _jquery2.default)(window).height();
 	        var logo_style = {
@@ -52566,7 +52645,7 @@
 	      return _react2.default.createElement(
 	        'nav',
 	        { className: this.state.class, style: this.state.style, onMouseEnter: this.open.bind(this), onMouseLeave: this.close.bind(this), onMouseMove: this.open.bind(this) },
-	        _react2.default.createElement('img', { src: 'https://s3.amazonaws.com/merciba.com/assets/mercibalogo-sm.svg', className: 'nav-logo color-logo', style: this.state.logo_style, onClick: this.scrollToTop.bind(this), onLoad: this.imageLoaded.bind(this) }),
+	        _react2.default.createElement('img', { src: 'https://s3.amazonaws.com/merciba.com/assets/mercibalogo-sm.svg', className: 'nav-logo color-logo', style: this.state.logo_style, onClick: this.scrollToTop.bind(this), onTouchStart: this.scrollToTop.bind(this), onLoad: this.imageLoaded.bind(this) }),
 	        _react2.default.createElement('img', { src: 'https://s3.amazonaws.com/merciba.com/assets/mercibalogo-sm-bw.svg', className: 'nav-logo', style: this.state.bw_logo_style, onClick: this.scrollToTop.bind(this), onLoad: this.imageLoaded.bind(this) }),
 	        _react2.default.createElement(
 	          'ul',
@@ -52731,7 +52810,35 @@
 	      var _this3 = this;
 	
 	      if (!this.state) return null;
-	      return _react2.default.createElement(
+	      if (window.isMobile()) return _react2.default.createElement(
+	        'section',
+	        { id: this.props.name },
+	        _react2.default.createElement('div', { ref: 'gallery' }),
+	        _react2.default.createElement(
+	          'div',
+	          { ref: 'fixed' },
+	          _react2.default.createElement(
+	            'a',
+	            { href: this.props.url, target: '_self' },
+	            _react2.default.createElement(_Text2.default, { tag: 'div', locale: this.props.locale, sel: 'section-title', translate: this.props.title })
+	          ),
+	          _react2.default.createElement(_Text2.default, { tag: 'p', locale: this.props.locale, sel: 'section-description', translate: this.props.description }),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'section-tags' },
+	            this.props.tags.map(function (tag) {
+	              return _react2.default.createElement(_Text2.default, { tag: 'div', locale: _this3.props.locale, key: tag, translate: tag });
+	            })
+	          ),
+	          this.props.icons ? this.props.icons.map(function (icon, index) {
+	            return _react2.default.createElement(
+	              'a',
+	              { href: icon.href, target: '_blank', style: _this3.state.links, key: 'link-' + index },
+	              _react2.default.createElement('img', { className: 'software-logo', height: '50', key: 'icon-' + index, src: icon.img, onLoad: _this3.imageLoaded.bind(_this3) })
+	            );
+	          }) : _react2.default.createElement('span', null)
+	        )
+	      );else return _react2.default.createElement(
 	        'section',
 	        { id: this.props.name },
 	        _react2.default.createElement(

@@ -90,7 +90,22 @@ class Project extends React.Component {
 
   render() {
     if (!this.state) return null;
-    return (
+    if (window.isMobile()) return (
+      <section id={this.props.name} >
+        <div ref="gallery">
+
+        </div>
+        <div ref="fixed">
+          <a href={this.props.url} target="_self" ><Text tag="div" locale={this.props.locale} sel="section-title" translate={this.props.title}/></a>
+          <Text tag="p" locale={this.props.locale} sel="section-description" translate={this.props.description}/>
+          <div className="section-tags">
+            {this.props.tags.map((tag) => <Text tag="div" locale={this.props.locale} key={tag} translate={tag}/>)}
+          </div>
+          {this.props.icons ? this.props.icons.map((icon, index) => <a href={icon.href} target="_blank" style={this.state.links} key={`link-${index}`}><img className="software-logo" height="50" key={`icon-${index}`} src={icon.img} onLoad={this.imageLoaded.bind(this)}/></a>) : <span></span>}
+        </div>
+      </section>
+    )
+    else return (
       <section id={this.props.name} >
         <div className={this.props.scrollSide} ref="gallery">
           {this.getScrollSide()}

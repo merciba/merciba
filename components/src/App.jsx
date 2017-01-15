@@ -16,7 +16,7 @@ class App extends React.Component {
     render() {
       if (!this.state) return null;
       return (
-        <main role="main" ref="gallery">
+        <main role="main" ref="gallery" data-enhance={window.isMobile()} style={window.isMobile() ? {height:  $(window).height()} : null}>
           <div className="spinner" style={this.state.loading ? { display: 'block', position: 'fixed' } : { display: 'none' }}></div>
           {this.getNavbar()}
           {this.getLanding()}
@@ -82,6 +82,7 @@ class App extends React.Component {
         else {
           $('html, body, #app').css('height', $(document).height())
           $('footer').show()
+          $('.ui-page-theme-a').removeClass('ui-page-theme-a')
         }
       })
     }
