@@ -38,6 +38,7 @@ class App extends React.Component {
         getLocale()
           .then((locale) => {
             if (window.isMobile()) {
+              window.onorientationchange = () => (window.orientation === 0) ? window.location.reload() : null
               this.setState({
                 locale,
                 loading: true
@@ -82,7 +83,6 @@ class App extends React.Component {
           $('#main-logo').css({
             margin: `${(($(window).height() - $('#main-logo').height()) / 4) + 30}px 10%`
           })
-          //$('.slick-slider, .slick-list, .slick-track, .slick-slide').css({ height: $(window).height() })
         }
         else {
           $('html, body, #app').css('height', $(document).height())
