@@ -18,6 +18,9 @@ class App extends React.Component {
       return (
         <main role="main" ref="gallery" data-enhance={window.isMobile()} style={window.isMobile() ? {height:  $(window).height()} : null}>
           <div className="spinner" style={this.state.loading ? { display: 'block', position: 'fixed' } : { display: 'none' }}></div>
+          <div className="changeOrientation">
+            <div>Landscape orientation is not supported. Please rotate your device back to portrait mode.</div>
+          </div>
           {this.getNavbar()}
           {this.getLanding()}
           {this.getProjects()}
@@ -74,10 +77,12 @@ class App extends React.Component {
     loaded() {
       setTimeout(() => {
         if (window.isMobile()) {
+          $('html, body, #app, main').css('height', $(window).height())
           $(this.refs.navbar).data('position', 'fixed')
           $('#main-logo').css({
             margin: `${(($(window).height() - $('#main-logo').height()) / 4) + 30}px 10%`
           })
+          //$('.slick-slider, .slick-list, .slick-track, .slick-slide').css({ height: $(window).height() })
         }
         else {
           $('html, body, #app').css('height', $(document).height())

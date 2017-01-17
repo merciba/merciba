@@ -104,6 +104,7 @@
     height: 48px;
     background: white;
     –webkit-transform: tranzlateZ(0);
+    z-index: 5;
   }
 
   #nav-items, #nav-links {

@@ -41,7 +41,7 @@ class About extends React.Component {
         style: { top: '20%', opacity: 0 },
         img1: this.props.page3.img1,
         img2: this.props.page3.img2,
-        img2Style: { position: 'absolute', top: 48, opacity: 0 }
+        img2Style: { position: 'absolute', top: '20%', opacity: 0 }
       }
     }
     else {
@@ -49,7 +49,7 @@ class About extends React.Component {
         style: { top: '20%', opacity: 1 },
         img1: this.props.page3.img1,
         img2: this.props.page3.img2,
-        img2Style: { position: 'absolute', top: 48, opacity: 1 }
+        img2Style: { position: 'absolute', top: '20%', opacity: 1 }
       }
     }
   }

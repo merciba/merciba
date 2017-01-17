@@ -124,6 +124,10 @@
     height: 100%;
   }
 
+  .changeOrientation {
+    display: none;
+  }
+
   .card {
     position: relative;
   }
@@ -207,7 +211,187 @@
   .logo-container {
     height: 100%;
     width: 100%;
-    padding: 20% 10%;
+    padding: 20% 10% 0 10%;
     background: white;
+  }
+
+  .projects-container {
+    background: white;
+    padding: 24px 0;
+  }
+
+  section {
+    margin: 48px 0;
+  }
+
+  .section-title {
+    font-family: Karla;
+    font-size: 35px;
+    font-weight: bold;
+    line-height: 41px;
+    color: #3A4045;
+    margin: 125px 24px 12px 24px;
+    max-width: 90%;
+  }
+
+  .section-description {
+    font-family: Karla;
+    font-size: 16px;
+    line-height: 24px;
+    color: #3A4045;
+    margin: 12px 24px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #9B9EA2;
+    max-width: 90%;
+  }
+
+  .section-tags {
+    font-size: 13px;
+    font-weight: bold;
+    line-height: 20px;
+    color: #9B9EA2;
+    margin: 12px 24px 48px 24px;
+    text-transform: uppercase;
+  }
+
+  .slick-slider {
+    margin-top: 12px;
+  }
+
+  .slick-dots {
+    list-style-type: none;
+    text-align: center;
+    padding: 0;
+  }
+
+  .slick-track {
+    margin: 0 14%;
+  }
+
+  .slide {
+    width: 100%;
+    display: inline-block;
+  }
+
+  .slide img {
+    width: 66%;
+    margin: auto;
+    float: none;
+  }
+
+  .slick-dots li {
+    width: 15px;
+    height: 15px;
+    background: white;
+    border: 1px solid #3A4045;
+    border-radius: 15px;
+    display: inline-block;
+    margin: 5px 10px;
+  }
+
+  .slick-dots .slick-active {
+    background: #3A4045;
+  }
+
+  .slick-dots li button {
+    opacity: 0;
+    width: 15px;
+    height: 15px;
+  }
+
+  .spinner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    background: white url('http://sites.jamanetwork.com/help/images/spinner-transparent.gif') no-repeat;
+    background-size: 50px 50px;
+    background-position: 50%;
+    width: 100%;
+    height: 100%;
+  }
+
+  .changeOrientation {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    background: white;
+    width: 100%;
+    height: 100%;
+  }
+
+  .changeOrientation div {
+    padding-top: 20%;
+    width: 60%;
+    height: 200px;
+    float: none;
+    margin: auto;
+  }
+
+  .card {
+    width: 86%;
+    margin: 24px;
+    position: relative;
+  }
+
+  .card div {
+    position: absolute;
+    font-weight: bold;
+    text-align: center;
+    color: #FFFFFF;
+  }
+
+  .card img {
+    width: 100%;
+    min-height: 270px;
+    margin: auto;
+    float: none;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.16), 0 4px 12px 0 rgba(0,0,0,0.22);
+    border-radius: 2px;
+  }
+
+  .card .card-title {
+    text-transform: uppercase;
+    top: 0;
+    width: 100%;
+    margin: 24px 0;
+    font-size: 22px;
+    line-height: 26px;
+  }
+
+  .card .card-description {
+    position: absolute;
+    top: 68px;
+    width: 80%;
+    margin: 0 30px;
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  .card .card-link {
+    text-transform: uppercase;
+    z-index: 1;
+    bottom: 0;
+    width: 100%;
+    margin: 24px 0;
+  }
+
+  .software-logo {
+    margin: 10px;
+  }
+}
+
+@media (max-width:1400px) and (orientation : landscape) {
+  .changeOrientation {
+    display: block;
+  }
+  main {
+    display: hidden;
+    -webkit-overflow-scrolling: none;
+  }
+  nav, article {
+    display: none;
   }
 }

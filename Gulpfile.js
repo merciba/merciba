@@ -16,7 +16,8 @@ stats(gulp);
 
 gulp.task('browser-sync', function() {
     browserSync.init({
-        proxy: "http://localhost:5000"
+        proxy: "http://localhost:5000",
+        tunnel: true
     });
 });
 
@@ -24,7 +25,7 @@ gulp.task('watch', function () {
 	gulp.watch(['components/src/**/*.jsx', 'views/**/*.pug'], function () {
 		runSequence('build', 'server');
 	})
-	gulp.watch(['server.js', 'routes/**/*.js', 'controllers/**/*.js'], ['server'])
+	gulp.watch(['server.js', 'routes/**/*.js', 'controllers/**/*.js', 'public/styles/**/*.css'], ['server'])
 	gulp.watch(['client.js'], ['webpack'])
 });
 
