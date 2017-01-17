@@ -9,8 +9,14 @@ class About extends React.Component {
 
   componentDidMount() {
     if (typeof window !== 'undefined') {
-      window.addEventListener('scroll', this.handleScroll.bind(this));
-      this.handleScroll()
+      if (window.isMobile()) {
+        $('main').on('scroll', this.handleScroll.bind(this));
+        this.handleScroll()
+      }
+      else {
+        window.addEventListener('scroll', this.handleScroll.bind(this));
+        this.handleScroll()
+      }
     }
   }
 
@@ -31,25 +37,40 @@ class About extends React.Component {
   }
 
   renderPage1({ pos, breakpoint }) {
-    if (pos > breakpoint) return { opacity: 0 }
-    else return { opacity: 1 }
+    if (window.isMobile()) {
+      return { opacity: 1 }
+    }
+    else {
+      if (pos > breakpoint) return { opacity: 0 }
+      else return { opacity: 1 }
+    }
   }
 
   renderPage3({ pos, start }) {
-    if ((pos === 0) || (pos < start)) {
+    if (window.isMobile()) {
       return {
-        style: { top: '20%', opacity: 0 },
+        style: { opacity: 1 },
         img1: this.props.page3.img1,
         img2: this.props.page3.img2,
-        img2Style: { position: 'absolute', top: '20%', opacity: 0 }
+        img2Style: { opacity: 1 }
       }
     }
     else {
-      return {
-        style: { top: '20%', opacity: 1 },
-        img1: this.props.page3.img1,
-        img2: this.props.page3.img2,
-        img2Style: { position: 'absolute', top: '20%', opacity: 1 }
+      if ((pos === 0) || (pos < start)) {
+        return {
+          style: { top: '20%', opacity: 0 },
+          img1: this.props.page3.img1,
+          img2: this.props.page3.img2,
+          img2Style: { position: 'absolute', top: '20%', opacity: 0 }
+        }
+      }
+      else {
+        return {
+          style: { top: '20%', opacity: 1 },
+          img1: this.props.page3.img1,
+          img2: this.props.page3.img2,
+          img2Style: { position: 'absolute', top: '20%', opacity: 1 }
+        }
       }
     }
   }
