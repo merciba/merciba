@@ -255,7 +255,7 @@ class App extends React.Component {
             description="ABOUT.PAGE_1.DESCRIPTION"
             cols={[
               {
-                img: "http://static.101smart.com/01/Images/image-placeholder-alt.jpg",
+                img: "https://s3.amazonaws.com/merciba.com/assets/about/about-design.gif",
                 title: "ABOUT.PAGE_2.LEFT.TITLE",
                 items: [
                   "ABOUT.PAGE_2.LEFT.DESCRIPTION.BRANDING_ID",
@@ -268,7 +268,7 @@ class App extends React.Component {
                 ]
               },
               {
-                img: "http://static.101smart.com/01/Images/image-placeholder-alt.jpg",
+                img: "https://s3.amazonaws.com/merciba.com/assets/about/about-tech.gif",
                 title: "ABOUT.PAGE_2.MIDDLE.TITLE",
                 items: [
                   "ABOUT.PAGE_2.MIDDLE.DESCRIPTION.HTML_CSS",
@@ -281,7 +281,7 @@ class App extends React.Component {
                 ]
               },
               {
-                img: "http://static.101smart.com/01/Images/image-placeholder-alt.jpg",
+                img: "https://s3.amazonaws.com/merciba.com/assets/about/about-strategy.gif",
                 title: "ABOUT.PAGE_2.RIGHT.TITLE",
                 items: [
                   "ABOUT.PAGE_2.RIGHT.DESCRIPTION.MKTG_STRATEGY",

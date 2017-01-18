@@ -52,7 +52,7 @@
 	"ABOUT": {
 		"PAGE_1": {
 			"TITLE": "At Merciba, we think big while considering the smallest of details.",
-			"DESCRIPTION": "Merciba is a fully equipped boutique digital agency. We’re fresh on the scene and stay on the cutting edge of design trends and tech. We work closely with our clients and partners to understand their story and audience. We believe in combining empathy with well-documented research and data. Efficiency and measurable results are key. We help our clients identify redundancies, automate, and organize to mitigate technical debt, brand inconsistency and missed marketing opportunities.",
+			"DESCRIPTION": "Merciba is a fully equipped boutique digital agency. We’re fresh on the scene and stay on the cutting edge of design trends and tech.<br><br> We work closely with our clients and partners to understand their story and audience. We believe in combining empathy with well-documented research and data, and for us, efficiency and measurable results are key. We help our clients identify redundancies, automate, and organize to mitigate technical debt, brand inconsistency and missed marketing opportunities.",
 			"CARDS": {
 				"CARD_1": {
 					"TITLE": "Iterative",
@@ -108,7 +108,7 @@
 		},
 		"PAGE_3": {
 			"TITLE": "About Us",
-			"DESCRIPTION": "First things first, we’re sure you’re wondering about the name. It’s pronounced 'mer-SEE-ba' - a mash-up of the word 'thank you' in the languages of our two founders: 'merci' in French and 'spasiba' (spelled phonetically) in Russian. Merciba was founded by Alfonso Gober - a Haitian-American web and microservices developer - and Sofia Falcon - an Armenian-American UI/UX/print designer - in 2015. We are based out of Brooklyn, NY, but our clients are all over the world. We came together to harmonize our individual skillsets into a one-stop-shop for the clients and partners we want to work with. Merciba has a special interest in working with marginalized and under-served communities and the organizations that serve them. In this spirit, we offer sliding-scale pricing. We have experience partnering with non-profits, start-ups, small businesses, and individual artists and entrepreneurs."
+			"DESCRIPTION": "First, we’re sure you’re wondering about the name.<br><br> It’s pronounced mer-<i>SEE</i>-ba - a mash-up of the word 'thank you' in the languages of our two founders: 'merci' in French and 'spasiba' (spelled phonetically) in Russian. Merciba was founded by Alfonso Gober - a Haitian-American web and microservices developer - and Sofia Falcon - an Armenian-American UI/UX/print designer - in 2015. We are based out of Brooklyn, NY, but our clients are all over the world. We came together to harmonize our individual skillsets into a one-stop-shop for the clients and partners we want to work with. Merciba has a special interest in working with marginalized and under-served communities and the organizations that serve them. In this spirit, we offer sliding-scale pricing. We have experience partnering with non-profits, start-ups, small businesses, and individual artists and entrepreneurs."
 		}
 	},
 	"CONTACT": {

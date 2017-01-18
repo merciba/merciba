@@ -10955,17 +10955,6 @@
 	  }
 	};
 	
-	var fiveArgumentPooler = function (a1, a2, a3, a4, a5) {
-	  var Klass = this;
-	  if (Klass.instancePool.length) {
-	    var instance = Klass.instancePool.pop();
-	    Klass.call(instance, a1, a2, a3, a4, a5);
-	    return instance;
-	  } else {
-	    return new Klass(a1, a2, a3, a4, a5);
-	  }
-	};
-	
 	var standardReleaser = function (instance) {
 	  var Klass = this;
 	  !(instance instanceof Klass) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'Trying to release an instance into a pool of a different type.') : _prodInvariant('25') : void 0;
@@ -11005,8 +10994,7 @@
 	  oneArgumentPooler: oneArgumentPooler,
 	  twoArgumentPooler: twoArgumentPooler,
 	  threeArgumentPooler: threeArgumentPooler,
-	  fourArgumentPooler: fourArgumentPooler,
-	  fiveArgumentPooler: fiveArgumentPooler
+	  fourArgumentPooler: fourArgumentPooler
 	};
 	
 	module.exports = PooledClass;
@@ -13346,7 +13334,14 @@
 	    // We warn in this case but don't throw. We expect the element creation to
 	    // succeed and there will likely be errors in render.
 	    if (!validType) {
-	      process.env.NODE_ENV !== 'production' ? warning(false, 'React.createElement: type should not be null, undefined, boolean, or ' + 'number. It should be a string (for DOM elements) or a ReactClass ' + '(for composite components).%s', getDeclarationErrorAddendum()) : void 0;
+	      if (typeof type !== 'function' && typeof type !== 'string') {
+	        var info = '';
+	        if (type === undefined || typeof type === 'object' && type !== null && Object.keys(type).length === 0) {
+	          info += ' You likely forgot to export your component from the file ' + 'it\'s defined in.';
+	        }
+	        info += getDeclarationErrorAddendum();
+	        process.env.NODE_ENV !== 'production' ? warning(false, 'React.createElement: type is invalid -- expected a string (for ' + 'built-in components) or a class/function (for composite ' + 'components) but got: %s.%s', type == null ? type : typeof type, info) : void 0;
+	      }
 	    }
 	
 	    var element = ReactElement.createElement.apply(this, arguments);
@@ -14317,7 +14312,7 @@
 	
 	'use strict';
 	
-	module.exports = '15.4.1';
+	module.exports = '15.4.2';
 
 /***/ },
 /* 32 */
@@ -14516,6 +14511,13 @@
 	var internalInstanceKey = '__reactInternalInstance$' + Math.random().toString(36).slice(2);
 	
 	/**
+	 * Check if a given node should be cached.
+	 */
+	function shouldPrecacheNode(node, nodeID) {
+	  return node.nodeType === 1 && node.getAttribute(ATTR_NAME) === String(nodeID) || node.nodeType === 8 && node.nodeValue === ' react-text: ' + nodeID + ' ' || node.nodeType === 8 && node.nodeValue === ' react-empty: ' + nodeID + ' ';
+	}
+	
+	/**
 	 * Drill down (through composites and empty components) until we get a host or
 	 * host text component.
 	 *
@@ -14580,7 +14582,7 @@
 	    }
 	    // We assume the child nodes are in the same order as the child instances.
 	    for (; childNode !== null; childNode = childNode.nextSibling) {
-	      if (childNode.nodeType === 1 && childNode.getAttribute(ATTR_NAME) === String(childID) || childNode.nodeType === 8 && childNode.nodeValue === ' react-text: ' + childID + ' ' || childNode.nodeType === 8 && childNode.nodeValue === ' react-empty: ' + childID + ' ') {
+	      if (shouldPrecacheNode(childNode, childID)) {
 	        precacheNode(childInst, childNode);
 	        continue outer;
 	      }
@@ -16821,17 +16823,6 @@
 	  }
 	};
 	
-	var fiveArgumentPooler = function (a1, a2, a3, a4, a5) {
-	  var Klass = this;
-	  if (Klass.instancePool.length) {
-	    var instance = Klass.instancePool.pop();
-	    Klass.call(instance, a1, a2, a3, a4, a5);
-	    return instance;
-	  } else {
-	    return new Klass(a1, a2, a3, a4, a5);
-	  }
-	};
-	
 	var standardReleaser = function (instance) {
 	  var Klass = this;
 	  !(instance instanceof Klass) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'Trying to release an instance into a pool of a different type.') : _prodInvariant('25') : void 0;
@@ -16871,8 +16862,7 @@
 	  oneArgumentPooler: oneArgumentPooler,
 	  twoArgumentPooler: twoArgumentPooler,
 	  threeArgumentPooler: threeArgumentPooler,
-	  fourArgumentPooler: fourArgumentPooler,
-	  fiveArgumentPooler: fiveArgumentPooler
+	  fourArgumentPooler: fourArgumentPooler
 	};
 	
 	module.exports = PooledClass;
@@ -21690,12 +21680,18 @@
 	    } else {
 	      var contentToUse = CONTENT_TYPES[typeof props.children] ? props.children : null;
 	      var childrenToUse = contentToUse != null ? null : props.children;
+	      // TODO: Validate that text is allowed as a child of this node
 	      if (contentToUse != null) {
-	        // TODO: Validate that text is allowed as a child of this node
-	        if (process.env.NODE_ENV !== 'production') {
-	          setAndValidateContentChildDev.call(this, contentToUse);
+	        // Avoid setting textContent when the text is empty. In IE11 setting
+	        // textContent on a text area will cause the placeholder to not
+	        // show within the textarea until it has been focused and blurred again.
+	        // https://github.com/facebook/react/issues/6731#issuecomment-254874553
+	        if (contentToUse !== '') {
+	          if (process.env.NODE_ENV !== 'production') {
+	            setAndValidateContentChildDev.call(this, contentToUse);
+	          }
+	          DOMLazyTree.queueText(lazyTree, contentToUse);
 	        }
-	        DOMLazyTree.queueText(lazyTree, contentToUse);
 	      } else if (childrenToUse != null) {
 	        var mountImages = this.mountChildren(childrenToUse, transaction, context);
 	        for (var i = 0; i < mountImages.length; i++) {
@@ -23615,7 +23611,17 @@
 	      }
 	    } else {
 	      if (props.value == null && props.defaultValue != null) {
-	        node.defaultValue = '' + props.defaultValue;
+	        // In Chrome, assigning defaultValue to certain input types triggers input validation.
+	        // For number inputs, the display value loses trailing decimal points. For email inputs,
+	        // Chrome raises "The specified value <x> is not a valid email address".
+	        //
+	        // Here we check to see if the defaultValue has actually changed, avoiding these problems
+	        // when the user is inputting text
+	        //
+	        // https://github.com/facebook/react/issues/7253
+	        if (node.defaultValue !== '' + props.defaultValue) {
+	          node.defaultValue = '' + props.defaultValue;
+	        }
 	      }
 	      if (props.checked == null && props.defaultChecked != null) {
 	        node.defaultChecked = !!props.defaultChecked;
@@ -24362,9 +24368,15 @@
 	    // This is in postMount because we need access to the DOM node, which is not
 	    // available until after the component has mounted.
 	    var node = ReactDOMComponentTree.getNodeFromInstance(inst);
+	    var textContent = node.textContent;
 	
-	    // Warning: node.value may be the empty string at this point (IE11) if placeholder is set.
-	    node.value = node.textContent; // Detach value from defaultValue
+	    // Only set node.value if textContent is equal to the expected
+	    // initial value. In IE10/IE11 there is a bug where the placeholder attribute
+	    // will populate textContent as well.
+	    // https://developer.microsoft.com/microsoft-edge/platform/issues/101525/
+	    if (textContent === inst._wrapperState.initialValue) {
+	      node.value = textContent;
+	    }
 	  }
 	};
 	
@@ -25166,7 +25178,17 @@
 	    instance = ReactEmptyComponent.create(instantiateReactComponent);
 	  } else if (typeof node === 'object') {
 	    var element = node;
-	    !(element && (typeof element.type === 'function' || typeof element.type === 'string')) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'Element type is invalid: expected a string (for built-in components) or a class/function (for composite components) but got: %s.%s', element.type == null ? element.type : typeof element.type, getDeclarationErrorAddendum(element._owner)) : _prodInvariant('130', element.type == null ? element.type : typeof element.type, getDeclarationErrorAddendum(element._owner)) : void 0;
+	    var type = element.type;
+	    if (typeof type !== 'function' && typeof type !== 'string') {
+	      var info = '';
+	      if (process.env.NODE_ENV !== 'production') {
+	        if (type === undefined || typeof type === 'object' && type !== null && Object.keys(type).length === 0) {
+	          info += ' You likely forgot to export your component from the file ' + 'it\'s defined in.';
+	        }
+	      }
+	      info += getDeclarationErrorAddendum(element._owner);
+	       true ? process.env.NODE_ENV !== 'production' ? invariant(false, 'Element type is invalid: expected a string (for built-in components) or a class/function (for composite components) but got: %s.%s', type == null ? type : typeof type, info) : _prodInvariant('130', type == null ? type : typeof type, info) : void 0;
+	    }
 	
 	    // Special case string values
 	    if (typeof element.type === 'string') {
@@ -25456,7 +25478,7 @@
 	      // Since plain JS classes are defined without any special initialization
 	      // logic, we can not catch common errors early. Therefore, we have to
 	      // catch them here, at initialization time, instead.
-	      process.env.NODE_ENV !== 'production' ? warning(!inst.getInitialState || inst.getInitialState.isReactClassApproved, 'getInitialState was defined on %s, a plain JavaScript class. ' + 'This is only supported for classes created using React.createClass. ' + 'Did you mean to define a state property instead?', this.getName() || 'a component') : void 0;
+	      process.env.NODE_ENV !== 'production' ? warning(!inst.getInitialState || inst.getInitialState.isReactClassApproved || inst.state, 'getInitialState was defined on %s, a plain JavaScript class. ' + 'This is only supported for classes created using React.createClass. ' + 'Did you mean to define a state property instead?', this.getName() || 'a component') : void 0;
 	      process.env.NODE_ENV !== 'production' ? warning(!inst.getDefaultProps || inst.getDefaultProps.isReactClassApproved, 'getDefaultProps was defined on %s, a plain JavaScript class. ' + 'This is only supported for classes created using React.createClass. ' + 'Use a static property to define defaultProps instead.', this.getName() || 'a component') : void 0;
 	      process.env.NODE_ENV !== 'production' ? warning(!inst.propTypes, 'propTypes was defined as an instance property on %s. Use a static ' + 'property to define propTypes instead.', this.getName() || 'a component') : void 0;
 	      process.env.NODE_ENV !== 'production' ? warning(!inst.contextTypes, 'contextTypes was defined as an instance property on %s. Use a ' + 'static property to define contextTypes instead.', this.getName() || 'a component') : void 0;
@@ -26460,14 +26482,11 @@
 	
 	'use strict';
 	
-	var _prodInvariant = __webpack_require__(36),
-	    _assign = __webpack_require__(5);
+	var _prodInvariant = __webpack_require__(36);
 	
 	var invariant = __webpack_require__(9);
 	
 	var genericComponentClass = null;
-	// This registry keeps track of wrapper classes around host tags.
-	var tagToComponentClass = {};
 	var textComponentClass = null;
 	
 	var ReactHostComponentInjection = {
@@ -26480,11 +26499,6 @@
 	  // rendered as props.
 	  injectTextComponentClass: function (componentClass) {
 	    textComponentClass = componentClass;
-	  },
-	  // This accepts a keyed object with classes as values. Each key represents a
-	  // tag. That particular tag will use this class instead of the generic one.
-	  injectComponentClasses: function (componentClasses) {
-	    _assign(tagToComponentClass, componentClasses);
 	  }
 	};
 	
@@ -31339,7 +31353,7 @@
 	
 	'use strict';
 	
-	module.exports = '15.4.1';
+	module.exports = '15.4.2';
 
 /***/ },
 /* 173 */
@@ -32007,15 +32021,15 @@
 	            title: 'ABOUT.PAGE_1.TITLE',
 	            description: 'ABOUT.PAGE_1.DESCRIPTION',
 	            cols: [{
-	              img: "http://static.101smart.com/01/Images/image-placeholder-alt.jpg",
+	              img: "https://s3.amazonaws.com/merciba.com/assets/about/about-design.gif",
 	              title: "ABOUT.PAGE_2.LEFT.TITLE",
 	              items: ["ABOUT.PAGE_2.LEFT.DESCRIPTION.BRANDING_ID", "ABOUT.PAGE_2.LEFT.DESCRIPTION.WIREFRAMING", "ABOUT.PAGE_2.LEFT.DESCRIPTION.UI_DSGN", "ABOUT.PAGE_2.LEFT.DESCRIPTION.PRD_DSGN", "ABOUT.PAGE_2.LEFT.DESCRIPTION.CPGN_CREATIVE", "ABOUT.PAGE_2.LEFT.DESCRIPTION.ART_DIR", "ABOUT.PAGE_2.LEFT.DESCRIPTION.BRANDED_DIGITAL"]
 	            }, {
-	              img: "http://static.101smart.com/01/Images/image-placeholder-alt.jpg",
+	              img: "https://s3.amazonaws.com/merciba.com/assets/about/about-tech.gif",
 	              title: "ABOUT.PAGE_2.MIDDLE.TITLE",
 	              items: ["ABOUT.PAGE_2.MIDDLE.DESCRIPTION.HTML_CSS", "ABOUT.PAGE_2.MIDDLE.DESCRIPTION.JS_NODE", "ABOUT.PAGE_2.MIDDLE.DESCRIPTION.NATIVE", "ABOUT.PAGE_2.MIDDLE.DESCRIPTION.SERVER_SIDE_ENG", "ABOUT.PAGE_2.MIDDLE.DESCRIPTION.CMS_PLATFORM", "ABOUT.PAGE_2.MIDDLE.DESCRIPTION.SEO", "ABOUT.PAGE_2.MIDDLE.DESCRIPTION.TRNG_CONSULT"]
 	            }, {
-	              img: "http://static.101smart.com/01/Images/image-placeholder-alt.jpg",
+	              img: "https://s3.amazonaws.com/merciba.com/assets/about/about-strategy.gif",
 	              title: "ABOUT.PAGE_2.RIGHT.TITLE",
 	              items: ["ABOUT.PAGE_2.RIGHT.DESCRIPTION.MKTG_STRATEGY", "ABOUT.PAGE_2.RIGHT.DESCRIPTION.SM_STRATEGY", "ABOUT.PAGE_2.RIGHT.DESCRIPTION.PM", "ABOUT.PAGE_2.RIGHT.DESCRIPTION.USR_ANALYTICS", "ABOUT.PAGE_2.RIGHT.DESCRIPTION.USR_PERSONA", "ABOUT.PAGE_2.RIGHT.DESCRIPTION.BRAND_STRATEGY", "ABOUT.PAGE_2.RIGHT.DESCRIPTION.IN_HOUSE_TRNG"]
 	            }],
@@ -38465,7 +38479,7 @@
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      if (!this.state) return null;else if (this.props.tag === 'p') return _react2.default.createElement('p', { className: this.props.sel ? this.props.sel : "translated" }, this.state.translation);else if (this.props.tag === 'div') return _react2.default.createElement('div', { className: this.props.sel ? this.props.sel : "translated" }, this.state.translation);else if (this.props.tag === 'span') return _react2.default.createElement('span', { className: this.props.sel ? this.props.sel : "translated" }, this.state.translation);else if (this.props.tag === 'h1') return _react2.default.createElement('h1', { className: this.props.sel ? this.props.sel : "translated" }, this.state.translation);else if (this.props.tag === 'h2') return _react2.default.createElement('h2', { className: this.props.sel ? this.props.sel : "translated" }, this.state.translation);else if (this.props.tag === 'h3') return _react2.default.createElement('h3', { className: this.props.sel ? this.props.sel : "translated" }, this.state.translation);else return _react2.default.createElement('p', { className: this.props.sel ? this.props.sel : "translated" }, this.state.translation);
+	      if (!this.state) return null;else if (this.props.tag === 'p') return _react2.default.createElement('p', { className: this.props.sel ? this.props.sel : "translated", dangerouslySetInnerHTML: { __html: this.state.translation } });else if (this.props.tag === 'div') return _react2.default.createElement('div', { className: this.props.sel ? this.props.sel : "translated", dangerouslySetInnerHTML: { __html: this.state.translation } });else if (this.props.tag === 'span') return _react2.default.createElement('span', { className: this.props.sel ? this.props.sel : "translated", dangerouslySetInnerHTML: { __html: this.state.translation } });else if (this.props.tag === 'h1') return _react2.default.createElement('h1', { className: this.props.sel ? this.props.sel : "translated", dangerouslySetInnerHTML: { __html: this.state.translation } });else if (this.props.tag === 'h2') return _react2.default.createElement('h2', { className: this.props.sel ? this.props.sel : "translated", dangerouslySetInnerHTML: { __html: this.state.translation } });else if (this.props.tag === 'h3') return _react2.default.createElement('h3', { className: this.props.sel ? this.props.sel : "translated", dangerouslySetInnerHTML: { __html: this.state.translation } });else return _react2.default.createElement('p', { className: this.props.sel ? this.props.sel : "translated", dangerouslySetInnerHTML: { __html: this.state.translation } });
 	    }
 	  }]);
 	
@@ -41091,7 +41105,9 @@
 	  }, {
 	    key: 'renderPage3',
 	    value: function renderPage3() {
-	      return _react2.default.createElement('div', { className: 'about-page-3', ref: 'page3' }, _react2.default.createElement('div', { className: 'section-scroll right', style: this.renderScrollContainer() }, _react2.default.createElement('img', {
+	      if (window.isMobile()) return _react2.default.createElement('div', { className: 'about-page-3', ref: 'page3' }, _react2.default.createElement('div', { ref: 'fixed' }, _react2.default.createElement(_Text2.default, { tag: 'div', locale: this.props.locale, sel: 'section-title', translate: this.props.page3.title }), _react2.default.createElement(_Text2.default, { tag: 'p', locale: this.props.locale, sel: 'section-description', translate: this.props.page3.description })), _react2.default.createElement('div', null, _react2.default.createElement('img', {
+	        src: this.props.page3.img2,
+	        onLoad: this.imageLoaded.bind(this) })));else return _react2.default.createElement('div', { className: 'about-page-3', ref: 'page3' }, _react2.default.createElement('div', { className: 'section-scroll right', style: this.renderScrollContainer() }, _react2.default.createElement('img', {
 	        style: { position: 'absolute', top: '40%' },
 	        src: this.props.page3.img1,
 	        onLoad: this.imageLoaded.bind(this) }), _react2.default.createElement('img', {
@@ -54400,7 +54416,23 @@
 	  }, {
 	    key: 'renderPage3',
 	    value: function renderPage3() {
-	      return _react2.default.createElement(
+	      if (window.isMobile()) return _react2.default.createElement(
+	        'div',
+	        { className: 'about-page-3', ref: 'page3' },
+	        _react2.default.createElement(
+	          'div',
+	          { ref: 'fixed' },
+	          _react2.default.createElement(_Text2.default, { tag: 'div', locale: this.props.locale, sel: 'section-title', translate: this.props.page3.title }),
+	          _react2.default.createElement(_Text2.default, { tag: 'p', locale: this.props.locale, sel: 'section-description', translate: this.props.page3.description })
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          null,
+	          _react2.default.createElement('img', {
+	            src: this.props.page3.img2,
+	            onLoad: this.imageLoaded.bind(this) })
+	        )
+	      );else return _react2.default.createElement(
 	        'div',
 	        { className: 'about-page-3', ref: 'page3' },
 	        _react2.default.createElement(
@@ -55343,35 +55375,7 @@
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      if (!this.state) return null;else if (this.props.tag === 'p') return _react2.default.createElement(
-	        'p',
-	        { className: this.props.sel ? this.props.sel : "translated" },
-	        this.state.translation
-	      );else if (this.props.tag === 'div') return _react2.default.createElement(
-	        'div',
-	        { className: this.props.sel ? this.props.sel : "translated" },
-	        this.state.translation
-	      );else if (this.props.tag === 'span') return _react2.default.createElement(
-	        'span',
-	        { className: this.props.sel ? this.props.sel : "translated" },
-	        this.state.translation
-	      );else if (this.props.tag === 'h1') return _react2.default.createElement(
-	        'h1',
-	        { className: this.props.sel ? this.props.sel : "translated" },
-	        this.state.translation
-	      );else if (this.props.tag === 'h2') return _react2.default.createElement(
-	        'h2',
-	        { className: this.props.sel ? this.props.sel : "translated" },
-	        this.state.translation
-	      );else if (this.props.tag === 'h3') return _react2.default.createElement(
-	        'h3',
-	        { className: this.props.sel ? this.props.sel : "translated" },
-	        this.state.translation
-	      );else return _react2.default.createElement(
-	        'p',
-	        { className: this.props.sel ? this.props.sel : "translated" },
-	        this.state.translation
-	      );
+	      if (!this.state) return null;else if (this.props.tag === 'p') return _react2.default.createElement('p', { className: this.props.sel ? this.props.sel : "translated", dangerouslySetInnerHTML: { __html: this.state.translation } });else if (this.props.tag === 'div') return _react2.default.createElement('div', { className: this.props.sel ? this.props.sel : "translated", dangerouslySetInnerHTML: { __html: this.state.translation } });else if (this.props.tag === 'span') return _react2.default.createElement('span', { className: this.props.sel ? this.props.sel : "translated", dangerouslySetInnerHTML: { __html: this.state.translation } });else if (this.props.tag === 'h1') return _react2.default.createElement('h1', { className: this.props.sel ? this.props.sel : "translated", dangerouslySetInnerHTML: { __html: this.state.translation } });else if (this.props.tag === 'h2') return _react2.default.createElement('h2', { className: this.props.sel ? this.props.sel : "translated", dangerouslySetInnerHTML: { __html: this.state.translation } });else if (this.props.tag === 'h3') return _react2.default.createElement('h3', { className: this.props.sel ? this.props.sel : "translated", dangerouslySetInnerHTML: { __html: this.state.translation } });else return _react2.default.createElement('p', { className: this.props.sel ? this.props.sel : "translated", dangerouslySetInnerHTML: { __html: this.state.translation } });
 	    }
 	  }]);
 	

@@ -63,7 +63,7 @@
 
   .about-vertical-img {
     width: 257.82px;
-    height: 256.53px;
+    height: 450.53px;
   }
 
   .about-vertical-title {
@@ -138,15 +138,16 @@
   }
 
   .about-vertical-col {
-    width: 22%;
-    height: 600px;
-    margin: 160px 67px;
-    display: inline-block;
+    width: 90%;
+    float: none;
+    margin: 144px auto;
+    display: block;
   }
 
   .about-vertical-img {
-    width: 257.82px;
-    height: 256.53px;
+    width: 100%;
+    float: none;
+    margin: auto;
   }
 
   .about-vertical-title {
@@ -155,17 +156,8 @@
     line-height: 41px;
   }
 
-  .about-page-2 {
-    margin-left: 10%;
-  }
-
-  .about-page-3 {
-    min-height: 1000px;
-  }
-
   .about-page-3 img {
-    width: 555px;
-    height: 555px;
+    width: 100%;
     transition: opacity 1.5s;
   }
 }

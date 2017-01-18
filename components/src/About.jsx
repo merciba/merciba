@@ -133,7 +133,20 @@ class About extends React.Component {
   }
 
   renderPage3() {
-    return (
+    if (window.isMobile()) return (
+      <div className="about-page-3" ref="page3">
+        <div ref="fixed">
+          <Text tag="div" locale={this.props.locale} sel="section-title" translate={this.props.page3.title} />
+          <Text tag="p" locale={this.props.locale} sel="section-description" translate={this.props.page3.description} />
+        </div>
+        <div>
+          <img
+            src={this.props.page3.img2}
+            onLoad={this.imageLoaded.bind(this)}/>
+        </div>
+      </div>
+    )
+    else return (
       <div className="about-page-3" ref="page3">
         <div className="section-scroll right" style={this.renderScrollContainer()}>
           <img

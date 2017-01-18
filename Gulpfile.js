@@ -17,8 +17,7 @@ stats(gulp);
 gulp.task('browser-sync', function() {
     browserSync.init({
         port: 4000,
-        proxy: "http://localhost:5000",
-        tunnel: true
+        proxy: "http://localhost:5000"
     });
 });
 

@@ -115,7 +115,7 @@
     top: 0;
     left: 0;
     z-index: 2;
-    background: white url('http://sites.jamanetwork.com/help/images/spinner-transparent.gif') no-repeat;
+    background: white url('https://s3.amazonaws.com/merciba.com/assets/loader.gif') no-repeat;
     background-size: 50px 50px;
     background-position: 50%;
     width: 100%;
