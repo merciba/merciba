@@ -55,7 +55,7 @@
   }
 
   .about-vertical-col {
-    width: 22%;
+    width: 20%;
     height: 600px;
     margin: 160px 67px;
     display: inline-block;
@@ -80,9 +80,35 @@
     min-height: 1000px;
   }
 
+  .about-page-3 .section-fixed {
+    margin-top: 20%;
+    top: -24%;
+  }
+
   .about-page-3 img {
     width: 555px;
     height: 555px;
+    margin: -15% auto;
+    transition: opacity 1.5s;
+  }
+}
+
+@media (min-width: 1300px) and (max-width:1450px) {
+  .about-page-3 img {
+    margin: 0 auto;
+  }
+}
+
+@media (min-width: 1024px) and (max-width:1300px) {
+  .about-page-3 .section-fixed {
+    font-size: 12px;
+    top: -33% !important;
+  }
+  .about-page-3 img {
+    width: 86%;
+    height: auto;
+    float: none;
+    margin: 96px 10%;
     transition: opacity 1.5s;
   }
 }

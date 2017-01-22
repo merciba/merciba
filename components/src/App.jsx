@@ -22,10 +22,10 @@ class App extends React.Component {
             <div>Landscape orientation is not supported. Please rotate your device back to portrait mode.</div>
           </div>
           {this.getNavbar()}
-          {this.getLanding()}
-          {this.getProjects()}
-          {this.getAbout()}
-          {this.getContact()}
+          {this.props.route === "/" ? this.getLanding() : null}
+          {(this.props.route === "/") || /project/i.test(this.props.route) ? this.getProjects() : null}
+          {this.props.route === "/about" ? this.getAbout() : null}
+          {this.props.route === "/contact" ? this.getContact() : null}
         </main>
       )
     }

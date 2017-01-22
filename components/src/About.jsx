@@ -58,7 +58,7 @@ class About extends React.Component {
     else {
       if ((pos === 0) || (pos < start)) {
         return {
-          style: { top: '10%', opacity: 0 },
+          style: { opacity: 0 },
           img1: this.props.page3.img1,
           img2: this.props.page3.img2,
           img2Style: { position: 'absolute', top: '40%', opacity: 0 }
@@ -66,7 +66,7 @@ class About extends React.Component {
       }
       else {
         return {
-          style: { top: '10%', opacity: 1 },
+          style: { opacity: 1 },
           img1: this.props.page3.img1,
           img2: this.props.page3.img2,
           img2Style: { position: 'absolute', top: '40%', opacity: 1 }
@@ -76,7 +76,7 @@ class About extends React.Component {
   }
 
   renderScrollContainer() {
-    if (typeof window !== 'undefined') return { position: 'absolute', marginTop: '20%' }
+    if (typeof window !== 'undefined') return { position: 'absolute' }
     else return {}
   }
 

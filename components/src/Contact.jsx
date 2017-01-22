@@ -108,7 +108,7 @@ class Contact extends React.Component {
           {this.getSubmittedCard()}
           {this.getContactForm()}
         </div>
-        <div className="section-fixed left" ref="fixed" style={{ opacity: 1, marginTop: '20%', marginBottom: 0 }}>
+        <div className="section-fixed left" ref="fixed" style={{ opacity: 1, marginBottom: 0 }}>
           <Text tag="div" locale={this.props.locale} sel="section-title" translate={this.props.title} />
           <Text tag="p" locale={this.props.locale} sel="section-description" translate={this.props.description} />
         </div>

@@ -69,7 +69,7 @@
 	  window.React = _react2.default;
 	  window.ReactDOM = _reactDom2.default;
 	  window.isMobile = function () {
-	    if ((0, _jquery2.default)(window).width() > 1400) return false;else return true;
+	    if ((0, _jquery2.default)(window).width() > 1024) return false;else return true;
 	  };
 	  window.clone = function (obj) {
 	    return JSON.parse(JSON.stringify(obj));
@@ -31814,10 +31814,10 @@
 	          )
 	        ),
 	        this.getNavbar(),
-	        this.getLanding(),
-	        this.getProjects(),
-	        this.getAbout(),
-	        this.getContact()
+	        this.props.route === "/" ? this.getLanding() : null,
+	        this.props.route === "/" || /project/i.test(this.props.route) ? this.getProjects() : null,
+	        this.props.route === "/about" ? this.getAbout() : null,
+	        this.props.route === "/contact" ? this.getContact() : null
 	      );
 	    }
 	  }, {
@@ -41056,14 +41056,14 @@
 	      } else {
 	        if (pos === 0 || pos < start) {
 	          return {
-	            style: { top: '10%', opacity: 0 },
+	            style: { opacity: 0 },
 	            img1: this.props.page3.img1,
 	            img2: this.props.page3.img2,
 	            img2Style: { position: 'absolute', top: '40%', opacity: 0 }
 	          };
 	        } else {
 	          return {
-	            style: { top: '10%', opacity: 1 },
+	            style: { opacity: 1 },
 	            img1: this.props.page3.img1,
 	            img2: this.props.page3.img2,
 	            img2Style: { position: 'absolute', top: '40%', opacity: 1 }
@@ -41074,7 +41074,7 @@
 	  }, {
 	    key: 'renderScrollContainer',
 	    value: function renderScrollContainer() {
-	      if (typeof window !== 'undefined') return { position: 'absolute', marginTop: '20%' };else return {};
+	      if (typeof window !== 'undefined') return { position: 'absolute' };else return {};
 	    }
 	  }, {
 	    key: 'renderPage1',
@@ -41296,7 +41296,7 @@
 	      if (window.isMobile()) {
 	        return _react2.default.createElement('div', { id: 'contact' }, _react2.default.createElement('div', { className: 'section-fixed', ref: 'fixed', style: { opacity: 1, marginTop: 144 } }, _react2.default.createElement(_Text2.default, { tag: 'div', locale: this.props.locale, sel: 'section-title', translate: this.props.title }), _react2.default.createElement(_Text2.default, { tag: 'p', locale: this.props.locale, sel: 'section-description', translate: this.props.description })), _react2.default.createElement('div', { className: 'section-scroll', ref: 'scroll', style: { marginTop: 48 } }, this.getSubmittedCard(), this.getContactForm()));
 	      } else {
-	        return _react2.default.createElement('div', { id: 'contact' }, _react2.default.createElement('div', { className: 'section-scroll right', ref: 'scroll', style: { marginTop: '10%' } }, this.getSubmittedCard(), this.getContactForm()), _react2.default.createElement('div', { className: 'section-fixed left', ref: 'fixed', style: { opacity: 1, marginTop: '20%', marginBottom: 0 } }, _react2.default.createElement(_Text2.default, { tag: 'div', locale: this.props.locale, sel: 'section-title', translate: this.props.title }), _react2.default.createElement(_Text2.default, { tag: 'p', locale: this.props.locale, sel: 'section-description', translate: this.props.description })));
+	        return _react2.default.createElement('div', { id: 'contact' }, _react2.default.createElement('div', { className: 'section-scroll right', ref: 'scroll', style: { marginTop: '10%' } }, this.getSubmittedCard(), this.getContactForm()), _react2.default.createElement('div', { className: 'section-fixed left', ref: 'fixed', style: { opacity: 1, marginBottom: 0 } }, _react2.default.createElement(_Text2.default, { tag: 'div', locale: this.props.locale, sel: 'section-title', translate: this.props.title }), _react2.default.createElement(_Text2.default, { tag: 'p', locale: this.props.locale, sel: 'section-description', translate: this.props.description })));
 	      }
 	    }
 	  }, {
@@ -54355,14 +54355,14 @@
 	      } else {
 	        if (pos === 0 || pos < start) {
 	          return {
-	            style: { top: '10%', opacity: 0 },
+	            style: { opacity: 0 },
 	            img1: this.props.page3.img1,
 	            img2: this.props.page3.img2,
 	            img2Style: { position: 'absolute', top: '40%', opacity: 0 }
 	          };
 	        } else {
 	          return {
-	            style: { top: '10%', opacity: 1 },
+	            style: { opacity: 1 },
 	            img1: this.props.page3.img1,
 	            img2: this.props.page3.img2,
 	            img2Style: { position: 'absolute', top: '40%', opacity: 1 }
@@ -54373,7 +54373,7 @@
 	  }, {
 	    key: 'renderScrollContainer',
 	    value: function renderScrollContainer() {
-	      if (typeof window !== 'undefined') return { position: 'absolute', marginTop: '20%' };else return {};
+	      if (typeof window !== 'undefined') return { position: 'absolute' };else return {};
 	    }
 	  }, {
 	    key: 'renderPage1',
@@ -54695,7 +54695,7 @@
 	          ),
 	          _react2.default.createElement(
 	            'div',
-	            { className: 'section-fixed left', ref: 'fixed', style: { opacity: 1, marginTop: '20%', marginBottom: 0 } },
+	            { className: 'section-fixed left', ref: 'fixed', style: { opacity: 1, marginBottom: 0 } },
 	            _react2.default.createElement(_Text2.default, { tag: 'div', locale: this.props.locale, sel: 'section-title', translate: this.props.title }),
 	            _react2.default.createElement(_Text2.default, { tag: 'p', locale: this.props.locale, sel: 'section-description', translate: this.props.description })
 	          )
