@@ -65,7 +65,6 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	if (typeof window !== 'undefined') {
-	  if (window.location.search.length) window.location.pathname = '/contacted';
 	  window.$ = _jquery2.default;
 	  window.React = _react2.default;
 	  window.ReactDOM = _reactDom2.default;
@@ -31970,7 +31969,7 @@
 	          _react2.default.createElement(_Project2.default, {
 	            ref: 'perengo',
 	            name: 'perengo',
-	            url: '/project/perengo',
+	            url: 'https://perengo.com',
 	            route: this.props.route,
 	            scrollSide: 'section-scroll left',
 	            fixedSide: 'section-fixed right',
@@ -31984,7 +31983,7 @@
 	          _react2.default.createElement(_Project2.default, {
 	            ref: 'sweetUnity',
 	            name: 'sweet-unity',
-	            url: '/project/sweet-unity-farms',
+	            url: 'https://sweetunityfarmscoffee.com',
 	            route: this.props.route,
 	            scrollSide: 'section-scroll right',
 	            fixedSide: 'section-fixed left',
@@ -31998,7 +31997,7 @@
 	          _react2.default.createElement(_Project2.default, {
 	            ref: 'software',
 	            name: 'software',
-	            url: '/project/software',
+	            url: 'https://github.com/merciba',
 	            route: this.props.route,
 	            scrollSide: 'section-scroll left',
 	            fixedSide: 'section-fixed right',
@@ -38681,11 +38680,11 @@
 	      var _this4 = this;
 	
 	      if (!this.state) return null;
-	      if (window.isMobile()) return _react2.default.createElement('section', { id: this.props.name }, _react2.default.createElement('div', { style: this.state.style, ref: 'fixed' }, _react2.default.createElement('a', { href: this.props.url, target: '_self' }, _react2.default.createElement(_Text2.default, { tag: 'div', locale: this.props.locale, sel: 'section-title', translate: this.props.title })), _react2.default.createElement(_Text2.default, { tag: 'p', locale: this.props.locale, sel: 'section-description', translate: this.props.description }), _react2.default.createElement('div', { className: 'section-tags' }, this.props.tags.map(function (tag) {
+	      if (window.isMobile()) return _react2.default.createElement('section', { id: this.props.name }, _react2.default.createElement('div', { style: this.state.style, ref: 'fixed' }, _react2.default.createElement('a', { href: this.props.url, target: '_blank' }, _react2.default.createElement(_Text2.default, { tag: 'div', locale: this.props.locale, sel: 'section-title', translate: this.props.title })), _react2.default.createElement(_Text2.default, { tag: 'p', locale: this.props.locale, sel: 'section-description', translate: this.props.description }), _react2.default.createElement('div', { className: 'section-tags' }, this.props.tags.map(function (tag) {
 	        return _react2.default.createElement(_Text2.default, { tag: 'div', locale: _this4.props.locale, key: tag, translate: tag });
 	      })), this.props.icons ? this.props.icons.map(function (icon, index) {
 	        return _react2.default.createElement('a', { href: icon.href, target: '_blank', style: _this4.state.links, key: 'link-' + index }, _react2.default.createElement('img', { className: 'software-logo', height: '50', key: 'icon-' + index, src: icon.img, onLoad: _this4.imageLoaded.bind(_this4) }));
-	      }) : _react2.default.createElement('span', null)), _react2.default.createElement('div', { ref: 'gallery' }, this.getSlideShow()));else return _react2.default.createElement('section', { id: this.props.name }, _react2.default.createElement('div', { className: this.props.scrollSide, ref: 'gallery' }, this.getScrollSide()), _react2.default.createElement('div', { className: this.props.fixedSide, style: this.state.style, ref: 'fixed' }, _react2.default.createElement('a', { href: this.props.url, target: '_self' }, _react2.default.createElement(_Text2.default, { tag: 'div', locale: this.props.locale, sel: 'section-title', translate: this.props.title })), _react2.default.createElement(_Text2.default, { tag: 'p', locale: this.props.locale, sel: 'section-description', translate: this.props.description }), _react2.default.createElement('div', { className: 'section-tags' }, this.props.tags.map(function (tag) {
+	      }) : _react2.default.createElement('span', null)), _react2.default.createElement('div', { ref: 'gallery' }, this.getSlideShow()));else return _react2.default.createElement('section', { id: this.props.name }, _react2.default.createElement('div', { className: this.props.scrollSide, ref: 'gallery' }, this.getScrollSide()), _react2.default.createElement('div', { className: this.props.fixedSide, style: this.state.style, ref: 'fixed' }, _react2.default.createElement('a', { href: this.props.url, target: '_blank' }, _react2.default.createElement(_Text2.default, { tag: 'div', locale: this.props.locale, sel: 'section-title', translate: this.props.title })), _react2.default.createElement(_Text2.default, { tag: 'p', locale: this.props.locale, sel: 'section-description', translate: this.props.description }), _react2.default.createElement('div', { className: 'section-tags' }, this.props.tags.map(function (tag) {
 	        return _react2.default.createElement(_Text2.default, { tag: 'div', locale: _this4.props.locale, key: tag, translate: tag });
 	      })), this.props.icons ? this.props.icons.map(function (icon, index) {
 	        return _react2.default.createElement('a', { href: icon.href, target: '_blank', style: _this4.state.links, key: 'link-' + index }, _react2.default.createElement('img', { className: 'software-logo', height: '50', key: 'icon-' + index, src: icon.img, onLoad: _this4.imageLoaded.bind(_this4) }));
@@ -41216,7 +41215,7 @@
 	          if (fields.type === 'checkbox') fields[field.name] = '';else fields[field.name] = '';
 	          _this2.setState(fields);
 	        });
-	        if (this.props.route === "/contacted") this.setState({ submitted: { opacity: 1, visibility: 'visible' } });else this.setState({ form: { opacity: 1, visibility: 'visible' } });
+	        this.setState({ submitted: { display: 'none' }, form: { display: 'block', opacity: 1, visibility: 'visible' } });
 	      }
 	    }
 	  }, {
@@ -41238,10 +41237,8 @@
 	    }
 	  }, {
 	    key: 'handleCaptcha',
-	    value: function handleCaptcha(event) {
-	      this.setState({
-	        human: true
-	      });
+	    value: function handleCaptcha(response) {
+	      this.setState({ 'g-recaptcha-response': response });
 	      this.validate();
 	    }
 	  }, {
@@ -41258,17 +41255,34 @@
 	    key: 'validate',
 	    value: function validate() {
 	      var emailValid = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-	      if (this.state.human && emailValid.test(this.state.email) && this.state.name && (this.state.message || this.state.subscribe)) (0, _jquery2.default)(this.refs.submit).removeAttr('disabled');else (0, _jquery2.default)(this.refs.submit).attr('disabled', true);
+	      if (this.state['g-recaptcha-response'] && emailValid.test(this.state.email) && this.state.name && (this.state.message || this.state.subscribe)) (0, _jquery2.default)(this.refs.submit).removeAttr('disabled');else (0, _jquery2.default)(this.refs.submit).attr('disabled', true);
+	    }
+	  }, {
+	    key: 'submit',
+	    value: function submit(e) {
+	      var _this4 = this;
+	
+	      e.preventDefault();
+	      _jquery2.default.post('/contact', {
+	        name: this.state.name,
+	        email: this.state.email,
+	        message: this.state.message,
+	        subscribe: this.state.subscribe,
+	        'g-recaptcha-response': this.state['g-recaptcha-response']
+	      }).done(function () {
+	        console.log('Submitted');
+	        _this4.setState({ form: { display: 'none' }, submitted: { display: 'block', opacity: 1, visibility: 'visible' } });
+	      });
 	    }
 	  }, {
 	    key: 'getContactForm',
 	    value: function getContactForm() {
-	      var _this4 = this;
+	      var _this5 = this;
 	
-	      return _react2.default.createElement('form', { className: 'contact-form', style: this.state.form }, this.props.fields.map(function (field) {
+	      return _react2.default.createElement('form', { className: 'contact-form', style: this.state.form, onSubmit: this.submit.bind(this) }, this.props.fields.map(function (field) {
 	        return _react2.default.createElement('div', { key: field.name, onClick: function onClick(e) {
 	            return field.type === 'checkbox' ? (0, _jquery2.default)(e.target).next().click() : null;
-	          } }, _react2.default.createElement('label', { htmlFor: field.name }, _react2.default.createElement(_Text2.default, { tag: 'div', locale: _this4.props.locale, translate: field.text })), _this4.getFormField(field));
+	          } }, _react2.default.createElement('label', { htmlFor: field.name }, _react2.default.createElement(_Text2.default, { tag: 'div', locale: _this5.props.locale, translate: field.text })), _this5.getFormField(field));
 	      }), _react2.default.createElement(_reactGoogleRecaptcha2.default, { ref: 'recaptcha', sitekey: '6LfZ6hAUAAAAAGRWkvMyGA1epGTbA8D1xUuX32xE', onChange: this.handleCaptcha.bind(this) }), _react2.default.createElement('input', { type: 'submit', ref: 'submit', disabled: true }));
 	    }
 	  }, {
@@ -41280,9 +41294,9 @@
 	    key: 'renderContactPage',
 	    value: function renderContactPage() {
 	      if (window.isMobile()) {
-	        return _react2.default.createElement('div', { id: 'contact' }, _react2.default.createElement('div', { className: 'section-fixed', ref: 'fixed', style: { opacity: 1, marginTop: 144 } }, _react2.default.createElement(_Text2.default, { tag: 'div', locale: this.props.locale, sel: 'section-title', translate: this.props.title }), _react2.default.createElement(_Text2.default, { tag: 'p', locale: this.props.locale, sel: 'section-description', translate: this.props.description })), _react2.default.createElement('div', { className: 'section-scroll', ref: 'scroll', style: { marginTop: 48 } }, this.props.route === "/contact" ? this.getContactForm() : this.getSubmittedCard()));
+	        return _react2.default.createElement('div', { id: 'contact' }, _react2.default.createElement('div', { className: 'section-fixed', ref: 'fixed', style: { opacity: 1, marginTop: 144 } }, _react2.default.createElement(_Text2.default, { tag: 'div', locale: this.props.locale, sel: 'section-title', translate: this.props.title }), _react2.default.createElement(_Text2.default, { tag: 'p', locale: this.props.locale, sel: 'section-description', translate: this.props.description })), _react2.default.createElement('div', { className: 'section-scroll', ref: 'scroll', style: { marginTop: 48 } }, this.getSubmittedCard(), this.getContactForm()));
 	      } else {
-	        return _react2.default.createElement('div', { id: 'contact' }, _react2.default.createElement('div', { className: 'section-scroll right', ref: 'scroll', style: { marginTop: '10%' } }, this.props.route === "/contact" ? this.getContactForm() : this.getSubmittedCard()), _react2.default.createElement('div', { className: 'section-fixed left', ref: 'fixed', style: { opacity: 1, marginTop: '20%', marginBottom: 0 } }, _react2.default.createElement(_Text2.default, { tag: 'div', locale: this.props.locale, sel: 'section-title', translate: this.props.title }), _react2.default.createElement(_Text2.default, { tag: 'p', locale: this.props.locale, sel: 'section-description', translate: this.props.description })));
+	        return _react2.default.createElement('div', { id: 'contact' }, _react2.default.createElement('div', { className: 'section-scroll right', ref: 'scroll', style: { marginTop: '10%' } }, this.getSubmittedCard(), this.getContactForm()), _react2.default.createElement('div', { className: 'section-fixed left', ref: 'fixed', style: { opacity: 1, marginTop: '20%', marginBottom: 0 } }, _react2.default.createElement(_Text2.default, { tag: 'div', locale: this.props.locale, sel: 'section-title', translate: this.props.title }), _react2.default.createElement(_Text2.default, { tag: 'p', locale: this.props.locale, sel: 'section-description', translate: this.props.description })));
 	      }
 	    }
 	  }, {
@@ -54554,7 +54568,7 @@
 	          if (fields.type === 'checkbox') fields[field.name] = '';else fields[field.name] = '';
 	          _this2.setState(fields);
 	        });
-	        if (this.props.route === "/contacted") this.setState({ submitted: { opacity: 1, visibility: 'visible' } });else this.setState({ form: { opacity: 1, visibility: 'visible' } });
+	        this.setState({ submitted: { display: 'none' }, form: { display: 'block', opacity: 1, visibility: 'visible' } });
 	      }
 	    }
 	  }, {
@@ -54576,10 +54590,8 @@
 	    }
 	  }, {
 	    key: 'handleCaptcha',
-	    value: function handleCaptcha(event) {
-	      this.setState({
-	        human: true
-	      });
+	    value: function handleCaptcha(response) {
+	      this.setState({ 'g-recaptcha-response': response });
 	      this.validate();
 	    }
 	  }, {
@@ -54596,16 +54608,33 @@
 	    key: 'validate',
 	    value: function validate() {
 	      var emailValid = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-	      if (this.state.human && emailValid.test(this.state.email) && this.state.name && (this.state.message || this.state.subscribe)) (0, _jquery2.default)(this.refs.submit).removeAttr('disabled');else (0, _jquery2.default)(this.refs.submit).attr('disabled', true);
+	      if (this.state['g-recaptcha-response'] && emailValid.test(this.state.email) && this.state.name && (this.state.message || this.state.subscribe)) (0, _jquery2.default)(this.refs.submit).removeAttr('disabled');else (0, _jquery2.default)(this.refs.submit).attr('disabled', true);
+	    }
+	  }, {
+	    key: 'submit',
+	    value: function submit(e) {
+	      var _this4 = this;
+	
+	      e.preventDefault();
+	      _jquery2.default.post('/contact', {
+	        name: this.state.name,
+	        email: this.state.email,
+	        message: this.state.message,
+	        subscribe: this.state.subscribe,
+	        'g-recaptcha-response': this.state['g-recaptcha-response']
+	      }).done(function () {
+	        console.log('Submitted');
+	        _this4.setState({ form: { display: 'none' }, submitted: { display: 'block', opacity: 1, visibility: 'visible' } });
+	      });
 	    }
 	  }, {
 	    key: 'getContactForm',
 	    value: function getContactForm() {
-	      var _this4 = this;
+	      var _this5 = this;
 	
 	      return _react2.default.createElement(
 	        'form',
-	        { className: 'contact-form', style: this.state.form },
+	        { className: 'contact-form', style: this.state.form, onSubmit: this.submit.bind(this) },
 	        this.props.fields.map(function (field) {
 	          return _react2.default.createElement(
 	            'div',
@@ -54615,9 +54644,9 @@
 	            _react2.default.createElement(
 	              'label',
 	              { htmlFor: field.name },
-	              _react2.default.createElement(_Text2.default, { tag: 'div', locale: _this4.props.locale, translate: field.text })
+	              _react2.default.createElement(_Text2.default, { tag: 'div', locale: _this5.props.locale, translate: field.text })
 	            ),
-	            _this4.getFormField(field)
+	            _this5.getFormField(field)
 	          );
 	        }),
 	        _react2.default.createElement(_reactGoogleRecaptcha2.default, { ref: 'recaptcha', sitekey: '6LfZ6hAUAAAAAGRWkvMyGA1epGTbA8D1xUuX32xE', onChange: this.handleCaptcha.bind(this) }),
@@ -54650,7 +54679,8 @@
 	          _react2.default.createElement(
 	            'div',
 	            { className: 'section-scroll', ref: 'scroll', style: { marginTop: 48 } },
-	            this.props.route === "/contact" ? this.getContactForm() : this.getSubmittedCard()
+	            this.getSubmittedCard(),
+	            this.getContactForm()
 	          )
 	        );
 	      } else {
@@ -54660,7 +54690,8 @@
 	          _react2.default.createElement(
 	            'div',
 	            { className: 'section-scroll right', ref: 'scroll', style: { marginTop: '10%' } },
-	            this.props.route === "/contact" ? this.getContactForm() : this.getSubmittedCard()
+	            this.getSubmittedCard(),
+	            this.getContactForm()
 	          ),
 	          _react2.default.createElement(
 	            'div',
@@ -55300,7 +55331,7 @@
 	          { style: this.state.style, ref: 'fixed' },
 	          _react2.default.createElement(
 	            'a',
-	            { href: this.props.url, target: '_self' },
+	            { href: this.props.url, target: '_blank' },
 	            _react2.default.createElement(_Text2.default, { tag: 'div', locale: this.props.locale, sel: 'section-title', translate: this.props.title })
 	          ),
 	          _react2.default.createElement(_Text2.default, { tag: 'p', locale: this.props.locale, sel: 'section-description', translate: this.props.description }),
@@ -55337,7 +55368,7 @@
 	          { className: this.props.fixedSide, style: this.state.style, ref: 'fixed' },
 	          _react2.default.createElement(
 	            'a',
-	            { href: this.props.url, target: '_self' },
+	            { href: this.props.url, target: '_blank' },
 	            _react2.default.createElement(_Text2.default, { tag: 'div', locale: this.props.locale, sel: 'section-title', translate: this.props.title })
 	          ),
 	          _react2.default.createElement(_Text2.default, { tag: 'p', locale: this.props.locale, sel: 'section-description', translate: this.props.description }),

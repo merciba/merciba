@@ -174,7 +174,7 @@ class App extends React.Component {
           <Project
             ref="perengo"
             name="perengo"
-            url="/project/perengo"
+            url="https://perengo.com"
             route={this.props.route}
             scrollSide="section-scroll left"
             fixedSide="section-fixed right"
@@ -199,7 +199,7 @@ class App extends React.Component {
           <Project
             ref="sweetUnity"
             name="sweet-unity"
-            url="/project/sweet-unity-farms"
+            url="https://sweetunityfarmscoffee.com"
             route={this.props.route}
             scrollSide="section-scroll right"
             fixedSide="section-fixed left"
@@ -219,7 +219,7 @@ class App extends React.Component {
           <Project
             ref="software"
             name="software"
-            url="/project/software"
+            url="https://github.com/merciba"
             route={this.props.route}
             scrollSide="section-scroll left"
             fixedSide="section-fixed right"

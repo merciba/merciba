@@ -143,7 +143,7 @@ class Project extends React.Component {
     if (window.isMobile()) return (
       <section id={this.props.name} >
         <div style={this.state.style} ref="fixed">
-          <a href={this.props.url} target="_self" ><Text tag="div" locale={this.props.locale} sel="section-title" translate={this.props.title}/></a>
+          <a href={this.props.url} target="_blank" ><Text tag="div" locale={this.props.locale} sel="section-title" translate={this.props.title}/></a>
           <Text tag="p" locale={this.props.locale} sel="section-description" translate={this.props.description}/>
           <div className="section-tags">
             {this.props.tags.map((tag) => <Text tag="div" locale={this.props.locale} key={tag} translate={tag}/>)}
@@ -161,7 +161,7 @@ class Project extends React.Component {
           {this.getScrollSide()}
         </div>
         <div className={this.props.fixedSide} style={this.state.style} ref="fixed">
-          <a href={this.props.url} target="_self" ><Text tag="div" locale={this.props.locale} sel="section-title" translate={this.props.title}/></a>
+          <a href={this.props.url} target="_blank" ><Text tag="div" locale={this.props.locale} sel="section-title" translate={this.props.title}/></a>
           <Text tag="p" locale={this.props.locale} sel="section-description" translate={this.props.description}/>
           <div className="section-tags">
             {this.props.tags.map((tag) => <Text tag="div" locale={this.props.locale} key={tag} translate={tag}/>)}

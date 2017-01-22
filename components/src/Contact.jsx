@@ -16,8 +16,7 @@ class Contact extends React.Component {
         else fields[field.name] = ''
         this.setState(fields)
       })
-      if (this.props.route === "/contacted") this.setState({ submitted: { opacity: 1, visibility: 'visible' }})
-      else this.setState({ form: { opacity: 1, visibility: 'visible' }})
+      this.setState({ submitted: { display: 'none' }, form: { display: 'block', opacity: 1, visibility: 'visible' }})
     }
   }
 
@@ -31,10 +30,8 @@ class Contact extends React.Component {
     }
   }
 
-  handleCaptcha(event) {
-    this.setState({
-      human: true
-    })
+  handleCaptcha(response) {
+    this.setState({ 'g-recaptcha-response': response })
     this.validate()
   }
 
@@ -51,12 +48,27 @@ class Contact extends React.Component {
 
   validate() {
     let emailValid = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-    if (this.state.human && emailValid.test(this.state.email) && this.state.name && (this.state.message || this.state.subscribe)) $(this.refs.submit).removeAttr('disabled')
+    if (this.state['g-recaptcha-response'] && emailValid.test(this.state.email) && this.state.name && (this.state.message || this.state.subscribe)) $(this.refs.submit).removeAttr('disabled')
     else $(this.refs.submit).attr('disabled', true)
   }
 
+  submit(e) {
+    e.preventDefault()
+    $.post('/contact', {
+      name: this.state.name,
+      email: this.state.email,
+      message: this.state.message,
+      subscribe: this.state.subscribe,
+      'g-recaptcha-response': this.state['g-recaptcha-response']
+    })
+      .done(() => {
+        console.log('Submitted')
+        this.setState({ form: { display: 'none' }, submitted: { display: 'block', opacity: 1, visibility: 'visible' }})
+      })
+  }
+
   getContactForm() {
-    return <form className="contact-form" style={this.state.form}>
+    return <form className="contact-form" style={this.state.form} onSubmit={this.submit.bind(this)}>
       {this.props.fields.map((field) => {
         return <div key={field.name} onClick={(e) => field.type === 'checkbox' ? $(e.target).next().click() : null}>
           <label htmlFor={field.name}>
@@ -85,14 +97,16 @@ class Contact extends React.Component {
           <Text tag="p" locale={this.props.locale} sel="section-description" translate={this.props.description} />
         </div>
         <div className="section-scroll" ref="scroll" style={{ marginTop: 48 }}>
-          {this.props.route === "/contact" ? this.getContactForm() : this.getSubmittedCard()}
+          {this.getSubmittedCard()}
+          {this.getContactForm()}
         </div>
       </div>
     }
     else {
       return <div id="contact">
         <div className="section-scroll right" ref="scroll" style={{ marginTop: '10%'}}>
-          {this.props.route === "/contact" ? this.getContactForm() : this.getSubmittedCard()}
+          {this.getSubmittedCard()}
+          {this.getContactForm()}
         </div>
         <div className="section-fixed left" ref="fixed" style={{ opacity: 1, marginTop: '20%', marginBottom: 0 }}>
           <Text tag="div" locale={this.props.locale} sel="section-title" translate={this.props.title} />

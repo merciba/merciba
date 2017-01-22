@@ -7,7 +7,6 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 
 if (typeof window !== 'undefined') {
-  if (window.location.search.length) window.location.pathname = '/contacted'
   window.$ = $;
   window.React = React;
   window.ReactDOM = ReactDOM;

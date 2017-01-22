@@ -72,18 +72,6 @@ module.exports = {
     }
   },
 
-  '/contacted': function * () {
-    try {
-      let reactHtml = ReactDOMServer.renderToString(App({ route: `/contacted` }));
-      let html = yield this.render('index.pug', { title: 'Contact Us | ', reactOutput: reactHtml, route: `/contacted` });
-
-      this.response.success(html)
-    }
-    catch (e) {
-      this.response.error(500, e.toString())
-    }
-  },
-
   '/locales/:lang': function * () {
     try {
       this.response.serveFile(path.join(__dirname, '..', 'i18n', this.params.lang + '.json'));

@@ -17,6 +17,6 @@ module.exports = (options) => {
     mailchimp.post({ path: `/lists/${process.env.MAILCHIMP_LIST_ID}/members`, body: { "email_address": options.email, "status": "subscribed" }})
       .then((result) => {
         resolve(result)
-      }, reject)
+      }, resolve)
   })
 }
