@@ -4,7 +4,8 @@
   "description": "What am I about?",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "build": "./node_modules/.bin/gulp build"
   },
   "dependencies": {
     "babel-core": "^6.21.0",
@@ -27,7 +28,6 @@
     "gulp-util": "^3.0.8",
     "gulp-watch": "^4.3.11",
     "i18n": "^0.8.3",
-    "inobounce": "^0.1.4",
     "isomorphic-fetch": "^2.2.1",
     "jquery": "^3.1.1",
     "json-loader": "^0.5.4",
