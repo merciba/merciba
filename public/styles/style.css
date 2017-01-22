@@ -1,4 +1,4 @@
-@media (min-width:1400px) {
+@media (min-width:1024px) {
 
   html {
     height:100%;
@@ -176,7 +176,7 @@
   }
 }
 
-@media (max-width:1400px) {
+@media (max-width:1024px) {
 /* smartphones, iPhone, portrait 480x320 phones */
   html {
     height:100vh;
@@ -385,7 +385,7 @@
   }
 }
 
-@media (max-width:1400px) and (orientation : landscape) {
+@media (max-width:1024px) and (orientation : landscape) {
   .changeOrientation {
     display: block;
   }
