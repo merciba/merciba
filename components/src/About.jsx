@@ -122,7 +122,7 @@ class About extends React.Component {
         <div className="about-page-2" ref="page2">
           {this.props.cols.map((col, index) => {
             return <div key={`vertical-col-${index}`} className="about-vertical-col">
-              <img className="about-vertical-img" src={col.img} />
+              <img className="about-vertical-img" src={col.img} onLoad={this.imageLoaded.bind(this)}/>
               <Text locale={this.props.locale} sel="about-vertical-title" translate={col.title}/>
               {col.items.map((item, index) => <Text key={index} locale={this.props.locale} sel="about-vertical-text" translate={item} />)}
             </div>

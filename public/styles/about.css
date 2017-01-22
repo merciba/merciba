@@ -157,7 +157,9 @@
   }
 
   .about-page-3 img {
-    width: 100%;
+    width: 86%;
+    float: none;
+    margin: 24px 7%;
     transition: opacity 1.5s;
   }
 }

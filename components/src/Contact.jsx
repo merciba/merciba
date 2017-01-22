@@ -12,7 +12,7 @@ class Contact extends React.Component {
     if (typeof window !== 'undefined') {
       this.props.fields.map((field) => {
         let fields = {}
-        if (fields.type === 'checkbox') fields[field.name] = false
+        if (fields.type === 'checkbox') fields[field.name] = ''
         else fields[field.name] = ''
         this.setState(fields)
       })
@@ -25,6 +25,7 @@ class Contact extends React.Component {
     if (typeof window !== 'undefined') {
       let fields = {}
       fields[event.target.name] = event.target.value || event.target.checked
+      Object.keys(fields).map((field) => (!fields[field]) ? fields[field] = '' : null)
       this.setState(fields)
       this.validate()
     }
@@ -76,10 +77,20 @@ class Contact extends React.Component {
     </div>
   }
 
-  render() {
-    if (!this.state) return null;
-    return (
-      <div id="contact">
+  renderContactPage() {
+    if (window.isMobile()) {
+      return <div id="contact">
+        <div className="section-fixed" ref="fixed" style={{ opacity: 1, marginTop: 144 }}>
+          <Text tag="div" locale={this.props.locale} sel="section-title" translate={this.props.title} />
+          <Text tag="p" locale={this.props.locale} sel="section-description" translate={this.props.description} />
+        </div>
+        <div className="section-scroll" ref="scroll" style={{ marginTop: 48 }}>
+          {this.props.route === "/contact" ? this.getContactForm() : this.getSubmittedCard()}
+        </div>
+      </div>
+    }
+    else {
+      return <div id="contact">
         <div className="section-scroll right" ref="scroll" style={{ marginTop: '10%'}}>
           {this.props.route === "/contact" ? this.getContactForm() : this.getSubmittedCard()}
         </div>
@@ -88,7 +99,13 @@ class Contact extends React.Component {
           <Text tag="p" locale={this.props.locale} sel="section-description" translate={this.props.description} />
         </div>
       </div>
-    )
+    }
+
+  }
+
+  render() {
+    if (!this.state) return null;
+    return this.renderContactPage()
   }
 }
 

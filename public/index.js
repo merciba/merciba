@@ -65,6 +65,7 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	if (typeof window !== 'undefined') {
+	  if (window.location.search.length) window.location.pathname = '/contacted';
 	  window.$ = _jquery2.default;
 	  window.React = _react2.default;
 	  window.ReactDOM = _reactDom2.default;
@@ -31833,7 +31834,11 @@
 	          getLocale().then(function (locale) {
 	            if (window.isMobile()) {
 	              window.onorientationchange = function () {
-	                return window.orientation === 0 ? window.location.reload() : null;
+	                if (window.orientation === 0) {
+	                  (0, _jquery2.default)('nav').hide();
+	                  _this2.setState({ loading: true });
+	                  window.location.reload();
+	                }
 	              };
 	              _this2.setState({
 	                locale: locale,
@@ -31868,9 +31873,7 @@
 	    key: 'imageLoaded',
 	    value: function imageLoaded() {
 	      var loading = !imagesLoaded(this.refs.gallery);
-	      this.setState({
-	        loading: loading
-	      });
+	      if (this.state.loading) this.setState({ loading: loading });
 	      if (!loading) this.loaded();
 	    }
 	  }, {
@@ -41096,7 +41099,7 @@
 	
 	      if (typeof window !== 'undefined') {
 	        return _react2.default.createElement('div', { className: 'about-page-2', ref: 'page2' }, this.props.cols.map(function (col, index) {
-	          return _react2.default.createElement('div', { key: 'vertical-col-' + index, className: 'about-vertical-col' }, _react2.default.createElement('img', { className: 'about-vertical-img', src: col.img }), _react2.default.createElement(_Text2.default, { locale: _this3.props.locale, sel: 'about-vertical-title', translate: col.title }), col.items.map(function (item, index) {
+	          return _react2.default.createElement('div', { key: 'vertical-col-' + index, className: 'about-vertical-col' }, _react2.default.createElement('img', { className: 'about-vertical-img', src: col.img, onLoad: _this3.imageLoaded.bind(_this3) }), _react2.default.createElement(_Text2.default, { locale: _this3.props.locale, sel: 'about-vertical-title', translate: col.title }), col.items.map(function (item, index) {
 	            return _react2.default.createElement(_Text2.default, { key: index, locale: _this3.props.locale, sel: 'about-vertical-text', translate: item });
 	          }));
 	        }));
@@ -41210,7 +41213,7 @@
 	      if (typeof window !== 'undefined') {
 	        this.props.fields.map(function (field) {
 	          var fields = {};
-	          if (fields.type === 'checkbox') fields[field.name] = false;else fields[field.name] = '';
+	          if (fields.type === 'checkbox') fields[field.name] = '';else fields[field.name] = '';
 	          _this2.setState(fields);
 	        });
 	        if (this.props.route === "/contacted") this.setState({ submitted: { opacity: 1, visibility: 'visible' } });else this.setState({ form: { opacity: 1, visibility: 'visible' } });
@@ -41219,11 +41222,18 @@
 	  }, {
 	    key: 'handleChange',
 	    value: function handleChange(event) {
+	      var _this3 = this;
+	
 	      if (typeof window !== 'undefined') {
-	        var fields = {};
-	        fields[event.target.name] = event.target.value || event.target.checked;
-	        this.setState(fields);
-	        this.validate();
+	        (function () {
+	          var fields = {};
+	          fields[event.target.name] = event.target.value || event.target.checked;
+	          Object.keys(fields).map(function (field) {
+	            return !fields[field] ? fields[field] = '' : null;
+	          });
+	          _this3.setState(fields);
+	          _this3.validate();
+	        })();
 	      }
 	    }
 	  }, {
@@ -41253,12 +41263,12 @@
 	  }, {
 	    key: 'getContactForm',
 	    value: function getContactForm() {
-	      var _this3 = this;
+	      var _this4 = this;
 	
 	      return _react2.default.createElement('form', { className: 'contact-form', style: this.state.form }, this.props.fields.map(function (field) {
 	        return _react2.default.createElement('div', { key: field.name, onClick: function onClick(e) {
 	            return field.type === 'checkbox' ? (0, _jquery2.default)(e.target).next().click() : null;
-	          } }, _react2.default.createElement('label', { htmlFor: field.name }, _react2.default.createElement(_Text2.default, { tag: 'div', locale: _this3.props.locale, translate: field.text })), _this3.getFormField(field));
+	          } }, _react2.default.createElement('label', { htmlFor: field.name }, _react2.default.createElement(_Text2.default, { tag: 'div', locale: _this4.props.locale, translate: field.text })), _this4.getFormField(field));
 	      }), _react2.default.createElement(_reactGoogleRecaptcha2.default, { ref: 'recaptcha', sitekey: '6LfZ6hAUAAAAAGRWkvMyGA1epGTbA8D1xUuX32xE', onChange: this.handleCaptcha.bind(this) }), _react2.default.createElement('input', { type: 'submit', ref: 'submit', disabled: true }));
 	    }
 	  }, {
@@ -41267,10 +41277,19 @@
 	      return _react2.default.createElement('div', { className: 'contact-submitted', style: this.state.submitted }, _react2.default.createElement(_Text2.default, { tag: 'div', sel: 'contact-submitted-text', locale: this.props.locale, translate: this.props.submitted.text }), _react2.default.createElement('img', { src: this.props.submitted.img, className: 'contact-submitted-image', onLoad: this.imageLoaded.bind(this) }));
 	    }
 	  }, {
+	    key: 'renderContactPage',
+	    value: function renderContactPage() {
+	      if (window.isMobile()) {
+	        return _react2.default.createElement('div', { id: 'contact' }, _react2.default.createElement('div', { className: 'section-fixed', ref: 'fixed', style: { opacity: 1, marginTop: 144 } }, _react2.default.createElement(_Text2.default, { tag: 'div', locale: this.props.locale, sel: 'section-title', translate: this.props.title }), _react2.default.createElement(_Text2.default, { tag: 'p', locale: this.props.locale, sel: 'section-description', translate: this.props.description })), _react2.default.createElement('div', { className: 'section-scroll', ref: 'scroll', style: { marginTop: 48 } }, this.props.route === "/contact" ? this.getContactForm() : this.getSubmittedCard()));
+	      } else {
+	        return _react2.default.createElement('div', { id: 'contact' }, _react2.default.createElement('div', { className: 'section-scroll right', ref: 'scroll', style: { marginTop: '10%' } }, this.props.route === "/contact" ? this.getContactForm() : this.getSubmittedCard()), _react2.default.createElement('div', { className: 'section-fixed left', ref: 'fixed', style: { opacity: 1, marginTop: '20%', marginBottom: 0 } }, _react2.default.createElement(_Text2.default, { tag: 'div', locale: this.props.locale, sel: 'section-title', translate: this.props.title }), _react2.default.createElement(_Text2.default, { tag: 'p', locale: this.props.locale, sel: 'section-description', translate: this.props.description })));
+	      }
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      if (!this.state) return null;
-	      return _react2.default.createElement('div', { id: 'contact' }, _react2.default.createElement('div', { className: 'section-scroll right', ref: 'scroll', style: { marginTop: '10%' } }, this.props.route === "/contact" ? this.getContactForm() : this.getSubmittedCard()), _react2.default.createElement('div', { className: 'section-fixed left', ref: 'fixed', style: { opacity: 1, marginTop: '20%', marginBottom: 0 } }, _react2.default.createElement(_Text2.default, { tag: 'div', locale: this.props.locale, sel: 'section-title', translate: this.props.title }), _react2.default.createElement(_Text2.default, { tag: 'p', locale: this.props.locale, sel: 'section-description', translate: this.props.description })));
+	      return this.renderContactPage();
 	    }
 	  }]);
 	
@@ -54403,7 +54422,7 @@
 	            return _react2.default.createElement(
 	              'div',
 	              { key: 'vertical-col-' + index, className: 'about-vertical-col' },
-	              _react2.default.createElement('img', { className: 'about-vertical-img', src: col.img }),
+	              _react2.default.createElement('img', { className: 'about-vertical-img', src: col.img, onLoad: _this3.imageLoaded.bind(_this3) }),
 	              _react2.default.createElement(_Text2.default, { locale: _this3.props.locale, sel: 'about-vertical-title', translate: col.title }),
 	              col.items.map(function (item, index) {
 	                return _react2.default.createElement(_Text2.default, { key: index, locale: _this3.props.locale, sel: 'about-vertical-text', translate: item });
@@ -54532,7 +54551,7 @@
 	      if (typeof window !== 'undefined') {
 	        this.props.fields.map(function (field) {
 	          var fields = {};
-	          if (fields.type === 'checkbox') fields[field.name] = false;else fields[field.name] = '';
+	          if (fields.type === 'checkbox') fields[field.name] = '';else fields[field.name] = '';
 	          _this2.setState(fields);
 	        });
 	        if (this.props.route === "/contacted") this.setState({ submitted: { opacity: 1, visibility: 'visible' } });else this.setState({ form: { opacity: 1, visibility: 'visible' } });
@@ -54541,11 +54560,18 @@
 	  }, {
 	    key: 'handleChange',
 	    value: function handleChange(event) {
+	      var _this3 = this;
+	
 	      if (typeof window !== 'undefined') {
-	        var fields = {};
-	        fields[event.target.name] = event.target.value || event.target.checked;
-	        this.setState(fields);
-	        this.validate();
+	        (function () {
+	          var fields = {};
+	          fields[event.target.name] = event.target.value || event.target.checked;
+	          Object.keys(fields).map(function (field) {
+	            return !fields[field] ? fields[field] = '' : null;
+	          });
+	          _this3.setState(fields);
+	          _this3.validate();
+	        })();
 	      }
 	    }
 	  }, {
@@ -54575,7 +54601,7 @@
 	  }, {
 	    key: 'getContactForm',
 	    value: function getContactForm() {
-	      var _this3 = this;
+	      var _this4 = this;
 	
 	      return _react2.default.createElement(
 	        'form',
@@ -54589,9 +54615,9 @@
 	            _react2.default.createElement(
 	              'label',
 	              { htmlFor: field.name },
-	              _react2.default.createElement(_Text2.default, { tag: 'div', locale: _this3.props.locale, translate: field.text })
+	              _react2.default.createElement(_Text2.default, { tag: 'div', locale: _this4.props.locale, translate: field.text })
 	            ),
-	            _this3.getFormField(field)
+	            _this4.getFormField(field)
 	          );
 	        }),
 	        _react2.default.createElement(_reactGoogleRecaptcha2.default, { ref: 'recaptcha', sitekey: '6LfZ6hAUAAAAAGRWkvMyGA1epGTbA8D1xUuX32xE', onChange: this.handleCaptcha.bind(this) }),
@@ -54609,24 +54635,47 @@
 	      );
 	    }
 	  }, {
+	    key: 'renderContactPage',
+	    value: function renderContactPage() {
+	      if (window.isMobile()) {
+	        return _react2.default.createElement(
+	          'div',
+	          { id: 'contact' },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'section-fixed', ref: 'fixed', style: { opacity: 1, marginTop: 144 } },
+	            _react2.default.createElement(_Text2.default, { tag: 'div', locale: this.props.locale, sel: 'section-title', translate: this.props.title }),
+	            _react2.default.createElement(_Text2.default, { tag: 'p', locale: this.props.locale, sel: 'section-description', translate: this.props.description })
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'section-scroll', ref: 'scroll', style: { marginTop: 48 } },
+	            this.props.route === "/contact" ? this.getContactForm() : this.getSubmittedCard()
+	          )
+	        );
+	      } else {
+	        return _react2.default.createElement(
+	          'div',
+	          { id: 'contact' },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'section-scroll right', ref: 'scroll', style: { marginTop: '10%' } },
+	            this.props.route === "/contact" ? this.getContactForm() : this.getSubmittedCard()
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'section-fixed left', ref: 'fixed', style: { opacity: 1, marginTop: '20%', marginBottom: 0 } },
+	            _react2.default.createElement(_Text2.default, { tag: 'div', locale: this.props.locale, sel: 'section-title', translate: this.props.title }),
+	            _react2.default.createElement(_Text2.default, { tag: 'p', locale: this.props.locale, sel: 'section-description', translate: this.props.description })
+	          )
+	        );
+	      }
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      if (!this.state) return null;
-	      return _react2.default.createElement(
-	        'div',
-	        { id: 'contact' },
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'section-scroll right', ref: 'scroll', style: { marginTop: '10%' } },
-	          this.props.route === "/contact" ? this.getContactForm() : this.getSubmittedCard()
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'section-fixed left', ref: 'fixed', style: { opacity: 1, marginTop: '20%', marginBottom: 0 } },
-	          _react2.default.createElement(_Text2.default, { tag: 'div', locale: this.props.locale, sel: 'section-title', translate: this.props.title }),
-	          _react2.default.createElement(_Text2.default, { tag: 'p', locale: this.props.locale, sel: 'section-description', translate: this.props.description })
-	        )
-	      );
+	      return this.renderContactPage();
 	    }
 	  }]);
 	

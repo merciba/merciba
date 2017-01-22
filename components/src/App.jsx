@@ -38,7 +38,13 @@ class App extends React.Component {
         getLocale()
           .then((locale) => {
             if (window.isMobile()) {
-              window.onorientationchange = () => (window.orientation === 0) ? window.location.reload() : null
+              window.onorientationchange = () => {
+                if (window.orientation === 0) {
+                  $('nav').hide()
+                  this.setState({ loading: true })
+                  window.location.reload()
+                }
+              }
               this.setState({
                 locale,
                 loading: true
@@ -69,9 +75,7 @@ class App extends React.Component {
 
     imageLoaded() {
       let loading = !imagesLoaded(this.refs.gallery)
-      this.setState({
-        loading,
-      })
+      if (this.state.loading) this.setState({ loading })
       if (!loading) this.loaded()
     }
 
