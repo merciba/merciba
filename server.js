@@ -6,7 +6,8 @@ const Paquet = require('paquet'),
   pug = require('pug'),
   Promise = require('bluebird'),
   mime = require('mime-types'),
-  toobusy = require('toobusy-js')
+  toobusy = require('toobusy-js'),
+  compress = require('koa-compress')
 
 toobusy.maxLag(1000)
 toobusy.interval(250)
@@ -18,6 +19,13 @@ app.start({
   name: 'merciba',
   public: __dirname + '/public',
   middleware: {
+    '/*': compress({
+      filter: function (content_type) {
+        return /text/i.test(content_type)
+      },
+      threshold: 2048,
+      flush: require('zlib').Z_SYNC_FLUSH
+    }),
     '/*': function * (next) {
       this.response.set('Content-Type', mime.lookup(this.request.url))
       if (/woff|ttf/.test(this.request.url)) console.log(mime.lookup(this.request.url))
