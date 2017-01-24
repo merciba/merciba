@@ -75,7 +75,7 @@
 	    return JSON.parse(JSON.stringify(obj));
 	  };
 	  window.onerror = function myErrorHandler(errorMsg, url, lineNumber) {
-	    console.log("Error occured: " + errorMsg);
+	    if (typeof errorMsg === 'string') console.log("Error occured: " + errorMsg);
 	    return false;
 	  };
 	} // This is the front-end entrypoint.
