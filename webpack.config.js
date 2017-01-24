@@ -20,6 +20,14 @@ module.exports = {
       {
         test: /.json$/,
         loader: 'json-loader'
+      },
+      {
+        test: /.js?$/,
+        loader: 'string-replace',
+        query: {
+          search: 'for (const',     // Needed due to a Firefox bug; see:
+          replace: 'for (var'       // https://bugzilla.mozilla.org/show_bug.cgi?id=1101653
+        }
       }
     ]
   },

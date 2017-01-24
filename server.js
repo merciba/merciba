@@ -19,10 +19,6 @@ app.start({
   name: 'merciba',
   public: __dirname + '/public',
   middleware: {
-    '/*': compress({
-      threshold: 2048,
-      flush: require('zlib').Z_SYNC_FLUSH
-    }),
     '/*': function * (next) {
       this.response.set('Content-Type', mime.lookup(this.request.url))
       if (/woff|ttf/.test(this.request.url)) console.log(mime.lookup(this.request.url))
