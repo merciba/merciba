@@ -22,11 +22,9 @@ gulp.task('browser-sync', function() {
 });
 
 gulp.task('watch', function () {
-	gulp.watch(['components/src/**/*.jsx', 'views/**/*.pug'], function () {
+	gulp.watch(['components/src/**/*.jsx', 'views/**/*.pug', 'server.js', 'routes/**/*.js', 'controllers/**/*.js', 'public/styles/**/*.css', 'client.js'], function () {
 		runSequence('build', 'server');
 	})
-	gulp.watch(['server.js', 'routes/**/*.js', 'controllers/**/*.js', 'public/styles/**/*.css'], ['server'])
-	gulp.watch(['client.js'], ['webpack'])
 });
 
 gulp.task('server', function() {
