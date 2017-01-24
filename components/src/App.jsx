@@ -339,7 +339,7 @@ class App extends React.Component {
 
 function imagesLoaded(parentNode) {
   const imgElements = parentNode.querySelectorAll('img');
-  for (const img of imgElements) {
+  for (var img of imgElements) {
     if (!img.complete) return false;
   }
   return true;
