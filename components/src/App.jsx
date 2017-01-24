@@ -338,7 +338,7 @@ class App extends React.Component {
 }
 
 function imagesLoaded(parentNode) {
-  const imgElements = parentNode.querySelectorAll('img');
+  const imgElements = $(parentNode).find('img');
   for (var img of imgElements) {
     if (!img.complete) return false;
   }

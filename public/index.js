@@ -32072,7 +32072,7 @@
 	}(_react2.default.Component);
 	
 	function imagesLoaded(parentNode) {
-	  var imgElements = parentNode.querySelectorAll('img');
+	  var imgElements = (0, _jquery2.default)(parentNode).find('img');
 	  var _iteratorNormalCompletion = true;
 	  var _didIteratorError = false;
 	  var _iteratorError = undefined;
