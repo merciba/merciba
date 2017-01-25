@@ -7,19 +7,8 @@ html
     meta(name='description', content='')
     meta(name='author', content='Alfonso Gober')
     title #{title}Merciba Design and Development
-    link(rel="stylesheet", href='http://fonts.googleapis.com/css?family=Karla')
-    script(src="https://use.fontawesome.com/63c8860610.js")
-    link(rel='stylesheet', href='/styles/style.css')
-    link(rel='stylesheet', href='/styles/nav.css')
-    link(rel='stylesheet', href='/styles/footer.css')
-    link(rel='stylesheet', href='/styles/about.css')
-    link(rel='stylesheet', href='/styles/contact.css')
-    link(rel='stylesheet', href='http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css')
-    script(src='http://code.jquery.com/jquery-1.11.1.min.js')
-    script(src='http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js')
   body(data-route=route, data-role="content")
     #app
-      | !{reactOutput}
     footer
       div(class='footer')
         div(class='footer-left')
@@ -30,4 +19,32 @@ html
           | and&nbsp;
           a(href='https://facebook.github.io/react/', target='_blank') React.js&nbsp;
           | in Brooklyn, New York 🗽
-    script(src="/index.js")
+    script(type="text/javascript").
+      var styles = [
+        "/styles/vendor/Karla.css",
+        "/styles/vendor/jquery.mobile-1.5.0-alpha.1.min.css",
+        "/styles/vendor/font-awesome.min.css",
+        "/index.min.css"
+      ]
+      var scripts = [
+        "/scripts/vendor/font-awesome.min.js",
+        "/scripts/vendor/jquery-3.1.1.min.js",
+        "/scripts/vendor/jquery.mobile-1.5.0-alpha.1.min.js",
+        "/index.min.js"
+      ]
+      function download() {
+        styles.map(function (url) {
+          var element = document.createElement("link");
+          element.rel = 'stylesheet';
+          element.href = url;
+          document.head.appendChild(element);
+        })
+        scripts.map(function (url) {
+          var element = document.createElement("script");
+          element.src = url;
+          document.body.appendChild(element);
+        })
+      }
+      if (window.addEventListener) window.addEventListener("load", download, false);
+      else if (window.attachEvent) window.attachEvent("onload", download);
+      else window.onload = download;

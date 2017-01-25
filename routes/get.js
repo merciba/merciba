@@ -2,15 +2,12 @@
 
 const React = require('react'),
   Promise = require('bluebird'),
-  path = require('path'),
-  ReactDOMServer = require('react-dom/server'),
-  App = React.createFactory(require('../components/dist/App').default);
+  path = require('path')
 
 module.exports = {
   '/': function * () {
     try {
-      let reactHtml = ReactDOMServer.renderToString(App({}));
-      let html = yield this.render('index.pug', { title: '', reactOutput: reactHtml, route: '/' });
+      let html = yield this.render('index.pug', { title: '', route: '/' });
 
       this.response.success(html)
     }
@@ -21,8 +18,7 @@ module.exports = {
 
   '/projects': function * () {
     try {
-      let reactHtml = ReactDOMServer.renderToString(App({ route: '/projects' }));
-      let html = yield this.render('index.pug', { title: 'Projects | ', reactOutput: reactHtml, route: '/projects' });
+      let html = yield this.render('index.pug', { title: 'Projects | ', route: '/projects' });
 
       this.response.success(html)
     }
@@ -38,8 +34,7 @@ module.exports = {
       if (this.params.project === 'sweet-unity-farms') title = 'Sweet Unity Farms'
       if (this.params.project === 'software') title = 'Open-Source Software'
 
-      let reactHtml = ReactDOMServer.renderToString(App({ route: `/project/${this.params.project}` }));
-      let html = yield this.render('index.pug', { title: `${title} | `, reactOutput: reactHtml, route: `/project/${this.params.project}` });
+      let html = yield this.render('index.pug', { title: `${title} | `, route: `/project/${this.params.project}` });
 
       this.response.success(html)
     }
@@ -50,8 +45,7 @@ module.exports = {
 
   '/about': function * () {
     try {
-      let reactHtml = ReactDOMServer.renderToString(App({ route: `/about` }));
-      let html = yield this.render('index.pug', { title: 'About Us | ', reactOutput: reactHtml, route: `/about` });
+      let html = yield this.render('index.pug', { title: 'About Us | ', route: `/about` });
 
       this.response.success(html)
     }
@@ -62,8 +56,7 @@ module.exports = {
 
   '/contact': function * () {
     try {
-      let reactHtml = ReactDOMServer.renderToString(App({ route: `/contact` }));
-      let html = yield this.render('index.pug', { title: 'Contact Us | ', reactOutput: reactHtml, route: `/contact` });
+      let html = yield this.render('index.pug', { title: 'Contact Us | ', route: `/contact` });
 
       this.response.success(html)
     }

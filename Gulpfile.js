@@ -22,7 +22,7 @@ gulp.task('browser-sync', function() {
 });
 
 gulp.task('watch', function () {
-	gulp.watch(['components/src/**/*.jsx', 'views/**/*.pug', 'server.js', 'routes/**/*.js', 'controllers/**/*.js', 'public/styles/**/*.css', 'client.js'], function () {
+	gulp.watch(['components/**/*.jsx', 'views/**/*.pug', 'server.js', 'routes/**/*.js', 'controllers/**/*.js', 'public/styles/**/*.css', 'client.js'], function () {
 		runSequence('build', 'server');
 	})
 });
@@ -53,13 +53,21 @@ gulp.task('webpack', function (done) {
 });
 
 gulp.task('babel', function () {
-  return gulp.src('components/src/**/*.jsx')
+  return gulp.src('components/**/*.jsx')
     .pipe(plugins.babel())
-    .pipe(gulp.dest('components/dist'));
+    .pipe(gulp.dest('public/scripts'));
 });
 
+gulp.task('css', function () {
+  return gulp.src('public/styles/**/*.css')
+    .pipe(plugins.cssmin())
+    .pipe(plugins.autoprefixer())
+    .pipe(plugins.concat('index.min.css'))
+    .pipe(gulp.dest('public'));
+})
+
 gulp.task('build', function (done) {
-	runSequence('babel', 'webpack', done);
+	runSequence('babel', 'webpack', 'css', done);
 });
 
 gulp.task('dev', function () {

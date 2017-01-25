@@ -1,5 +1,5 @@
 // This is the front-end entrypoint.
-// It is packaged, along with any referenced components into public/client.js
+// It is packaged, along with any referenced components into public/index.min.js
 // This allows using ES6 import for including front-end libraries.
 
 import $ from 'jquery'
@@ -21,6 +21,6 @@ if (typeof window !== 'undefined') {
   }
 }
 
-import App from './components/src/App.jsx'
+import App from './components/App.jsx'
 
 ReactDOM.render(<App route={$('body').data('route')}/>, document.getElementById('app'))

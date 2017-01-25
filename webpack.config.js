@@ -5,7 +5,7 @@ const path = require('path'),
 
 module.exports = {
   entry: './client.js',
-  output: { path: __dirname + '/public', filename: 'index.js' },
+  output: { path: __dirname + '/public', filename: 'index.min.js' },
   devtool: 'source-map',
   debug: process.env.NODE_ENV === 'development' ? true : false,
   module: {
@@ -33,8 +33,8 @@ module.exports = {
       }
     ]
   },
-  resolveLoader: {
-    root: path.join(__dirname, 'node_modules')
+  resolve:{
+      modulesDirectories: ['components', 'node_modules', 'public/scripts'],
   },
   plugins: [
     new webpack.DefinePlugin({
