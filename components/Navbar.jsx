@@ -119,7 +119,7 @@ class Navbar extends React.Component {
     let converted = scrolledFromTop * factor
     let logoDescended = (-120 + converted) < 0 ? (-120 + converted) : 0
     let ulTopDescended = (converted + 50) < 200 ? (converted + 50) : 200
-    let ulBottomAscended = 90
+    let ulBottomAscended = 65
 
     let logo_style = {
       opacity: this.state && (this.state.class === "closed") ? 0 : 1,
@@ -135,7 +135,7 @@ class Navbar extends React.Component {
       marginTop: this.props.route === "/" ? `${ulTopDescended}px` : 200
     }
     let bottom_style = {
-      bottom: this.props.route === "/" ? `${ulBottomAscended}px` : 90
+      bottom: this.props.route === "/" ? `${ulBottomAscended}px` : 65
     }
     let style = {
       left: (this.state && this.state.style.left ? this.state.style.left : -200),
@@ -238,7 +238,7 @@ class Navbar extends React.Component {
 
   getTopLinks() {
     return this.props.links.map((link, index)=> {
-      return <NavItem key={`nav-item-${index}`} url={link.url} icon={link.icon} color="blk" locale={this.props.locale} translate={link.text} position="top"/>
+      return <NavItem key={`nav-item-${index}`} url={link.url} icon={link.icon} color="blk" locale={this.props.locale} translate={link.text} route={this.props.route} position="top"/>
     })
   }
 

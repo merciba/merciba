@@ -151,7 +151,7 @@ var Navbar = function (_React$Component) {
       var converted = scrolledFromTop * factor;
       var logoDescended = -120 + converted < 0 ? -120 + converted : 0;
       var ulTopDescended = converted + 50 < 200 ? converted + 50 : 200;
-      var ulBottomAscended = 90;
+      var ulBottomAscended = 65;
 
       var logo_style = {
         opacity: this.state && this.state.class === "closed" ? 0 : 1,
@@ -167,7 +167,7 @@ var Navbar = function (_React$Component) {
         marginTop: this.props.route === "/" ? ulTopDescended + 'px' : 200
       };
       var bottom_style = {
-        bottom: this.props.route === "/" ? ulBottomAscended + 'px' : 90
+        bottom: this.props.route === "/" ? ulBottomAscended + 'px' : 65
       };
       var style = {
         left: this.state && this.state.style.left ? this.state.style.left : -200,
@@ -273,7 +273,7 @@ var Navbar = function (_React$Component) {
       var _this2 = this;
 
       return this.props.links.map(function (link, index) {
-        return _react2.default.createElement(_NavItem2.default, { key: 'nav-item-' + index, url: link.url, icon: link.icon, color: 'blk', locale: _this2.props.locale, translate: link.text, position: 'top' });
+        return _react2.default.createElement(_NavItem2.default, { key: 'nav-item-' + index, url: link.url, icon: link.icon, color: 'blk', locale: _this2.props.locale, translate: link.text, route: _this2.props.route, position: 'top' });
       });
     }
   }, {

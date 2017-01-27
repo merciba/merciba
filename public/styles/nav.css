@@ -1,3 +1,7 @@
+#nav-items a:hover object {
+  opacity: 0.5;
+}
+
 @media (min-width:1024px) {
   nav {
     position: fixed;
@@ -26,8 +30,16 @@
     text-transform: uppercase;
   }
 
-  #nav-items li a {
+  #nav-items li a object {
+    opacity: 0.5;
+  }
+
+  #nav-items li a, #nav-items li.active a p  {
     color: #3A4045;
+  }
+
+  #nav-items li a:hover p {
+    color: #A2A5A9;
   }
 
   #nav-links li a {
@@ -40,10 +52,11 @@
   }
 
   #nav-items {
-    margin-top: 50px;
+    margin-top: 55px;
   }
 
   #nav-links {
+    margin-bottom: 0;
     position: absolute;
     bottom: 90px;
   }

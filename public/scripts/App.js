@@ -178,12 +178,15 @@ var App = function (_React$Component) {
             (0, _jquery2.default)(this.refs.projects).find('section:first-child').css("padding-top", 0);
             (0, _jquery2.default)(this.refs.projects).find('section:first-child .section-scroll').css("margin-top", "6%");
             (0, _jquery2.default)(this.refs.projects).find('section:first-child .section-fixed').css({ "opacity": 1, "visibility": "visible" });
+            (0, _jquery2.default)('#nav-items li:not(.active) a p').css('color', '#A2A5A9');
             break;
           case "/about":
+            (0, _jquery2.default)('#nav-items li:not(.active) a p').css('color', '#A2A5A9');
+            (0, _jquery2.default)('.left').css('#top', '0%');
+            (0, _jquery2.default)('.about-page-3 .left').css('opacity', 0);
             break;
           case "/contact":
-            break;
-          case "/contacted":
+            (0, _jquery2.default)('#nav-items li:not(.active) a p').css('color', '#A2A5A9');
             break;
           default:
             window.location.href = "/";

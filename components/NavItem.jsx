@@ -7,7 +7,12 @@ class NavItem extends React.Component {
   }
 
   componentDidMount() {
+    let active = null;
+    if ((this.props.route === '/projects') && (this.props.translate === 'NAVBAR.PROJECTS')) active = 'active'
+    if ((this.props.route === '/about') && (this.props.translate === 'NAVBAR.ABOUT')) active = 'active'
+    if ((this.props.route === '/contact') && (this.props.translate === 'NAVBAR.CONTACT')) active = 'active'
     if (this.props.icon && this.props.color) this.setState({
+      active,
       icon_id: `${this.props.icon}-icon`,
       icon_url: `https://s3.amazonaws.com/merciba.com/assets/menu-${this.props.icon}-${this.props.color}.svg`
     })
@@ -30,7 +35,7 @@ class NavItem extends React.Component {
   render() {
     if (!this.state) return null;
     return (
-      <li>
+      <li className={this.state.active}>
         <a href={this.props.url} target={this.props.position === "top" ? "_self" : "_blank"}>
           {this.getIcon()}
           {this.getText()}

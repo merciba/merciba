@@ -2,6 +2,15 @@
     text-shadow: none !important;
 }
 
+a div:hover {
+  color: #A2A5A9;
+}
+
+.software-logo:first-child {
+  max-width: 65px;
+  max-height: 50px;
+}
+
 @media (min-width:1024px) {
 
   html {
@@ -108,7 +117,8 @@
   .section-tags {
     font-size: 13px;
     font-weight: bold;
-    line-height: 20px;
+    line-height: 28px;
+    letter-spacing: 1px;
     color: #9B9EA2;
     margin: 12px 0;
     text-transform: uppercase;
@@ -156,6 +166,7 @@
     margin: 24px 0;
     font-size: 22px;
     line-height: 26px;
+    letter-spacing: 2px;
   }
 
   .card .card-description {
@@ -165,6 +176,7 @@
     margin: 0 30px;
     font-size: 16px;
     line-height: 24px;
+    letter-spacing: 1px;
   }
 
   .card .card-link {
@@ -173,6 +185,7 @@
     bottom: 0;
     width: 100%;
     margin: 24px 0;
+    letter-spacing: 2px;
   }
 
   .software-logo {
@@ -186,6 +199,10 @@
   }
   .section-fixed {
     top: 80px !important;
+  }
+
+  .about-page-3 .section-fixed {
+    top: 0% !important;
   }
 }
 
@@ -205,6 +222,7 @@
     overflow-x: hidden;
     overflow-y: scroll;
     -webkit-overflow-scrolling: touch;
+    margin: 0 !important;
   }
 
   a, a:visited {
@@ -259,7 +277,8 @@
   .section-tags {
     font-size: 13px;
     font-weight: bold;
-    line-height: 20px;
+    line-height: 28px;
+    letter-spacing: 1px;
     color: #9B9EA2;
     margin: 12px 24px 48px 24px;
     text-transform: uppercase;
@@ -374,6 +393,7 @@
     margin: 24px 0;
     font-size: 22px;
     line-height: 26px;
+    letter-spacing: 2px;
   }
 
   .card .card-description {
@@ -383,6 +403,7 @@
     margin: 0 30px;
     font-size: 16px;
     line-height: 24px;
+    letter-spacing: 1px;
   }
 
   .card .card-link {
@@ -391,10 +412,15 @@
     bottom: 0;
     width: 100%;
     margin: 24px 0;
+    letter-spacing: 2px;
   }
 
   .software-logo {
     margin: 10px;
+  }
+
+  .software-logo:first-child {
+    margin-left: 25px;
   }
 }
 

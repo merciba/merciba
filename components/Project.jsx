@@ -148,7 +148,7 @@ class Project extends React.Component {
           <div className="section-tags">
             {this.props.tags.map((tag) => <Text tag="div" locale={this.props.locale} key={tag} translate={tag}/>)}
           </div>
-          {this.props.icons ? this.props.icons.map((icon, index) => <a href={icon.href} target="_blank" style={this.state.links} key={`link-${index}`}><img className="software-logo" height="50" key={`icon-${index}`} src={icon.img} onLoad={this.imageLoaded.bind(this)}/></a>) : <span></span>}
+          {this.props.icons ? this.props.icons.map((icon, index) => <a href={icon.href} target="_blank" style={this.state.links} key={`link-${index}`}><img className="software-logo" key={`icon-${index}`} src={icon.img} onLoad={this.imageLoaded.bind(this)}/></a>) : <span></span>}
         </div>
         <div ref="gallery">
           {this.getSlideShow()}
@@ -166,7 +166,7 @@ class Project extends React.Component {
           <div className="section-tags">
             {this.props.tags.map((tag) => <Text tag="div" locale={this.props.locale} key={tag} translate={tag}/>)}
           </div>
-          {this.props.icons ? this.props.icons.map((icon, index) => <a href={icon.href} target="_blank" style={this.state.links} key={`link-${index}`}><img className="software-logo" height="50" key={`icon-${index}`} src={icon.img} onLoad={this.imageLoaded.bind(this)}/></a>) : <span></span>}
+          {this.props.icons ? this.props.icons.map((icon, index) => <a href={icon.href} target="_blank" style={this.state.links} key={`link-${index}`}><img className="software-logo" key={`icon-${index}`} src={icon.img} onLoad={this.imageLoaded.bind(this)}/></a>) : <span></span>}
         </div>
       </section>
     )

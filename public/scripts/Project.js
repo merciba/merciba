@@ -213,7 +213,7 @@ var Project = function (_React$Component) {
             return _react2.default.createElement(
               'a',
               { href: icon.href, target: '_blank', style: _this4.state.links, key: 'link-' + index },
-              _react2.default.createElement('img', { className: 'software-logo', height: '50', key: 'icon-' + index, src: icon.img, onLoad: _this4.imageLoaded.bind(_this4) })
+              _react2.default.createElement('img', { className: 'software-logo', key: 'icon-' + index, src: icon.img, onLoad: _this4.imageLoaded.bind(_this4) })
             );
           }) : _react2.default.createElement('span', null)
         ),
@@ -250,7 +250,7 @@ var Project = function (_React$Component) {
             return _react2.default.createElement(
               'a',
               { href: icon.href, target: '_blank', style: _this4.state.links, key: 'link-' + index },
-              _react2.default.createElement('img', { className: 'software-logo', height: '50', key: 'icon-' + index, src: icon.img, onLoad: _this4.imageLoaded.bind(_this4) })
+              _react2.default.createElement('img', { className: 'software-logo', key: 'icon-' + index, src: icon.img, onLoad: _this4.imageLoaded.bind(_this4) })
             );
           }) : _react2.default.createElement('span', null)
         )

@@ -13,7 +13,7 @@ module.exports = {
       {
         test: [/.jsx?$/, /node_modules[\\\/](?:os-locale)[\\\/]lib[\\\/](?:.+).js/],
         loader: 'babel-loader',
-        exclude: /node_modules\/react-google-recaptcha/,
+        exclude: [/node_modules\/react-google-recaptcha/, /node_modules\/(?!(os-locale)\/).*/],
         query: {
           presets: ['es2015', 'stage-2', 'react'],
           plugins: ['transform-object-assign']
