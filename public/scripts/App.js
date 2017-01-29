@@ -251,7 +251,7 @@ var App = function (_React$Component) {
             title: 'MAIN.PROJECTS.SWEET_UNITY.TITLE',
             description: 'MAIN.PROJECTS.SWEET_UNITY.DESCRIPTION',
             tags: ["MAIN.TAGS.UI_DESIGN", "MAIN.TAGS.FE_DEV", "MAIN.TAGS.E_COMM"],
-            images: ["https://s3.amazonaws.com/merciba.com/assets/projects/sweet_unity/sweetunity-1.png"],
+            images: ["https://s3.amazonaws.com/merciba.com/assets/projects/sweet_unity/sweetunity-1.jpg"],
             locale: this.state.locale,
             onImageLoaded: this.imageLoaded.bind(this) }),
           _react2.default.createElement(_Project2.default, {

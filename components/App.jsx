@@ -215,7 +215,7 @@ class App extends React.Component {
               "MAIN.TAGS.E_COMM"
             ]}
             images={[
-              "https://s3.amazonaws.com/merciba.com/assets/projects/sweet_unity/sweetunity-1.png"
+              "https://s3.amazonaws.com/merciba.com/assets/projects/sweet_unity/sweetunity-1.jpg"
             ]}
             locale={this.state.locale}
             onImageLoaded={this.imageLoaded.bind(this)} />
