@@ -298,8 +298,8 @@ var App = function (_React$Component) {
             page3: {
               title: "ABOUT.PAGE_3.TITLE",
               description: "ABOUT.PAGE_3.DESCRIPTION",
-              img1: "https://s3.amazonaws.com/merciba.com/assets/about/about-image-1.png",
-              img2: "https://s3.amazonaws.com/merciba.com/assets/about/about-image-2.png",
+              img1: "https://s3.amazonaws.com/merciba.com/assets/about/about-image-1.jpg",
+              img2: "https://s3.amazonaws.com/merciba.com/assets/about/about-image-2.jpg",
               style: { top: '20%', opacity: 0 }
             },
             locale: this.state.locale,
