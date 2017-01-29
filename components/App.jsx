@@ -85,7 +85,7 @@ class App extends React.Component {
           $('html, body, #app, main').css('height', $(window).height())
           $(this.refs.navbar).data('position', 'fixed')
           $('#main-logo').css({
-            margin: `${(($(window).height() - $('#main-logo').height()) / 4) + 30}px 10%`
+            margin: `${(($(window).height() - $('#main-logo').height()) / 4)}px -7%`
           })
         }
         else {

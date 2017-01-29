@@ -142,7 +142,7 @@ var App = function (_React$Component) {
           (0, _jquery2.default)('html, body, #app, main').css('height', (0, _jquery2.default)(window).height());
           (0, _jquery2.default)(_this3.refs.navbar).data('position', 'fixed');
           (0, _jquery2.default)('#main-logo').css({
-            margin: ((0, _jquery2.default)(window).height() - (0, _jquery2.default)('#main-logo').height()) / 4 + 30 + 'px 10%'
+            margin: ((0, _jquery2.default)(window).height() - (0, _jquery2.default)('#main-logo').height()) / 4 + 'px -7%'
           });
         } else {
           (0, _jquery2.default)('html, body, #app').css('height', (0, _jquery2.default)(document).height());
