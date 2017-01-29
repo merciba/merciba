@@ -12,11 +12,11 @@
 		"PROJECTS": {
 			"PERENGO": {
 				"TITLE": "Perengo",
-				"DESCRIPTION": "Perengo is a workforce recruitment platform focusing on blue collar jobs and the on-demand sector. Merciba collaborated closely with the product owner and CEO and a team of contractors, leading the UX / UI design and front-end development teams. We collaborated on user flows and wireframes, created UI systems, developed core front-end functionality, and resolved bugs."
+				"DESCRIPTION": "Perengo is a workforce recruitment platform  which focuses on blue-collar and  on-demand sector. Merciba collaborated closely with the product owner / CEO and a team of contractors, leading the UX / UI and front-end development teams. We collaborated on user flows and wireframes, created comps and UI kits, developed core front-end and back-end functionality, and resolved bugs."
 			},
 			"SWEET_UNITY": {
 				"TITLE": "Sweet Unity Farms",
-				"DESCRIPTION": "We worked with Sweet Unity Farms Coffee to develop an e-commerce website and online presence. SUF is a farm-sourced coffee company founded by David Robinson, son of Jackie Robinson. Merciba created their visual identity for their digital content and worked closely with stakeholders to visually express their brand values."
+				"DESCRIPTION": "We worked with Sweet Unity Farms Coffee to develop an e-commerce site and an online presence. Sweet Unity is a farm-sourced coffee company founded by David Robinson, son of Jackie Robinson. Merciba created their visual identity for their digital content and worked closely with the family to visually express their family and brand values."
 			},
 			"SOFTWARE": {
 				"TITLE": "Open-Source Software",
@@ -29,7 +29,7 @@
 					},
 					"CARD_2": {
 						"TITLE": "K-Nearest",
-						"DESCRIPTION": "A JavaScript implementation of the K-Neaerest-Neighbor machine-learning algorithm."
+						"DESCRIPTION": "A JavaScript implementation of the K-Nearest-Neighbor machine-learning algorithm."
 					},
 					"CARD_3": {
 						"TITLE": "ASCII-Mirror",
@@ -51,16 +51,16 @@
 	},
 	"ABOUT": {
 		"PAGE_1": {
-			"TITLE": "At Merciba, we think big while considering the smallest of details.",
-			"DESCRIPTION": "Merciba is a fully equipped boutique digital agency. We’re fresh on the scene and stay on the cutting edge of design trends and tech.<br><br> We work closely with our clients and partners to understand their story and audience. We believe in combining empathy with well-documented research and data, and for us, efficiency and measurable results are key. We help our clients identify redundancies, automate, and organize to mitigate technical debt, brand inconsistency and missed marketing opportunities.",
+			"TITLE": "We believe in balance of the empathetic and the analytical.",
+			"DESCRIPTION": "Merciba is a fully equipped boutique digital agency. We’re fresh on the scene and stay on the cutting edge of design trends and tech.<br><br> We work closely with our clients and partners to understand their story and audience. We believe in combining empathy with well-documented research and data. For us, efficiency and measurable results are key. We help our clients identify redundancies, automate, and organize to mitigate technical debt, identify brand inconsistency and spot missed marketing opportunities. ",
 			"CARDS": {
 				"CARD_1": {
 					"TITLE": "Iterative",
-					"DESCRIPTION": "We make sure to have recurring check-ins with all team members and stake holders. By continuously validating requirements and deliverables and making changes where needed, we help our clients and partners achieve their goals and meet requirements."
+					"DESCRIPTION": "We make sure to have recurring check-ins with all team members and stakeholders. By continuously validating requirements and deliverables and making changes where needed, we help our clients and partners achieve their goals and meet requirements."
 				},
 				"CARD_2": {
 					"TITLE": "Collaborative",
-					"DESCRIPTION": "Highly functional collaboration between management, design and engineering is key to a successful project. We have worked hard to develop internal workflows to improve communication and collaboration using the idustry’s best tools."
+					"DESCRIPTION": "Highly functional collaboration between management, design and engineering is key to a successful project. We have worked hard to develop internal workflows to improve communication and collaboration using the industry’s best tools."
 				},
 				"CARD_3": {
 					"TITLE": "Flexible",
@@ -85,7 +85,7 @@
 				"TITLE": "Technology",
 				"DESCRIPTION": {
 					"HTML_CSS": "HTML, CSS",
-					"JS_NODE": "JavaScript",
+					"JS_NODE": "JavaScript, Node.js",
 					"NATIVE": "Native Cross-Platform Apps",
 					"SERVER_SIDE_ENG": "Server-Side Engineering",
 					"CMS_PLATFORM": "CMS & Platform Builds",
@@ -108,12 +108,12 @@
 		},
 		"PAGE_3": {
 			"TITLE": "About Us",
-			"DESCRIPTION": "First, we’re sure you’re wondering about the name.<br><br> It’s pronounced mer-<i>SEE</i>-ba - a mash-up of the word 'thank you' in the languages of our two founders: <i>merci</i> in French and <i>спасибо</i> (in Latin letters: <i>spasiba</i>) in Russian.<br><br> Merciba was founded by Alfonso Gober (a web and microservices developer) and Sofia Falcon (a UI/UX/print designer) in 2015. Together we have over a decade of experience in the technology industry.<br><br>We are based out of Brooklyn, NY, but our clients are all over the world. We came together to harmonize our individual skillsets into a one-stop-shop for the clients and partners we want to work with.<br><br>Merciba has a special interest in working with marginalized and under-served communities and the organizations that serve them. In this spirit, we offer sliding-scale pricing. We have experience partnering with non-profits, start-ups, small businesses, and individual artists and entrepreneurs."
+			"DESCRIPTION": "First, we’re sure you’re wondering about the name.<br><br> It’s pronounced mer-<i>SEE</i>-ba - a mash-up of the word 'thank you' in the languages of our two founders: <i>merci</i> in French and <i>спасибо</i> (spelled phonetically and in Latin letters: <i>spasiba</i>) in Russian.<br><br> Merciba was founded by Alfonso Gober (a web and microservices developer) and Sofia Falcon (a UI/UX/print designer) in 2015. Together we have over a decade of experience in the technology industry.<br><br>We are based out of Brooklyn, NY, but our clients are all over the world. We came together to harmonize our individual skillsets into a one-stop-shop for the clients and partners we want to work with.<br><br>Merciba has a special interest in working with marginalized and under-served communities and the organizations that serve them. In this spirit, we offer sliding-scale pricing. We have experience partnering with non-profits, start-ups, small businesses, and individual artists and entrepreneurs."
 		}
 	},
 	"CONTACT": {
 		"TITLE": "Reach Out",
-		"DESCRIPTION": "Need a consultant? Like our website? Let us know - we are always interested in connecting with like-minded creatives, designers, developers, managers, entrepreneurs and influencers. Send us a message if you’d like to discuss a project or connect with us.",
+		"DESCRIPTION": "Interested in working with us or just want to say hi? Get in touch. We are currently taking consultation work and are always interested in connecting with like-minded creatives, designers, developers, managers, entrepreneurs and influencers. Send us a message if you’d like to discuss a project or connect with us.",
 		"FORM": {
 			"NAME": "Your Name",
 			"EMAIL": "Your Email",
