@@ -24,7 +24,7 @@ a div:hover {
     font-family: 'Karla', sans-serif !important;
     min-height: 100%;
     min-width: 100%;
-    background: #fff;
+    background: #fff !important;
   }
 
   a, a:visited {
@@ -224,7 +224,7 @@ a div:hover {
     overflow-y: scroll;
     -webkit-overflow-scrolling: touch;
     margin: 0 !important;
-    background: #fff;
+    background: #fff !important;
   }
 
   a, a:visited {
