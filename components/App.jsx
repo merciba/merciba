@@ -130,7 +130,6 @@ class App extends React.Component {
             $('#nav-items li:not(.active) a p').css('color', '#A2A5A9')
             $('.left').css('#top', '0%')
             $('.about-page-3 .left').css('opacity', 0)
-            console.log($(document).height())
             break;
           case "/contact":
             $('#nav-items li:not(.active) a p').css('color', '#A2A5A9')
