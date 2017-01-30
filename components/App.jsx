@@ -89,7 +89,7 @@ class App extends React.Component {
           })
         }
         else {
-          $('html, body, #app').css('height', $(document).height())
+          if (this.props.route !== "/about") $('html, body, #app').css('height', $(document).height())
           $('footer').show()
           $('.ui-page-theme-a').removeClass('ui-page-theme-a')
         }
