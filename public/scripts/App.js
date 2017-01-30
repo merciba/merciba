@@ -213,7 +213,7 @@ var App = function (_React$Component) {
         return _react2.default.createElement(
           'article',
           { className: 'container logo-container', ref: 'logo' },
-          _react2.default.createElement('img', { id: 'main-logo', src: 'https://s3.amazonaws.com/merciba.com/assets/merciba-logo.png', style: this.state.logo, onLoad: this.imageLoaded.bind(this) })
+          _react2.default.createElement('img', { id: 'main-logo', src: 'https://s3.amazonaws.com/merciba.com/assets/merciba-main-logo.png', style: this.state.logo, onLoad: this.imageLoaded.bind(this) })
         );
       } else return null;
     }

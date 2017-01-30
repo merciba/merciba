@@ -163,7 +163,7 @@ class App extends React.Component {
     getLanding() {
       if (this.props.route === "/") {
         return <article className="container logo-container" ref="logo">
-          <img id="main-logo" src="https://s3.amazonaws.com/merciba.com/assets/merciba-logo.png" style={this.state.logo} onLoad={this.imageLoaded.bind(this)} />
+          <img id="main-logo" src="https://s3.amazonaws.com/merciba.com/assets/merciba-main-logo.png" style={this.state.logo} onLoad={this.imageLoaded.bind(this)} />
         </article>
       }
       else return null
