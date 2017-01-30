@@ -233,7 +233,7 @@ a div:hover {
   }
 
   #main-logo {
-    width: 70%;
+    width: 100%;
     float: none;
     margin: auto;
     cursor: default;
