@@ -184,6 +184,7 @@ var App = function (_React$Component) {
             (0, _jquery2.default)('#nav-items li:not(.active) a p').css('color', '#A2A5A9');
             (0, _jquery2.default)('.left').css('#top', '0%');
             (0, _jquery2.default)('.about-page-3 .left').css('opacity', 0);
+            console.log((0, _jquery2.default)(document).height());
             break;
           case "/contact":
             (0, _jquery2.default)('#nav-items li:not(.active) a p').css('color', '#A2A5A9');
