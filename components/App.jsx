@@ -82,7 +82,7 @@ class App extends React.Component {
     loaded() {
       setTimeout(() => {
         if (window.isMobile()) {
-          $('html, body, #app, main').css('height', $(window).height())
+          $('html, body, #app, main').css({height: $(window).height(), 'overflow-y': 'scroll'})
           $(this.refs.navbar).data('position', 'fixed')
           $('#main-logo').css({
             margin: `${(($(window).height() - $('#main-logo').height()) / 6)}px -5%`

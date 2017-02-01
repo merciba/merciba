@@ -139,7 +139,7 @@ var App = function (_React$Component) {
 
       setTimeout(function () {
         if (window.isMobile()) {
-          (0, _jquery2.default)('html, body, #app, main').css('height', (0, _jquery2.default)(window).height());
+          (0, _jquery2.default)('html, body, #app, main').css({ height: (0, _jquery2.default)(window).height(), 'overflow-y': 'scroll' });
           (0, _jquery2.default)(_this3.refs.navbar).data('position', 'fixed');
           (0, _jquery2.default)('#main-logo').css({
             margin: ((0, _jquery2.default)(window).height() - (0, _jquery2.default)('#main-logo').height()) / 6 + 'px -5%'
