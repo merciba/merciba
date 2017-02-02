@@ -101,6 +101,7 @@ class App extends React.Component {
           $('#main-logo').css({
             margin: `${(($(window).height() - $('#main-logo').height()) / 6)}px -5%`
           })
+          if ((this.props.route === "/projects") || /project/.test(this.props.route)) $('.projects-container').css('margin-top', 180)
         }
         else {
           if (this.props.route !== "/about") $('html, body, #app').css('height', $(document).height())
