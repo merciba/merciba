@@ -106,9 +106,13 @@ var App = function (_React$Component) {
                 loading: true,
                 logo: {
                   margin: (windowHeight - 585) / 2 + 'px ' + windowWidth / 3 + 'px'
+                },
+                videoLogo: {
+                  display: 'none'
                 }
               });
               _this2.styleElements();
+              _this2.videoLoaded(windowHeight, windowWidth);
             }
           });
         })();
@@ -131,6 +135,17 @@ var App = function (_React$Component) {
       var loading = !imagesLoaded(this.refs.gallery);
       if (this.state.loading) this.setState({ loading: loading });
       if (!loading) this.loaded();
+    }
+  }, {
+    key: 'videoLoaded',
+    value: function videoLoaded(windowHeight, windowWidth) {
+      this.setState({
+        logo: { display: 'none' },
+        videoLogo: { display: 'block', margin: (windowHeight - 585) / 2 + 'px ' + windowWidth / 3 + 'px' }
+      });
+      (0, _jquery2.default)('video').on('canplaythrough', function () {
+        this.play();
+      });
     }
   }, {
     key: 'loaded',
@@ -213,6 +228,7 @@ var App = function (_React$Component) {
         return _react2.default.createElement(
           'article',
           { className: 'container logo-container', ref: 'logo' },
+          window.isMobile() ? null : _react2.default.createElement('video', { id: 'video-logo', style: this.state.videoLogo, autoplay: 'autoplay', src: 'https://s3.amazonaws.com/merciba.com/assets/merciba-animation.mov', type: 'video/quicktime' }),
           _react2.default.createElement('img', { id: 'main-logo', src: 'https://s3.amazonaws.com/merciba.com/assets/merciba-main-logo.png', style: this.state.logo, onLoad: this.imageLoaded.bind(this) })
         );
       } else return null;

@@ -42,6 +42,16 @@ a div:hover {
     transition: opacity 0.25s;
   }
 
+  #video-logo {
+    opacity: 1;
+    width: 700px;
+    height: auto;
+    float: none;
+    margin: 300px 30%;
+    cursor: default;
+    transition: opacity 0.25s;
+  }
+
   .logo-container {
     cursor: default;
   }

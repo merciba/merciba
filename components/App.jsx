@@ -56,9 +56,13 @@ class App extends React.Component {
                 loading: true,
                 logo: {
                   margin: `${(windowHeight - 585) / 2}px ${(windowWidth / 3)}px`
+                },
+                videoLogo: {
+                  display: 'none'
                 }
               })
               this.styleElements()
+              this.videoLoaded(windowHeight, windowWidth)
             }
           })
       }
@@ -77,6 +81,16 @@ class App extends React.Component {
       let loading = !imagesLoaded(this.refs.gallery)
       if (this.state.loading) this.setState({ loading })
       if (!loading) this.loaded()
+    }
+
+    videoLoaded(windowHeight, windowWidth) {
+      this.setState({
+        logo: { display: 'none' },
+        videoLogo: { display: 'block', margin: `${(windowHeight - 585) / 2}px ${(windowWidth / 3)}px` }
+      })
+      $('video').on('canplaythrough', function() {
+         this.play();
+      })
     }
 
     loaded() {
@@ -163,6 +177,7 @@ class App extends React.Component {
     getLanding() {
       if (this.props.route === "/") {
         return <article className="container logo-container" ref="logo">
+          {window.isMobile() ? null : <video id="video-logo" style={this.state.videoLogo} autoplay="autoplay" src="https://s3.amazonaws.com/merciba.com/assets/merciba-animation.mov" type="video/quicktime"></video>}
           <img id="main-logo" src="https://s3.amazonaws.com/merciba.com/assets/merciba-main-logo.png" style={this.state.logo} onLoad={this.imageLoaded.bind(this)} />
         </article>
       }
