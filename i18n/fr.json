@@ -1,25 +1,25 @@
 {
-	"MAIN": {
-		"HEADLINE": "",
-		"TAGS": {
-			"PRD_DESIGN": "",
-			"FE_DEV": "",
-			"BE_DEV": "",
-			"DEV": "",
-			"UI_DESIGN": "",
-			"E_COMM": ""
+  "MAIN": {
+    "HEADLINE": "Design, Technologie, Stratégie",
+    "TAGS": {
+      "PRD_DESIGN": "Conception des produits",
+      "FE_DEV": "Développement frontal",
+      "BE_DEV": "Développement arrière",
+			"DEV": "Développement",
+			"UI_DESIGN": "Conception de l'IU",
+			"E_COMM": "commerce électronique"
 		},
 		"PROJECTS": {
 			"PERENGO": {
 				"TITLE": "Perengo",
-				"DESCRIPTION": ""
+				"DESCRIPTION": "Perengo est une plate-forme de recrutement de main-d'œuvre axée sur les cols bleus et le secteur à la demande. Merciba a collaboré étroitement avec le propriétaire du produit, le chef de la direction et une équipe d'entrepreneurs, dirigeant le design UX / UI et les équipes de développement frontal. Nous avons collaboré sur les flux d'utilisateurs et les wireframes, créé les systèmes d'interface utilisateur, développé la fonctionnalité de base et écrasé des bugs."
 			},
 			"SWEET_UNITY": {
 				"TITLE": "Sweet Unity Farms",
 				"DESCRIPTION": ""
 			},
 			"SOFTWARE": {
-				"TITLE": "Open-Source Software",
+				"TITLE": "Logiciels Source Ouvert",
 				"DESCRIPTION": "",
 				"LINK_TEXT": "Voyez-le sur Github",
 				"CARDS": {
