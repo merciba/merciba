@@ -367,7 +367,7 @@ function imagesLoaded(parentNode) {
 function getLocale() {
   return new Promise((resolve, reject) => {
     if (typeof window !== 'undefined') {
-      lang = window.navigator.language[0] + window.navigator.language[1];
+      if (!lang) lang = window.navigator.language[0] + window.navigator.language[1];
       require('es6-promise').polyfill();
       const isoFetch = require('isomorphic-fetch')
 
