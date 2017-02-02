@@ -364,7 +364,7 @@ function imagesLoaded(parentNode) {
 function getLocale() {
   return new _bluebird2.default(function (resolve, reject) {
     if (typeof window !== 'undefined') {
-      if (!lang) lang = window.navigator.language[0] + window.navigator.language[1];
+      lang = window.navigator.language[0] + window.navigator.language[1];
       require('es6-promise').polyfill();
       var isoFetch = require('isomorphic-fetch');
 

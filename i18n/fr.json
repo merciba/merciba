@@ -16,28 +16,28 @@
 			},
 			"SWEET_UNITY": {
 				"TITLE": "Sweet Unity Farms",
-				"DESCRIPTION": ""
+				"DESCRIPTION": " "
 			},
 			"SOFTWARE": {
 				"TITLE": "Logiciels Source Ouvert",
-				"DESCRIPTION": "",
+				"DESCRIPTION": " ",
 				"LINK_TEXT": "Voyez-le sur Github",
 				"CARDS": {
 					"CARD_1": {
 						"TITLE": "Paquet",
-						"DESCRIPTION": ""
+						"DESCRIPTION": " "
 					},
 					"CARD_2": {
 						"TITLE": "K-Nearest",
-						"DESCRIPTION": ""
+						"DESCRIPTION": " "
 					},
 					"CARD_3": {
 						"TITLE": "ASCII-Mirror",
-						"DESCRIPTION": ""
+						"DESCRIPTION": " "
 					},
 					"CARD_4": {
 						"TITLE": "Orequire",
-						"DESCRIPTION": ""
+						"DESCRIPTION": " "
 					}
 				}
 			}
@@ -52,19 +52,19 @@
 	"ABOUT": {
 		"PAGE_1": {
 			"TITLE": "On croit qu'il nous faut balancer l'empathique et l'analytique",
-			"DESCRIPTION": "",
+			"DESCRIPTION": " ",
 			"CARDS": {
 				"CARD_1": {
-					"TITLE": "",
-					"DESCRIPTION": ""
+					"TITLE": " ",
+					"DESCRIPTION": " "
 				},
 				"CARD_2": {
-					"TITLE": "",
-					"DESCRIPTION": ""
+					"TITLE": " ",
+					"DESCRIPTION": " "
 				},
 				"CARD_3": {
 					"TITLE": "Flexible",
-					"DESCRIPTION": ""
+					"DESCRIPTION": " "
 				}
 			}
 		},
@@ -72,48 +72,48 @@
 			"LEFT": {
 				"TITLE": "Design",
 				"DESCRIPTION": {
-					"BRANDING_ID": "",
-					"WIREFRAMING": "",
-					"UI_DSGN": "",
-					"PRD_DSGN": "",
-					"CPGN_CREATIVE": "",
-					"ART_DIR": "",
-					"BRANDED_DIGITAL": ""
+					"BRANDING_ID": " ",
+					"WIREFRAMING": " ",
+					"UI_DSGN": " ",
+					"PRD_DSGN": " ",
+					"CPGN_CREATIVE": " ",
+					"ART_DIR": " ",
+					"BRANDED_DIGITAL": " "
 				}
 			},
 			"MIDDLE": {
 				"TITLE": "Technologie",
 				"DESCRIPTION": {
-					"HTML_CSS": "",
-					"JS_NODE": "",
-					"NATIVE": "",
-					"SERVER_SIDE_ENG": "",
-					"CMS_PLATFORM": "",
-					"SEO": "",
-					"TRNG_CONSULT": ""
+					"HTML_CSS": " ",
+					"JS_NODE": " ",
+					"NATIVE": " ",
+					"SERVER_SIDE_ENG": " ",
+					"CMS_PLATFORM": " ",
+					"SEO": " ",
+					"TRNG_CONSULT": " "
 				}
 			},
 			"RIGHT": {
-				"TITLE": "",
+				"TITLE": " ",
 				"DESCRIPTION": {
-					"MKTG_STRATEGY": "",
-					"SM_STRATEGY": "",
-					"PM": "",
-					"USR_ANALYTICS": "",
-					"USR_PERSONA": "",
-					"BRAND_STRATEGY": "",
-					"IN_HOUSE_TRNG": ""
+					"MKTG_STRATEGY": " ",
+					"SM_STRATEGY": " ",
+					"PM": " ",
+					"USR_ANALYTICS": " ",
+					"USR_PERSONA": " ",
+					"BRAND_STRATEGY": " ",
+					"IN_HOUSE_TRNG": " "
 				}
 			}
 		},
 		"PAGE_3": {
-			"TITLE": "",
-			"DESCRIPTION": ""
+			"TITLE": " ",
+			"DESCRIPTION": " "
 		}
 	},
 	"CONTACT": {
 		"TITLE": "Contactez-nous",
-		"DESCRIPTION": "",
+		"DESCRIPTION": " ",
 		"FORM": {
 			"NAME": "Votre Nom",
 			"EMAIL": "Votre Email",

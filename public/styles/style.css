@@ -248,7 +248,7 @@ a div:hover {
 
   .projects-container {
     background: white;
-    padding: 24px 0;
+    padding: 0;
   }
 
   section {
@@ -261,7 +261,7 @@ a div:hover {
     font-weight: bold;
     line-height: 41px;
     color: #3A4045;
-    margin: 125px 24px 12px 24px;
+    margin: 180px 24px 12px 24px;
     max-width: 90%;
   }
 

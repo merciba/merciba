@@ -158,6 +158,7 @@
     font-size: 35px;
     font-weight: bold;
     line-height: 41px;
+    margin-top: 180px;
   }
 
   .about-description {
@@ -174,9 +175,9 @@
   }
 
   .about-vertical-img {
-    width: 100%;
+    width: 70%;
     float: none;
-    margin: auto;
+    margin: auto 15%;
   }
 
   .about-vertical-title {
