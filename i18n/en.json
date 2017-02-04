@@ -85,7 +85,7 @@
 				"TITLE": "Technology",
 				"DESCRIPTION": {
 					"HTML_CSS": "HTML, CSS",
-					"JS_NODE": "JavaScript, Node.js",
+					"JS_NODE": "JavaScript, Node.js, React, Angular",
 					"NATIVE": "Native Cross-Platform Apps",
 					"SERVER_SIDE_ENG": "Server-Side Engineering",
 					"CMS_PLATFORM": "CMS & Platform Builds",
