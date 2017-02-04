@@ -105,6 +105,7 @@ class App extends React.Component {
         }
         else {
           if (this.props.route !== "/about") $('html, body, #app').css('height', $(document).height())
+          else $('html, body, #app').css('height', $(window).height() * 3)
           $('footer').show()
           $('.ui-page-theme-a').removeClass('ui-page-theme-a')
         }
@@ -367,7 +368,7 @@ function imagesLoaded(parentNode) {
 function getLocale() {
   return new Promise((resolve, reject) => {
     if (typeof window !== 'undefined') {
-      if (!lang) lang = window.navigator.language[0] + window.navigator.language[1];
+      lang = window.navigator.language[0] + window.navigator.language[1];
       require('es6-promise').polyfill();
       const isoFetch = require('isomorphic-fetch')
 

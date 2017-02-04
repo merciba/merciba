@@ -11,7 +11,7 @@ a div:hover {
   max-height: 50px;
 }
 
-@media (min-width:1024px) {
+@media (min-width:1025px) {
 
   html {
     height:100%;
@@ -204,7 +204,7 @@ a div:hover {
   }
 }
 
-@media (min-width: 1024px) and (max-width:1400px) {
+@media (min-width: 1025px) and (max-width:1400px) {
   .left {
     margin: 160px 50% 323px 17%;
   }
@@ -217,7 +217,7 @@ a div:hover {
   }
 }
 
-@media (max-width:1024px) {
+@media (max-width:1025px) {
 /* smartphones, iPhone, portrait 480x320 phones */
   html {
     height:100vh;
@@ -441,7 +441,7 @@ a div:hover {
   }
 }
 
-@media (max-width:1024px) and (orientation : landscape) {
+@media (max-width:1025px) and (orientation : landscape) {
   .changeOrientation {
     display: block;
   }

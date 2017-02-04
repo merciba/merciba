@@ -1,4 +1,4 @@
-@media (min-width:1024px) {
+@media (min-width:1025px) {
 
   #contact {
 
@@ -89,7 +89,7 @@
   }
 }
 
-@media (max-width:1024px) {
+@media (max-width:1025px) {
 /* smartphones, iPhone, portrait 480x320 phones */
 
   .contact-form {

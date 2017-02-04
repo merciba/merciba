@@ -11,7 +11,7 @@ if (typeof window !== 'undefined') {
   window.React = React;
   window.ReactDOM = ReactDOM;
   window.isMobile = function () {
-    if ($(window).width() > 1024) return false
+    if ($(window).width() > 1025) return false
     else return true
   }
   window.clone = (obj) => JSON.parse(JSON.stringify(obj))

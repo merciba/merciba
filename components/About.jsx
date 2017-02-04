@@ -76,7 +76,11 @@ class About extends React.Component {
   }
 
   renderScrollContainer() {
-    if (typeof window !== 'undefined') return { position: 'absolute' }
+    if (typeof window !== 'undefined') {
+      let marginTop = ($(window).height() > 1024) ? ($(window).height() / 3) : 170
+      $('footer').css({ marginTop: marginTop + 150 })
+      return { position: 'absolute', marginTop }
+    }
     else return {}
   }
 

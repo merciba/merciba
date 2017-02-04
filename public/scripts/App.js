@@ -161,7 +161,7 @@ var App = function (_React$Component) {
           });
           if (_this3.props.route === "/projects" || /project/.test(_this3.props.route)) (0, _jquery2.default)('.projects-container').css('margin-top', 180);
         } else {
-          if (_this3.props.route !== "/about") (0, _jquery2.default)('html, body, #app').css('height', (0, _jquery2.default)(document).height());
+          if (_this3.props.route !== "/about") (0, _jquery2.default)('html, body, #app').css('height', (0, _jquery2.default)(document).height());else (0, _jquery2.default)('html, body, #app').css('height', (0, _jquery2.default)(window).height() * 3);
           (0, _jquery2.default)('footer').show();
           (0, _jquery2.default)('.ui-page-theme-a').removeClass('ui-page-theme-a');
         }
@@ -381,7 +381,7 @@ function imagesLoaded(parentNode) {
 function getLocale() {
   return new _bluebird2.default(function (resolve, reject) {
     if (typeof window !== 'undefined') {
-      if (!lang) lang = window.navigator.language[0] + window.navigator.language[1];
+      lang = window.navigator.language[0] + window.navigator.language[1];
       require('es6-promise').polyfill();
       var isoFetch = require('isomorphic-fetch');
 

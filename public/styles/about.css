@@ -1,4 +1,4 @@
-@media (min-width:1024px) {
+@media (min-width:1025px) {
 
   #about {
 
@@ -17,6 +17,7 @@
     border-radius: 2px;
     padding: 24px;
     margin: 24px;
+    background-size: cover !important;
   }
 
   .about-card-title {
@@ -80,10 +81,6 @@
     min-height: 1000px;
   }
 
-  .about-page-3 .section-scroll {
-    margin-top: 320px;
-  }
-
   .about-page-3 .section-fixed {
     top: 0;
   }
@@ -102,7 +99,7 @@
   }
 }
 
-@media (min-width: 1024px) and (max-width:1300px) {
+@media (min-width: 1025px) and (max-width:1300px) {
   .about-page-3 .section-fixed {
     font-size: 12px;
     top: -33% !important;
@@ -116,7 +113,7 @@
   }
 }
 
-@media (max-width:1024px) {
+@media (max-width:1025px) {
 /* smartphones, iPhone, portrait 480x320 phones */
 
   .about-cards {
@@ -132,6 +129,7 @@
     border-radius: 2px;
     padding: 24px;
     margin: 24px;
+    background-size: cover !important;
   }
 
   .about-card-title {

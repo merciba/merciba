@@ -112,7 +112,11 @@ var About = function (_React$Component) {
   }, {
     key: 'renderScrollContainer',
     value: function renderScrollContainer() {
-      if (typeof window !== 'undefined') return { position: 'absolute' };else return {};
+      if (typeof window !== 'undefined') {
+        var marginTop = (0, _jquery2.default)(window).height() > 1024 ? (0, _jquery2.default)(window).height() / 3 : 170;
+        (0, _jquery2.default)('footer').css({ marginTop: marginTop + 150 });
+        return { position: 'absolute', marginTop: marginTop };
+      } else return {};
     }
   }, {
     key: 'renderPage1',

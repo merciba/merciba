@@ -2,7 +2,7 @@
   opacity: 0.5;
 }
 
-@media (min-width:1024px) {
+@media (min-width:1025px) {
   nav {
     position: fixed;
     top: 0;
@@ -109,7 +109,7 @@
   }
 }
 
-@media (max-width:1024px) {
+@media (max-width:1025px) {
 /* smartphones, iPhone, portrait 480x320 phones */
   nav {
     position: fixed;
