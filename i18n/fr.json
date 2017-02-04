@@ -113,7 +113,7 @@
 	},
 	"CONTACT": {
 		"TITLE": "Contactez-nous",
-		"DESCRIPTION": "Vous vous intéresse à travailler avec nous? Vous n'avez qu'envie de nous dire salut? Contactez-nous. Nous prenons actuellement des travaux de consultation et nous nous intéressons toujours à nous connecter avec des créateurs, des concepteurs, des développeurs, des gestionnaires, des entrepreneurs et des influenceurs qui pensent comme nous. Envoyez-nous un message si vous souhaitez discuter d'un projet ou communiquer avec nous.",
+		"DESCRIPTION": "Vous vous intéressez à travailler avec nous? Vous n'avez qu'envie de nous dire salut? Contactez-nous. Nous prenons actuellement des travaux de consultation et nous nous intéressons toujours à nous connecter avec des créateurs, des concepteurs, des développeurs, des gestionnaires, des entrepreneurs et des influenceurs qui pensent comme nous. Envoyez-nous un message si vous souhaitez discuter d'un projet ou communiquer avec nous.",
 		"FORM": {
 			"NAME": "Votre Nom",
 			"EMAIL": "Votre Email",
