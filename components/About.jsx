@@ -81,7 +81,7 @@ class About extends React.Component {
       $('footer').css({ marginTop: marginTop + 150 })
       return { position: 'absolute', marginTop }
     }
-    else return {}
+    else return {};
   }
 
   renderPage1() {
