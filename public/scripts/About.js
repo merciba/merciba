@@ -44,6 +44,7 @@ var About = function (_React$Component) {
           this.handleScroll();
         } else {
           window.addEventListener('scroll', this.handleScroll.bind(this));
+          (0, _jquery2.default)('#app').height((0, _jquery2.default)(window).height() * 3.25);
           this.handleScroll();
         }
       }
