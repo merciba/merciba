@@ -105,7 +105,7 @@ class App extends React.Component {
         }
         else {
           if (this.props.route !== "/about") $('html, body, #app').css('height', $(document).height())
-          else $('html, body, #app').css('height', $(window).height() * 3)
+          else $('html, body, #app').css('height', $(window).height() * 3.25)
           $('footer').show()
           $('.ui-page-theme-a').removeClass('ui-page-theme-a')
         }

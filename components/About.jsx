@@ -15,7 +15,6 @@ class About extends React.Component {
       }
       else {
         window.addEventListener('scroll', this.handleScroll.bind(this));
-        $('#app').height($(window).height() * 3.5)
         this.handleScroll()
       }
     }
