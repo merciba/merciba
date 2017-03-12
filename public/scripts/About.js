@@ -217,7 +217,8 @@ var About = function (_React$Component) {
           _react2.default.createElement('img', {
             style: { position: 'absolute', top: '40%' },
             src: this.props.page3.img1,
-            onLoad: this.imageLoaded.bind(this) }),
+            onLoad: this.imageLoaded.bind(this),
+            ref: 'aboutImg' }),
           _react2.default.createElement('img', {
             style: this.state ? this.state.page3.img2Style : { position: 'absolute', top: '40%', opacity: 0 },
             src: this.props.page3.img2,

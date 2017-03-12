@@ -131,7 +131,7 @@ var App = function (_React$Component) {
     }
   }, {
     key: 'imageLoaded',
-    value: function imageLoaded() {
+    value: function imageLoaded(e) {
       var loading = !imagesLoaded(this.refs.gallery);
       if (this.state.loading) this.setState({ loading: loading });
       if (!loading) this.loaded();
@@ -161,7 +161,7 @@ var App = function (_React$Component) {
           });
           if (_this3.props.route === "/projects" || /project/.test(_this3.props.route)) (0, _jquery2.default)('.projects-container').css('margin-top', 180);
         } else {
-          if (_this3.props.route !== "/about") (0, _jquery2.default)('html, body, #app').css('height', (0, _jquery2.default)(document).height());else (0, _jquery2.default)('html, body, #app').css('height', (0, _jquery2.default)(window).height() * 3.25);
+          if (_this3.props.route !== "/about") (0, _jquery2.default)('html, body, #app').css('height', (0, _jquery2.default)(document).height());else (0, _jquery2.default)('html, body, #app').css('height', (0, _jquery2.default)((0, _jquery2.default)(_this3.refs.about).find('.section-scroll.right img')[0]).offset().top + 400);
           (0, _jquery2.default)('footer').show();
           (0, _jquery2.default)('.ui-page-theme-a').removeClass('ui-page-theme-a');
         }

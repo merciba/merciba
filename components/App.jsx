@@ -77,7 +77,7 @@ class App extends React.Component {
 
     }
 
-    imageLoaded() {
+    imageLoaded(e) {
       let loading = !imagesLoaded(this.refs.gallery)
       if (this.state.loading) this.setState({ loading })
       if (!loading) this.loaded()
@@ -105,7 +105,7 @@ class App extends React.Component {
         }
         else {
           if (this.props.route !== "/about") $('html, body, #app').css('height', $(document).height())
-          else $('html, body, #app').css('height', $(window).height() * 3.25)
+          else $('html, body, #app').css('height', ($($(this.refs.about).find('.section-scroll.right img')[0]).offset().top + 400))
           $('footer').show()
           $('.ui-page-theme-a').removeClass('ui-page-theme-a')
         }
