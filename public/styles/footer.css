@@ -1,0 +1,38 @@
+footer {
+  position: relative;
+  display: none;
+  height: 80px;
+  width: 100%;
+  font-size: 14px;
+}
+
+.footer {
+  width: 100%;
+  text-align: right;
+  padding: 25px;
+  transition: display 0.5s
+}
+
+.footer:before {
+  content:"";
+  background: #9B9EA2;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 2px;
+  width: 90%;
+  margin-left: 40px;
+}
+
+.footer-right {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+}
+
+.footer-left {
+  z-index: 0;
+  position: absolute;
+  left: 40px;
+  top: 20px;
+}

@@ -1,0 +1,455 @@
+.card * {
+    text-shadow: none !important;
+}
+
+a div:hover {
+  color: #A2A5A9;
+}
+
+.software-logo:first-child {
+  max-width: 65px;
+  max-height: 50px;
+}
+
+@media (min-width:1025px) {
+
+  html {
+    height:100%;
+    min-height:100%;
+    width:100%;
+    min-width:100%;
+  }
+
+  body {
+    font-family: 'Karla', sans-serif !important;
+    min-height: 100%;
+    min-width: 100%;
+    background: #fff !important;
+  }
+
+  a, a:visited {
+    visibility: inherit;
+    text-decoration: none !important;
+  }
+
+  #main-logo {
+    opacity: 1;
+    width: 700px;
+    height: auto;
+    float: none;
+    margin: 300px 30%;
+    cursor: default;
+    transition: opacity 0.25s;
+  }
+
+  #video-logo {
+    opacity: 1;
+    width: 700px;
+    height: auto;
+    float: none;
+    margin: 300px 30%;
+    cursor: default;
+    transition: opacity 0.25s;
+  }
+
+  .logo-container {
+    cursor: default;
+  }
+
+  .projects-container {
+    z-index: -1;
+  }
+
+  article section {
+    padding-top: 140px;
+  }
+
+  .left {
+    margin: 160px 50% 323px 15%;
+  }
+
+  .right {
+    margin: 160px 10% 323px 55%;
+  }
+
+  .section-scroll {
+    margin-top: 350px;
+  }
+
+  .section-scroll.left {
+    width: 35%;
+    float: left;
+  }
+
+  .section-scroll.right {
+    width: 35%;
+    float: right;
+  }
+
+  .section-scroll > img {
+    margin: 25px auto;
+    display: block;
+    box-shadow: 0 6px 12px 0 rgba(0,0,0,0.16), 0 4px 12px 0 rgba(0,0,0,0.22);
+  }
+
+  .section-fixed {
+    position: fixed;
+    width: 35%;
+    top: 0;
+    opacity: 0;
+    transition: opacity 0.25s, visibility 0.25s;
+  }
+
+  .section-fixed.left {
+    left: 10px;
+  }
+
+  .section-fixed.right {
+    right: -10px;
+  }
+
+  .section-title {
+    font-size: 35px;
+    font-weight: bold;
+    line-height: 41px;
+    color: #3A4045;
+    margin: 12px 0;
+  }
+
+  .section-description {
+    font-size: 16px;
+    line-height: 24px;
+    color: #3A4045;
+    margin-top: 12px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #9B9EA2;
+  }
+
+  .section-tags {
+    font-size: 13px;
+    font-weight: bold;
+    line-height: 28px;
+    letter-spacing: 1px;
+    color: #9B9EA2;
+    margin: 12px 0;
+    text-transform: uppercase;
+  }
+
+  .spinner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    background: white url('https://s3.amazonaws.com/merciba.com/assets/loader.gif') no-repeat;
+    background-size: 50px 50px;
+    background-position: 50%;
+    width: 100%;
+    height: 100%;
+  }
+
+  .changeOrientation {
+    display: none;
+  }
+
+  .card {
+    position: relative;
+  }
+
+  .card img {
+    width: 100%;
+    max-height: 250px;
+    margin: 25px auto;
+    display: block;
+    box-shadow: 0 6px 12px 0 rgba(0,0,0,0.16), 0 4px 12px 0 rgba(0,0,0,0.22);
+  }
+
+  .card div {
+    position: absolute;
+    font-weight: bold;
+    text-align: center;
+    color: #FFFFFF;
+  }
+
+  .card .card-title {
+    text-transform: uppercase;
+    top: 0;
+    width: 100%;
+    margin: 24px 0;
+    font-size: 22px;
+    line-height: 26px;
+    letter-spacing: 2px;
+  }
+
+  .card .card-description {
+    position: absolute;
+    top: 68px;
+    width: 90%;
+    margin: 0 30px;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 1px;
+  }
+
+  .card .card-link {
+    text-transform: uppercase;
+    z-index: 1;
+    bottom: 0;
+    width: 100%;
+    margin: 24px 0;
+    letter-spacing: 2px;
+  }
+
+  .software-logo {
+    margin: 10px;
+  }
+}
+
+@media (min-width: 1025px) and (max-width:1400px) {
+  .left {
+    margin: 160px 50% 323px 17%;
+  }
+  .section-fixed {
+    top: 80px !important;
+  }
+
+  .about-page-3 .section-fixed {
+    top: 0% !important;
+  }
+}
+
+@media (max-width:1025px) {
+/* smartphones, iPhone, portrait 480x320 phones */
+  html {
+    height:100vh;
+    min-height:100vh;
+    width:100%;
+    min-width:100%;
+  }
+
+  body, main {
+    font-family: 'Karla', sans-serif !important;
+    height: 100%;
+    min-width: 100%;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+    margin: 0 !important;
+    background: #fff !important;
+  }
+
+  a, a:visited {
+    visibility: inherit;
+    text-decoration: none !important;
+  }
+
+  #main-logo {
+    width: 100%;
+    float: none;
+    margin: auto;
+    cursor: default;
+  }
+
+  #video-logo {
+    display: none;
+  }
+
+  .logo-container {
+    height: 100%;
+    width: 100%;
+    padding: 20% 10% 0 10%;
+    background: white;
+  }
+
+  .projects-container {
+    background: white;
+    padding: 0;
+    margin-top: -180px;
+  }
+
+  section {
+    margin: 48px 0;
+  }
+
+  .section-title {
+    font-family: Karla;
+    font-size: 35px;
+    font-weight: bold;
+    line-height: 41px;
+    color: #3A4045;
+    margin: 180px 24px 12px 24px;
+    max-width: 90%;
+  }
+
+  .section-description {
+    font-family: Karla;
+    font-size: 16px;
+    line-height: 24px;
+    color: #3A4045;
+    margin: 12px 24px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #9B9EA2;
+    max-width: 90%;
+  }
+
+  .section-tags {
+    font-size: 13px;
+    font-weight: bold;
+    line-height: 28px;
+    letter-spacing: 1px;
+    color: #9B9EA2;
+    margin: 12px 24px 48px 24px;
+    text-transform: uppercase;
+  }
+
+  .slick-slider {
+    margin-top: 12px;
+  }
+
+  .slick-dots {
+    list-style-type: none;
+    text-align: center;
+    padding: 0;
+  }
+
+  .slick-track {
+    margin: 0 14%;
+  }
+
+  .slide {
+    width: 100%;
+    display: inline-block;
+  }
+
+  .slide img {
+    width: 66%;
+    margin: auto;
+    float: none;
+  }
+
+  .slick-dots li {
+    width: 15px;
+    height: 15px;
+    background: white;
+    border: 1px solid #3A4045;
+    border-radius: 15px;
+    display: inline-block;
+    margin: 5px 10px;
+  }
+
+  .slick-dots .slick-active {
+    background: #3A4045;
+  }
+
+  .slick-dots li button {
+    opacity: 0;
+    width: 15px;
+    height: 15px;
+  }
+
+  .spinner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    background: white url('https://s3.amazonaws.com/merciba.com/assets/loader.gif') no-repeat;
+    background-size: 50px 50px;
+    background-position: 50%;
+    width: 100%;
+    height: 100%;
+  }
+
+  .changeOrientation {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    background: white;
+    width: 100%;
+    height: 100%;
+  }
+
+  .changeOrientation div {
+    padding-top: 20%;
+    width: 60%;
+    height: 200px;
+    float: none;
+    margin: auto;
+  }
+
+  .slick-slider img {
+    box-shadow: 0 6px 12px 0 rgba(0,0,0,0.16), 0 4px 12px 0 rgba(0,0,0,0.22);
+  }
+
+  .card {
+    width: 86%;
+    margin: 24px;
+    position: relative;
+  }
+
+  .card div {
+    position: absolute;
+    font-weight: bold;
+    text-align: center;
+    color: #FFFFFF;
+  }
+
+  .card img {
+    width: 100%;
+    min-height: 270px;
+    margin: auto;
+    float: none;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.16), 0 4px 12px 0 rgba(0,0,0,0.22);
+    border-radius: 2px;
+  }
+
+  .card .card-title {
+    text-transform: uppercase;
+    top: 0;
+    width: 100%;
+    margin: 24px 0;
+    font-size: 22px;
+    line-height: 26px;
+    letter-spacing: 2px;
+  }
+
+  .card .card-description {
+    position: absolute;
+    top: 68px;
+    width: 80%;
+    margin: 0 30px;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 1px;
+  }
+
+  .card .card-link {
+    text-transform: uppercase;
+    z-index: 1;
+    bottom: 0;
+    width: 100%;
+    margin: 24px 0;
+    letter-spacing: 2px;
+  }
+
+  .software-logo {
+    margin: 10px;
+  }
+
+  .software-logo:first-child {
+    margin-left: 25px;
+  }
+}
+
+@media (max-width:1025px) and (orientation : landscape) {
+  .changeOrientation {
+    display: block;
+  }
+  main {
+    display: hidden;
+    -webkit-overflow-scrolling: none;
+  }
+  nav, article {
+    display: none;
+  }
+}

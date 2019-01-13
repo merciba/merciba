@@ -1,0 +1,126 @@
+{
+  "MAIN": {
+    "HEADLINE": "Design, Technologie, Stratégie",
+    "TAGS": {
+      "PRD_DESIGN": "Conception des produits",
+      "FE_DEV": "Développement frontal",
+      "BE_DEV": "Développement arrière",
+			"DEV": "Développement",
+			"UI_DESIGN": "Conception de l'IU",
+			"E_COMM": "commerce électronique"
+		},
+		"PROJECTS": {
+			"PERENGO": {
+				"TITLE": "Perengo",
+				"DESCRIPTION": "Perengo est une plate-forme de recrutement de main-d'œuvre axée sur les cols bleus et le secteur à la demande. Merciba a collaboré étroitement avec le propriétaire du produit, le chef de la direction et une équipe d'entrepreneurs, dirigeant le design UX / UI et les équipes de développement frontal. Nous avons collaboré sur les flux d'utilisateurs et les wireframes, créé les systèmes d'interface utilisateur, développé la fonctionnalité de base et écrasé des bugs."
+			},
+			"SWEET_UNITY": {
+				"TITLE": "Sweet Unity Farms",
+				"DESCRIPTION": "Nous avons travaillé avec Sweet Unity Farms Coffee pour développer un site de commerce électronique et une présence numérique. Sweet Unity est une société de café d'origine agricole fondée par David Robinson, fils de Jackie Robinson. Merciba a créé son identité visuelle pour son contenu numérique et a travaillé en étroite collaboration avec la famille pour exprimer visuellement leur famille et les valeurs de la marque."
+			},
+			"SOFTWARE": {
+				"TITLE": "Logiciels Source Ouvert",
+				"DESCRIPTION": "Nous sommes actifs dans la communauté Open Source Software (OSS), et avons une passion pour le développement de logiciels utiles. Nous utilisons notre propre logiciel pour nos projets, hébergés sur Github, et nous avons publié des modules sur npm (Node Package Manager).",
+				"LINK_TEXT": "Voyez-le sur Github",
+				"CARDS": {
+					"CARD_1": {
+						"TITLE": "Paquet",
+						"DESCRIPTION": "Paquet est un cadre IPA avec un but précis: Obtenir un serveur configuré aussi rapidement et sans effort que possible, avec une suite complète de fonctions prêtes à la production."
+					},
+					"CARD_2": {
+						"TITLE": "K-Nearest",
+						"DESCRIPTION": "Une implémentation JavaScript de l'algorithme d'apprentissage automatique «k plus proches voisins»."
+					},
+					"CARD_3": {
+						"TITLE": "ASCII-Mirror",
+						"DESCRIPTION": "Une application Raspberry Pi écrit en Node.js qui génère une représentation ASCII du flux vidéo d'une caméra, créant ainsi un effet «miroir» en texte ASCII."
+					},
+					"CARD_4": {
+						"TITLE": "Orequire",
+						"DESCRIPTION": "Un tout petit module Node.js qui convertit tous les fichiers exportés dans un dossier en structure d'objet. Pratique pour le démarrage d'une application."
+					}
+				}
+			}
+		}
+	},
+	"NAVBAR": {
+		"PROJECTS": "Projets",
+		"ABOUT": "À propos",
+		"CONTACT": "Contacter",
+		"BLOG": "Blog"
+	},
+	"ABOUT": {
+		"PAGE_1": {
+			"TITLE": "L'équilibre entre l'empathique et l'analytique. Nous y croyons.",
+			"DESCRIPTION": "Merciba est une boutique agence numérique. Nous sommes nouveaux sur la scène et nous restons à la fine pointe des tendances de conception et de la technologie.<br><br>Nous travaillons en étroite collaboration avec nos clients et nos partenaires pour comprendre leur histoire et leur audience. Nous croyons qu'il faut combiner l'empathie avec des recherches et des données bien documentées. Pour nous, l'efficacité et les résultats mesurables sont essentiels. Nous aidons nos clients à identifier les redondances, à les automatiser et les organiser afin d'atténuer la dette technique, d'identifier l'incohérence de la marque et de repérer les occasions de marketing manquées.",
+			"CARDS": {
+				"CARD_1": {
+					"TITLE": "Itératif",
+					"DESCRIPTION": "Nous nous assurons de maintenir une communication constante avec tous les membres de l'équipe et les parties prenantes. En validant en permanence les exigences et les produits livrables et en apportant les changements nécessaires, nous aidons nos clients et partenaires à atteindre leurs objectifs et à satisfaire aux exigences."
+				},
+				"CARD_2": {
+					"TITLE": "Collaboratif",
+					"DESCRIPTION": "Une collaboration très fonctionnelle entre la gestion, la conception et l'ingénierie, c'est la clé du succès d'un projet. Nous avons bien travaillé de développer des flux de travail internes afin d'améliorer la communication et la collaboration, en utilisant les meilleurs outils de l'industrie."
+				},
+				"CARD_3": {
+					"TITLE": "Flexible",
+					"DESCRIPTION": "Il y a inévitablement des changements et des surprises quand il s'agit de projets; notre organisation permet une flexibilité tout au long du projet. Nous adaptons notre processus au mieux aux besoins de chaque projet."
+				}
+			}
+		},
+		"PAGE_2": {
+			"LEFT": {
+				"TITLE": "Design",
+				"DESCRIPTION": {
+					"BRANDING_ID": "Développement de la marque et de l'identité",
+					"WIREFRAMING": "Wireframing et flux utilisateur (UX)",
+					"UI_DSGN": "Conception de l'IU",
+					"PRD_DSGN": "Conception des produits",
+					"CPGN_CREATIVE": "Création de campagne",
+					"ART_DIR": "Direction artistique",
+					"BRANDED_DIGITAL": "Contenu numérique marqué"
+				}
+			},
+			"MIDDLE": {
+				"TITLE": "Technologie",
+				"DESCRIPTION": {
+					"HTML_CSS": "HTML, CSS",
+					"JS_NODE": "JavaScript, Node.js, React, Angular",
+					"NATIVE": "Applications multiplate-forme natives",
+					"SERVER_SIDE_ENG": "Ingénierie côté serveur",
+					"CMS_PLATFORM": "CMS et construction de plate-forme",
+					"SEO": "Référencement",
+					"TRNG_CONSULT": "Formation en logiciels et consultation"
+				}
+			},
+			"RIGHT": {
+				"TITLE": "Stratégie",
+				"DESCRIPTION": {
+					"MKTG_STRATEGY": "Stratégie de marketing",
+					"SM_STRATEGY": "Stratégie sociale",
+					"PM": "Gestion de projet (cascade, agile)",
+					"USR_ANALYTICS": "Utilisateur recherche et analytics (UX)",
+					"USR_PERSONA": "Personne utilisateur développement (UX)",
+					"BRAND_STRATEGY": "Stratégie de marque et de contenu",
+					"IN_HOUSE_TRNG": "Formation interne et développement d'équipe"
+				}
+			}
+		},
+		"PAGE_3": {
+			"TITLE": "À propos de nous",
+			"DESCRIPTION": "Tout d'abord, nous imaginons que vous vous demandez sur le nom.<br><br>C'est un mélange des mots «merci» dans les langues de nos deux fondateurs: merci (en français) et спасибо (orthographe phonétiquement en lettres latines: spasiba) en russe.<br><br>Merciba a été fondé par Alfonso Gober (développeur web et microservices) et Sofia Falcon (UI / UX / designer de marque) en 2015. Ensemble, nous avons plus d'une décennie d'expérience dans les industries liées à la conception et à la technologie.<br><br>Nous sommes basés à Brooklyn, NY, mais nos clients sont partout dans le monde. Nous nous sommes réunis pour harmoniser nos compétences individuelles en un guichet unique pour les clients et les partenaires avec lesquels nous voulons travailler.<br><br>Merciba s'intéressent en particulier à travailler avec les communautés marginalisées et sous-servies, et les organisations qui les servent. Du coup, nous proposons une tarification à l'échelle mobile. Nous avons de l'expérience en partenariat avec des organismes sans but lucratif, des entreprises en démarrage, des petites entreprises, des artistes et des entrepreneurs individuels."
+		}
+	},
+	"CONTACT": {
+		"TITLE": "Contactez-nous",
+		"DESCRIPTION": "Vous vous intéressez à travailler avec nous? Vous n'avez qu'envie de nous dire salut? Contactez-nous. Nous prenons actuellement des travaux de consultation et nous nous intéressons toujours à nous connecter avec des créateurs, des concepteurs, des développeurs, des gestionnaires, des entrepreneurs et des influenceurs qui pensent comme nous. Envoyez-nous un message si vous souhaitez discuter d'un projet ou communiquer avec nous.",
+		"FORM": {
+			"NAME": "Votre Nom",
+			"EMAIL": "Votre Email",
+			"MESSAGE": "Message",
+			"SUBSCRIBE": "Abonnez-moi aux actualites Merciba",
+			"SEND": "Envoyez"
+		},
+		"SUBMITTED": "Merci de votre message. Nous vous repondrons tout suite."
+	}
+}
