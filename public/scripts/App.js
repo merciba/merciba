@@ -83,7 +83,6 @@ var App = function (_React$Component) {
       var _this2 = this;
 
       if (typeof window !== 'undefined') {
-<<<<<<< HEAD
         var windowHeight = (0, _jquery2.default)(window).height();
         var windowWidth = (0, _jquery2.default)(window).width();
         window.addEventListener('scroll', this.handleScroll.bind(this));
@@ -115,41 +114,6 @@ var App = function (_React$Component) {
             _this2.videoLoaded(windowHeight, windowWidth);
           }
         });
-=======
-        (function () {
-          var windowHeight = (0, _jquery2.default)(window).height();
-          var windowWidth = (0, _jquery2.default)(window).width();
-          window.addEventListener('scroll', _this2.handleScroll.bind(_this2));
-          getLocale().then(function (locale) {
-            if (window.isMobile()) {
-              window.onorientationchange = function () {
-                if (window.orientation === 0) {
-                  (0, _jquery2.default)('nav').hide();
-                  _this2.setState({ loading: true });
-                  window.location.reload();
-                }
-              };
-              _this2.setState({
-                locale: locale,
-                loading: true
-              });
-            } else {
-              _this2.setState({
-                locale: locale,
-                loading: true,
-                logo: {
-                  margin: (windowHeight - 585) / 2 + 'px ' + windowWidth / 3 + 'px'
-                },
-                videoLogo: {
-                  display: 'none'
-                }
-              });
-              _this2.styleElements();
-              _this2.videoLoaded(windowHeight, windowWidth);
-            }
-          });
-        })();
->>>>>>> a882b0a13f8e251bbe24df5db4d99fa08eb9fa75
       }
     }
   }, {
@@ -263,11 +227,7 @@ var App = function (_React$Component) {
         return _react2.default.createElement(
           'article',
           { className: 'container logo-container', ref: 'logo' },
-<<<<<<< HEAD
           window.isMobile() ? null : _react2.default.createElement('video', { id: 'video-logo', style: this.state.videoLogo, muted: true, autoplay: 'autoplay', src: 'https://s3.amazonaws.com/merciba.com/assets/merciba-animation.mov', type: 'video/quicktime' }),
-=======
-          window.isMobile() ? null : _react2.default.createElement('video', { id: 'video-logo', style: this.state.videoLogo, autoplay: 'autoplay', src: 'https://s3.amazonaws.com/merciba.com/assets/merciba-animation.mov', type: 'video/quicktime' }),
->>>>>>> a882b0a13f8e251bbe24df5db4d99fa08eb9fa75
           _react2.default.createElement('img', { id: 'main-logo', src: 'https://s3.amazonaws.com/merciba.com/assets/merciba-main-logo.png', style: this.state.logo, onLoad: this.imageLoaded.bind(this) })
         );
       } else return null;
@@ -431,7 +391,6 @@ function getLocale() {
         resolve(res);
       });
     } else {
-<<<<<<< HEAD
       var osLocale = require('os-locale');
       var path = require('path');
       var locale = void 0;
@@ -444,22 +403,6 @@ function getLocale() {
         }
         resolve(locale);
       });
-=======
-      (function () {
-        var osLocale = require('os-locale');
-        var path = require('path');
-        var locale = void 0;
-        osLocale().then(function (res) {
-          lang = res[0] + res[1];
-          try {
-            locale = require(path.join(__dirname, '..', 'i18n', lang + '.json'));
-          } catch (e) {
-            locale = require(path.join(__dirname, '..', 'i18n', 'en.json'));
-          }
-          resolve(locale);
-        });
-      })();
->>>>>>> a882b0a13f8e251bbe24df5db4d99fa08eb9fa75
     }
   });
 }
