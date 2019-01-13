@@ -56,6 +56,7 @@ var Contact = function (_React$Component) {
   }, {
     key: 'handleChange',
     value: function handleChange(event) {
+<<<<<<< HEAD
       if (typeof window !== 'undefined') {
         var fields = {};
         fields[event.target.name] = event.target.value || event.target.checked;
@@ -64,6 +65,20 @@ var Contact = function (_React$Component) {
         });
         this.setState(fields);
         this.validate();
+=======
+      var _this3 = this;
+
+      if (typeof window !== 'undefined') {
+        (function () {
+          var fields = {};
+          fields[event.target.name] = event.target.value || event.target.checked;
+          Object.keys(fields).map(function (field) {
+            return !fields[field] ? fields[field] = '' : null;
+          });
+          _this3.setState(fields);
+          _this3.validate();
+        })();
+>>>>>>> a882b0a13f8e251bbe24df5db4d99fa08eb9fa75
       }
     }
   }, {
@@ -91,7 +106,11 @@ var Contact = function (_React$Component) {
   }, {
     key: 'submit',
     value: function submit(e) {
+<<<<<<< HEAD
       var _this3 = this;
+=======
+      var _this4 = this;
+>>>>>>> a882b0a13f8e251bbe24df5db4d99fa08eb9fa75
 
       e.preventDefault();
       _jquery2.default.post('/contact', {
@@ -102,13 +121,21 @@ var Contact = function (_React$Component) {
         'g-recaptcha-response': this.state['g-recaptcha-response']
       }).done(function () {
         console.log('Submitted');
+<<<<<<< HEAD
         _this3.setState({ form: { display: 'none' }, submitted: { display: 'block', opacity: 1, visibility: 'visible' } });
+=======
+        _this4.setState({ form: { display: 'none' }, submitted: { display: 'block', opacity: 1, visibility: 'visible' } });
+>>>>>>> a882b0a13f8e251bbe24df5db4d99fa08eb9fa75
       });
     }
   }, {
     key: 'getContactForm',
     value: function getContactForm() {
+<<<<<<< HEAD
       var _this4 = this;
+=======
+      var _this5 = this;
+>>>>>>> a882b0a13f8e251bbe24df5db4d99fa08eb9fa75
 
       return _react2.default.createElement(
         'form',
@@ -122,9 +149,15 @@ var Contact = function (_React$Component) {
             _react2.default.createElement(
               'label',
               { htmlFor: field.name },
+<<<<<<< HEAD
               _react2.default.createElement(_Text2.default, { tag: 'div', locale: _this4.props.locale, translate: field.text })
             ),
             _this4.getFormField(field)
+=======
+              _react2.default.createElement(_Text2.default, { tag: 'div', locale: _this5.props.locale, translate: field.text })
+            ),
+            _this5.getFormField(field)
+>>>>>>> a882b0a13f8e251bbe24df5db4d99fa08eb9fa75
           );
         }),
         _react2.default.createElement(_reactGoogleRecaptcha2.default, { ref: 'recaptcha', sitekey: '6LfZ6hAUAAAAAGRWkvMyGA1epGTbA8D1xUuX32xE', onChange: this.handleCaptcha.bind(this) }),
